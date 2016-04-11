@@ -1,5 +1,5 @@
 {
-  "name": "yum-search",
+  "name": "yumsearch",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -16,6 +16,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/ChemaGAGM/Yum-Search.git"
-  }
+    "url": "https://gitlab.com/ChemaGAGM/YumSearch.git"
+  },
+  "authors":"Josep Maria Cagigal Soler <josemaricagigalso@gmail.com>",
+  "contributors":"José María García-Arias García-Morato <josemgagm@gmail.com>"
 }

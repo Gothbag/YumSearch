@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('pakiBoy:server');
+var debug = require('debug')('yumSearch:server');
 var http = require('http');
 
 /**
