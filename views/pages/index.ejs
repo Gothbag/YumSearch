@@ -38,19 +38,21 @@
     <div class="content-section-a">
 
         <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Death to the Stock Photo:<br>Special Thanks</h2>
-                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="resources/img/ipad.png" alt=""/>
+            <div class=" col-sm-12 row" data-bind="foreach: offers">
+                <div class="col-sm-4">
+                    <div class="col-sm-12 thumbnail text-center">
+                        <img alt="" class="img-responsive" src=
+                        "http://www.wallpapereast.com/static/images/6801692-lovely-nature-wallpaper.jpg">
+
+                        <div class="caption">
+                            <h4><span data-bind="text: prod"></span> Now: <span data-bind="text: now"></span> Before: <span data-bind="text: before"></span></h4>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
+
+    </div>
         <!-- /.container -->
 
     </div>
