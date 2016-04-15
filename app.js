@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var session = require('express-session');
 
+var configDB = ('./config/database.js');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
