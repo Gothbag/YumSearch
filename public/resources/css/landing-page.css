@@ -39,6 +39,10 @@ h6 {
     background-size: cover;
 }
 
+.intro-header-business {
+   background: url(../img/fruit-stand-background.jpg) no-repeat center center !important;
+}
+
 .intro-message {
     position: relative;
     padding-top: 20%;
