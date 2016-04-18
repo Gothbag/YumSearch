@@ -1,14 +1,11 @@
-var express = require('express');
-var router = express.Router();
-
-module.exports = function (passport) {
+module.exports = function (app, passport) {
 
 	/* GET users listing. */
-	router.get('/users', function(req, res, next) {
+	app.get('/users', function(req, res, next) {
 	  res.send('respond with a resource');
 	});
 
-	router.post('/signup', function (req, res, next) {
+	app.post('/signup', function (req, res, next) {
 		passport.authenticate('local-signup', function (req, res, next) {
 			if (err) { return next(err); }
 		    if (!user) { return res.json({success:false}); }
@@ -16,7 +13,4 @@ module.exports = function (passport) {
 		})(req, res, next);
 
 	});
-
-	return router;
-
 };
