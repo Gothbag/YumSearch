@@ -1,10 +1,15 @@
 module.exports = function (app, passport) {
 
+<<<<<<< HEAD
+	
+	
+=======
 	/* GET users listing. */
 	app.get('/users', function(req, res, next) {
 	  res.send('respond with a resource');
 	});
 
+>>>>>>> 53f553effc4c7c528e326e3343e93124d97aac3f
 	app.post('/signup', function (req, res, next) {
 		passport.authenticate('local-signup', function (req, res, next) {
 			if (err) { return next(err); }
@@ -13,4 +18,9 @@ module.exports = function (app, passport) {
 		})(req, res, next);
 
 	});
+<<<<<<< HEAD
+
 };
+=======
+};
+>>>>>>> 53f553effc4c7c528e326e3343e93124d97aac3f
