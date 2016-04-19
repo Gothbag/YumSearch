@@ -5,14 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var mongoose = require('mongoose');
 
 var session = require('express-session');
 
-var configDB = ('./config/database.js');
+mongoose.connect('mongodb://localhost:27017/yumsearchdb');
 
 var app = express();
 
-
+require('./config/passport')(passport); //passport is configured
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

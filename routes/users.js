@@ -5,9 +5,8 @@ module.exports = function (app, passport) {
 	  res.send('respond with a resource');
 	});
 
-	app.post('/signup', function (req, res, next) {
-		console.log(req.body);
-		passport.authenticate('local-signup', function (req, res, next) {
+	app.post('/signup', function (req, res, next) {	
+		passport.authenticate('local-signup', function (err, user) {
 			if (err) { return next(err); }
 		    if (!user) { return res.json({success:false}); }
 	    	res.send('{"success" : "Updated Successfully", "status" : 200}');

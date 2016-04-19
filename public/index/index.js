@@ -7,7 +7,7 @@ $(document).ready(function () {
 		$("#signUpModal").modal();
 	});
     $("#terms_cond").click(function() {
-		$("#t_and_c_m").modal();
+		$("#termsModal").modal();
 	});
 
 	$("#Register").click(function () {
@@ -19,7 +19,7 @@ $(document).ready(function () {
          data: JSON.stringify({email: $("#registerEmail").val(), password: $('#registerPwd').val(), username: $('#registerUsername').val()}),
          success:function(result){
             if(result.status == 200){
-            	alert("paco");
+            	window.location = "/users"
        		 }	
 
          },
