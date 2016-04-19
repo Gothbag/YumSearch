@@ -1,8 +1,8 @@
 /*!
- * Start Bootstrap - Landing Page Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+* Start Bootstrap - Landing Page Bootstrap Theme (http://startbootstrap.com)
+* Code licensed under the Apache License v2.0.
+* For details, see http://www.apache.org/licenses/LICENSE-2.0.
+*/
 
 body,
 html {
@@ -40,7 +40,16 @@ h6 {
 }
 
 .intro-header-business {
-   background: url(../img/fruit-stand-background.jpg) no-repeat center center !important;
+    background: url(../img/fruit-stand-background.jpg) no-repeat center center !important;
+}
+
+.logo{
+    margin: 0 auto;
+}
+
+.brand {
+    max-width:100px;
+    margin-top: -7px;
 }
 
 .intro-message {
