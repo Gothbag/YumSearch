@@ -12,9 +12,7 @@ var configDB = ('./config/database.js');
 
 var app = express();
 
-var routes = require('./routes/index')(app, passport);
-var users = require('./routes/users')(app, passport);
-var business = require('./routes/business')(app, passport);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,7 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({secret: 'yums34rch1smys3cr3t', saveUninitialized: true, resave: true}));
 
-app.use('/', routes);
+var routes = require('./routes/index')(app, passport);
+var users = require('./routes/users')(app, passport);
+var business = require('./routes/business')(app, passport);
+
+// error handlers
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,8 +40,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace
