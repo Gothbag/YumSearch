@@ -5,12 +5,14 @@ module.exports = function (app, passport) {
 	});
 
 	app.post('/signup', function (req, res, next) {
-		passport.authenticate('local-signup', function (req, res, next) {
+		passport.authenticate('local-signup', function (err, user) {
+
 			if (err) { return next(err); }
 		    if (!user) { return res.json({success:false}); }
-	    	return res.json({success: true});
+	    	res.send('{"success" : "Updated Successfully", "status" : 200}');
 		})(req, res, next);
 
 	});
+
 };
 
