@@ -1,34 +1,6 @@
 /* events */
 $(document).ready(function () {
-	$("#navLogIn").click(function() {
-		$("#logInModal").modal();
-	});
-    $("#navSignUp").click(function() {
-		$("#signUpModal").modal();
-	});
-    $("#terms_cond").click(function() {
-		$("#termsModal").modal();
-	});
 
-	$("#Register").click(function () {
-		$.ajax({
-         type:'POST',
-         url:'/signup',
-         contentType: "application/json; charset=utf-8",
-        dataType: 'json',
-         data: JSON.stringify({email: $("#registerEmail").val(), password: $('#registerPwd').val(), username: $('#registerUsername').val()}),
-         success:function(result){
-            if(result.status == 200){
-            	window.location = "/users"
-       		 }
-
-         },
-         error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status);
-            console.log(thrownError);
-         }
-      });
-	});
 });
 
 /* index Knockout*/

@@ -30,12 +30,18 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li  class="margin-right-5px">
-                     <button id="navLogIn" class="btn btn-info navbar-btn" type="button">Log In</button>
-                </li>
-                <li>
-                     <button id="navSignUp" class="btn btn-info navbar-btn" type="button">Sign Up</button>
-                </li>
+                <% if (user) { %>
+                    <li>
+                         <a id="Logout" href="/logout" class="btn btn-info navbar-btn" type="button">Log Out</a>
+                    </li>
+                <% } else  { %>
+                    <li  class="margin-right-5px">
+                         <button id="navLogIn" class="btn btn-info navbar-btn" type="button">Log In</button>
+                    </li>
+                    <li>
+                         <button id="navSignUp" class="btn btn-info navbar-btn" type="button">Sign Up</button>
+                    </li>
+                <% }  %>
             </ul>
            
         </div>
