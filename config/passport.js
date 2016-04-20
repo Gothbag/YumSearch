@@ -27,10 +27,10 @@ module.exports = function (passport) {
 					return done(null, false);
 				} else {
 					var newUser = new User();
-
+                    //the new user is set
 					newUser.local.username = username;
 					newUser.local.email = email;
-					newUser.local.password = newUser.generateHash(password);
+					newUser.local.password = newUser.generateHash(password); //password is hashed
 
 					newUser.save(function (err) {	
 						if (err) { return done(err); }
