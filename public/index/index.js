@@ -29,6 +29,32 @@ $(document).ready(function () {
          }
       });
 	});
+
+    $("#Login").click(function () {
+		$.ajax({
+         type:'POST',
+         url:'/login',
+         contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+         data: JSON.stringify({email: $("#loginEmail").val(), password: $('#loginPwd').val()}),
+         success:function(result){
+            if(result.status == 200) {
+                if (result.success == true){
+            	   window.location = "/users";
+                } else {
+                    alert("fuck you");
+                }
+            }
+
+
+         },
+         error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+         }
+      });
+	});
+
 });
 
 /* index Knockout*/

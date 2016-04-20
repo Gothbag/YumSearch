@@ -13,7 +13,7 @@ module.exports = function (passport) {
 			if (user) {
 				done(err, user); //err should be null
 			}
-		})
+		});
 	});
 	passport.use('local-signup', new LocalStrategy({
 		passReqToCallback: true, //the request is passed to the callback function
@@ -40,4 +40,25 @@ module.exports = function (passport) {
 			});
 		});
 	}));
+    //login
+    passport.use('local-login', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true
+    }, function(req, email, password, done) {
+        //find a user whose mail or username matches the login used on the form
+        //we check if the user already exists
+        User.findOne({ $or: [ { 'local.username': email }, { 'local.email': email } ] }, function (err, user) {
+            if (err) {return done(err);}
+            // if no user is found, return the message
+            if (!user) {return done(null, false);}
+
+            // if the user is found but the password is wrong
+            if (!user.validPassword(password)) {return done(null, false);}
+
+            // all is well, return successful user
+            return done(null, user);
+        });
+    }));
 }
