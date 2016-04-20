@@ -64,6 +64,15 @@ h6 {
     font-size: 5em;
 }
 
+.welcome-message{
+    font-size: 4em;
+    color: black;
+}
+
+.center-btn{
+  margin:0px auto;
+}
+
 .intro-divider {
     width: 400px;
     border-top: 1px solid #f8f8f8;
