@@ -7,6 +7,6 @@ module.exports = function (app, passport) {
 
     /*GET dashboard business user*/
     app.get('/dashboard', function(req, res, next) {
-        res.render('pages/business/dashboard.ejs', { title: 'Business', user: req.user });
+        res.render('pages/business/dashboard.ejs', { title: 'Dashboard', user: req.user });
 	});
 };
