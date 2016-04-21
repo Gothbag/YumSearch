@@ -4,19 +4,19 @@
 
 /* -- color classes -- */
 .coralbg {
-    background-color: #FA396F;
+    background-color: #D80000;
 }
 
 .coral {
-    color: #FA396f;
+    color: #D80000;
 }
 
 .turqbg {
-    background-color: #46D8D2;
+    background-color: #00FFFF;
 }
 
 .turq {
-    color: #46D8D2;
+    color: #00FFFF;
 }
 
 .white {
@@ -75,7 +75,7 @@ div.btn-group-vertical>a:hover {
 }
 
 div.btn-group-vertical>a.active {
-    background: #FA396F;
+    background: #D80000;
     box-shadow: none;
     color: white;
 }
