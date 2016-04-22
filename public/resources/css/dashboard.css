@@ -12,11 +12,11 @@
 }
 
 .turqbg {
-    background-color: #00FFFF;
+    background-color: #66CCCC;
 }
 
 .turq {
-    color: #00FFFF;
+    color: #66CCCC;
 }
 
 .white {
@@ -64,7 +64,7 @@ div.user-menu-container .btn-group-vertical {
 
 div.user-menu-container .btn-group-vertical>a {
     padding: 20px 25px;
-    background-color: #46D8D2;
+    background-color: #66CCCC;
     color: white;
     border-color: #fff;
 }
@@ -95,7 +95,7 @@ div.user-menu-btns div.btn-group-vertical>a.active:after{
   border-left: 0;
   border-bottom: 13px solid transparent;
   border-top: 13px solid transparent;
-  border-left: 10px solid #46D8D2;
+  border-left: 10px solid #66CCCC;
 }
 /* -- The main tab & content styling of the vertical buttons info-- */
 div.user-menu-content {

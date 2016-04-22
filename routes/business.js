@@ -9,4 +9,9 @@ module.exports = function (app, passport) {
     app.get('/dashboard', function(req, res, next) {
         res.render('pages/business/dashboard.ejs', { title: 'Dashboard', user: req.user });
 	});
+
+    /*GET business offered products*/
+    app.get('/dashboard/offers', function(req, res, next) {
+        res.send('Insert your offers here');
+	});
 };
