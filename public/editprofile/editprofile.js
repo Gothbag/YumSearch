@@ -1,19 +1,18 @@
+$(document).ready(function () {
+
+
+});
+
 /* index Knockout*/
 (function () {
 
 	//the main view model
-	var ProfileModel = function () {
+	var ProfileModel = function (user) {
 		var self = this;
 
-        this.user = this;
+        this.user = new User(user);
 
-		this.offers = [];
-		//OJO!! temporary
-		pOffers.map(function (offer) {
-			self.offers.push(new Offer(offer));
-		});
-
-		this.loadUser = function () {
+		this.saveUser = function () {
 			$.ajax({
 		        type: "POST",
 		        url: '/api/users/self', /* url of the request */
@@ -35,10 +34,11 @@
 
 	//represent a single user item
 	var User = function (user) {
-		this._id = snake._id;
-		this.local.name = ko.observable(user.local.name);
-		this.local.password = ko.observable(user.local.password);
-		this.age = ko.observable(snake.age);
+		this._id = user._id;
+        this.firstName = ko.observable(user.firstName);
+        this.lastName = ko.observable(user.lastName);
+		this.local.username = ko.observable(user.local.name);
+        this.local.password = ko.observable();
 	}
 
 	var profileModel = new ProfileModel();
