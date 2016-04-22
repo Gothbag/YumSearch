@@ -1,3 +1,6 @@
+//User model
+var User = require('../models/user');
+
 module.exports = function (app, passport) {
 
 	app.post('/signup', function (req, res, next) {
@@ -26,6 +29,27 @@ module.exports = function (app, passport) {
 
 	});
 
+     app.post('/users/emailexists', function (req, res) {
+		User.findOne({ 'local.email': req.body.email }, function (err, user) {
+            if (err) { throw err;}
+            // a user is found, we return true
+            if (user) {return res.send(true);}
+            //no users have been found
+            return res.send(false);
+        });
+
+	});
+
+    app.post('/users/usernameexists', function (req, res) {
+		User.findOne({ 'local.username': req.body.username }, function (err, user) {
+            if (err) { throw err;}
+            // a user is found, we return true
+            if (user) {return res.send(true);}
+            //no users have been found
+            return res.send(false);
+        });
+
+	});
 
     app.get('/logout', function(req, res) {
         req.logout();
