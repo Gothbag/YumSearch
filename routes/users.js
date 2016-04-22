@@ -1,3 +1,4 @@
+var _ = require('underscore');
 //User model
 var User = require('../models/user');
 
@@ -57,7 +58,8 @@ module.exports = function (app, passport) {
     });
 
     app.get('/editprofile', isAuthenticated, function(req, res) {
-        res.render('pages/users/editprofile.ejs', { title: 'Edit profile', user: req.user });
+        var userSubset = _.pick(req.user, 'local.username', 'firstName', 'lastName'); //we only pick the properties we need
+        res.render('pages/users/editprofile.ejs', { title: 'Edit profile', user: userSubset });
     });
 
     /* GET users listing. */
