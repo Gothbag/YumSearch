@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../../partials/head %>
+    </head>
+
+    <body>
+
+        <% include ../../partials/navigation %>
+
+        <div class="container">
+          <h2>Welcome <%= user.local.username %>!</h2>
+         <div class="row">
+             <div class="col-md-6 col-md-offset-3">
+                 <div class="alert alert-success">
+                    Your user has been created successfully! A verification email has been sent to your account.
+                  </div>
+                <div class="text-center">
+                  <img src="//placehold.it/100" id="uploadedavatar" class="avatar img-circle" alt="avatar" height="100" width="100" />
+                  <h6>You may now upload your profile picture.</h6>
+
+                  <input class="form-control" type="file" id="avatarupload" name="avatarupload" accept="image/*"/>
+                </div>
+              </div>
+        </div>
+
+        </div>
+
+    <% include ../../partials/footer %>
+
+     <% include ../../partials/termsmodal %>
+    <script type="text/javascript" src="uploadfile/uploadfile.js"></script>
+
+
+    </body>
+
+</html>

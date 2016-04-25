@@ -58,13 +58,21 @@ module.exports = function (app, passport) {
     });
 
     app.get('/editprofile', isAuthenticated, function(req, res) {
-        var userSubset = _.pick(req.user, 'local.username', 'firstName', 'lastName'); //we only pick the properties we need
+        var userSubset = _.pick(req.user, 'firstName', 'lastName'); //we only pick the properties we need
+        userSubset.local = {};
+        userSubset.local.username = req.user.local.username;
+        console.log(userSubset);
         res.render('pages/users/editprofile.ejs', { title: 'Edit profile', user: userSubset });
     });
 
     /* GET users listing. */
 	app.get('/users',isAuthenticated, function(req, res, next) {
 	  res.send('respond with a resource');
+	});
+
+    /* new user welcome page */
+	app.get('/usercreated',isAuthenticated, function(req, res, next) {
+	  res.render('pages/users/usercreated.ejs', { title: 'User created successfully', user: req.user });
 	});
 
 };

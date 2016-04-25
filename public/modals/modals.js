@@ -42,7 +42,8 @@ $(document).ready(function () {
             // simple rule, converted to {required:true}
             registerUsername: {
                 required: true,
-                usernameExists: true
+                usernameExists: true,
+                noWhiteSpace: true
             },
             registerEmail: {
                 required: true,
@@ -66,51 +67,58 @@ $(document).ready(function () {
         }
 
     });
+
+    /* extra validation methods */
+    //we make sure the email isn't taken
+    $.validator.addMethod("emailExists", function (value, element) {
+        var result;
+        $.ajax({
+             type:'POST',
+            async: false,
+             url:'/users/emailexists',
+             contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+             data: JSON.stringify({email: $("#registerEmail").val()}),
+             success:function(data){
+                result = !data; //the server will return true if the email already exists, therefore the validation must return false
+             },
+             error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+             }
+        });
+        return result;
+    }, "This email is already taken.");
+
+    //we make sure user the username isn't taken
+    $.validator.addMethod("usernameExists", function (value, element) {
+        var result;
+        $.ajax({
+             type:'POST',
+            async: false,
+             url:'/users/usernameexists',
+             contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+             data: JSON.stringify({username: $("#registerUsername").val()}),
+             success:function(data){
+                result = !data; //the server will return true if the email already exists, therefore the validation must return false
+             },
+             error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+             }
+        });
+        return result;
+    }, "This username is already taken.");
+
+    $.validator.addMethod("noWhiteSpace", function(value, element) {
+      return value.indexOf(" ") < 0 && value != "";
+    }, "Whitespace is not allowed.");
+
 });
 
 
-/* extra validation methods */
-//we make sure the email isn't taken
-$.validator.addMethod("emailExists", function (value, element) {
-    var result;
-    $.ajax({
-         type:'POST',
-        async: false,
-         url:'/users/emailexists',
-         contentType: "application/json; charset=utf-8",
-        dataType: 'json',
-         data: JSON.stringify({email: $("#registerEmail").val()}),
-         success:function(data){
-            result = !data; //the server will return true if the email already exists, therefore the validation must return false
-         },
-         error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status);
-            console.log(thrownError);
-         }
-    });
-    return result;
-}, "This email is already taken.");
 
-//we make sure user the username isn't taken
-$.validator.addMethod("usernameExists", function (value, element) {
-    var result;
-    $.ajax({
-         type:'POST',
-        async: false,
-         url:'/users/usernameexists',
-         contentType: "application/json; charset=utf-8",
-        dataType: 'json',
-         data: JSON.stringify({username: $("#registerUsername").val()}),
-         success:function(data){
-            result = !data; //the server will return true if the email already exists, therefore the validation must return false
-         },
-         error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status);
-            console.log(thrownError);
-         }
-    });
-    return result;
-}, "This username is already taken.");
 
 
 /* functions*/
@@ -157,7 +165,7 @@ function register() {
          data: JSON.stringify({email: $("#registerEmail").val(), password: $('#registerPwd').val(), username: $('#registerUsername').val()}),
          success:function(result){
             if(result.status == 200){
-            	window.location = "/users"
+            	window.location = "/usercreated"
        		 }
 
          },
