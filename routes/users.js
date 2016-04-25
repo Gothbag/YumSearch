@@ -1,4 +1,18 @@
 var _ = require('underscore');
+//Multer and all modules we need to upload files
+var multer = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, '../', 'resources/img/profileimages'));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + ".jpg")
+  }
+});
+var upload = multer({ storage: storage });
+var fs = require('fs');
+var path = require('path');
+
 //User model
 var User = require('../models/user');
 
@@ -72,8 +86,41 @@ module.exports = function (app, passport) {
 
     /* new user welcome page */
 	app.get('/usercreated',isAuthenticated, function(req, res, next) {
+        console.log(req.user);
 	  res.render('pages/users/usercreated.ejs', { title: 'User created successfully', user: req.user });
 	});
+
+    app.post('/users/updateuser', function (req, res) {
+        var changedVals = req.body.changedValues;
+
+        var profileimage;
+        if (req.file) {
+            profileimage = req.file.filename;
+            console.log(req.file);
+            var image = true;
+        } else {
+            profileimage = 'noimage.jpg';
+        }
+
+        if (image) {
+			fs.stat(path.join('profileimages', sId), function (err, stats) { //the path won't accept an integer that's why we add the ""
+				if (!stats.isDirectory) { //stats is an object with information on the file inspected
+					fs.mkdir(path.join('profileimages', sId), function (err) { //we create the directory if it doesn't exist
+						if (!err) {
+							fs.rename(path.join('uploads', profileimage), path.join('profileimages', sId, profileimage), function (err) {
+								if (err) {throw err;}
+							});
+						}
+					})
+				}
+			});
+
+		}
+        User.update({_id:req.user._id}, { $set: changedVals }, function (err) {
+            if (err) {throw err;}
+
+        });
+    });
 
 };
 

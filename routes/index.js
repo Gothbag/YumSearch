@@ -5,8 +5,5 @@ module.exports = function (app, passport) {
 	  res.render('pages/main/index.ejs', { title: 'Home', user: req.user });
 	});
 
-
-
-
 };
 
