@@ -29,7 +29,7 @@ $(document).ready(function () {
 		this.current = ko.observable();
 		//add a new offer
 		this.add = function () {
-			this.offers.push(new Offer());
+			this.offers.push(new Offer({name:"Product"}));
 		}.bind(this); // this ensures the value "this" is the parent object and not the array item.
 
 		this.remove = function (offer) {
@@ -58,7 +58,7 @@ $(document).ready(function () {
 		    });
 		}.bind(this);
 
-		this.offer = ko.observableArray();
+		this.offers = ko.observableArray();
 		this.loadOffers();
 
 	};
@@ -76,6 +76,6 @@ $(document).ready(function () {
 	//we load the data
 
 	var viewModel = new ViewModel();
-	ko.applyBindings(viewModel);
+	ko.applyBindings(viewModel, document.getElementById("offers"));
 
 }());
