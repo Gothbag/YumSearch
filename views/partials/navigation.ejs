@@ -31,21 +31,39 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <% if (user) { %>
+                    <% if (typeof user.businesses != "undefined" || user.businesses.length > 0) { %>
                     <li>
                          <div class="dropdown">
                             <button class="btn btn-info navbar-btn dropdown-toggle" type="button" data-toggle="dropdown"><%= user.local.username %>
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li><a href="/dashboard">Dashboard</a></li>
+                                <li><a href="/dashboard/offers">Offers Management</a></li>
+                                <li><a href="#">Comments about you</a></li>
                                 <li><a href="/editprofile">Edit Profile</a></li>
-                                <li><a href="#">Recent Activity</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/logout">Log Out</a></li>
                             </ul>
                         </div>
                     </li>
-            </ul>
-                <% } else  { %>
+                <% } else if  (typeof user.businesses != "undefined" || user.businesses.length == 0) { %>
+                    <li>
+                         <div class="dropdown">
+                            <button class="btn btn-info navbar-btn dropdown-toggle" type="button" data-toggle="dropdown"><%= user.local.username %>
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/dashboard">Dashboard</a></li>
+                                <li><a href="/dashboard/offers">Offers Management</a></li>
+                                <li><a href="#">Comments about you</a></li>
+                                <li><a href="/editprofile">Edit Profile</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/logout">Log Out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                <% } } else  { %>
                     <li  class="margin-right-5px">
                          <button id="navLogIn" class="btn btn-info navbar-btn" type="button">Log In</button>
                     </li>
