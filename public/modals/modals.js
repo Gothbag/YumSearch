@@ -59,11 +59,17 @@ $(document).ready(function () {
                 required: true,
                 equalTo: "#registerPwd",
                 minlength: 6
+            },
+            termsconds: {
+                required: true
             }
         },
         messages: {
             registerPwdConfirm: {
                 equalTo: "The two passwords don't match."
+            },
+            termsconds: {
+                required: "You have to read and accept our terms and conditions."
             }
         }
 

@@ -20,7 +20,6 @@ var businessSchema = mongoose.Schema({
     },
     registrationData : Timestamp,
     profileImg : String,
-    offers : Array,
     rating: Double
 });
 
