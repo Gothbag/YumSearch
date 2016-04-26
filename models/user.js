@@ -7,6 +7,7 @@ var userSchema = mongoose.Schema({
     lastName: String,
     creationDate: Date,
     profileimage: String,
+    businesses: [mongoose.Schema.Types.ObjectId],
     local            : {
         email        : String,
         username     : String,

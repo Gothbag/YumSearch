@@ -12,6 +12,6 @@ module.exports = function (app, passport) {
 
     /*GET business offered products*/
     app.get('/dashboard/offers', function(req, res, next) {
-        res.render('pages/business/offers.ejs', { title: 'Dashboard', user: req.user });
+        res.render('pages/business/offers.ejs', { title: 'Offers', user: req.user });
 	});
 };
