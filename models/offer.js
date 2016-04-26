@@ -6,7 +6,7 @@ var offerSchema = mongoose.Schema({
     name: String,
     priceBefore: Double,
     priceNow: Double,
-    business: ObjectId
+    business: mongoose.Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('Offers', offerSchema);
