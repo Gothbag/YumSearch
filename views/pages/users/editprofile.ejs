@@ -27,53 +27,47 @@
               <div class="col-md-9 personal-info">
                 <h3>Personal info</h3>
 
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" id="form2" role="form" action="#">
                   <div class="form-group">
                     <label class="col-lg-3 control-label">First name:</label>
                     <div class="col-lg-8">
-                      <input class="form-control" value="<%= user.firstName %>" type="text">
+                      <input class="form-control" value="<%= user.firstName %>" name="lastName" id="lastName" type="text"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-lg-3 control-label">Last name:</label>
                     <div class="col-lg-8">
-                      <input class="form-control" value="<%= user.lastName %>" type="text">
+                      <input class="form-control" value="<%= user.lastName %>" name="firstName" name="lastName" type="text"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-lg-3 control-label">Email:</label>
                     <div class="col-lg-8">
-                      <input class="form-control" value="<%= user.local.email %>" type="text">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-md-3 control-label">Username:</label>
-                    <div class="col-md-8">
-                      <input class="form-control" value="<%= user.local.username %>" type="text">
+                      <input class="form-control" value="<%= user.local.email %>" name="email" id="email" type="text"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label">Old password:</label>
                     <div class="col-md-8">
-                      <input class="form-control" type="password">
+                      <input class="form-control Password" type="password" name="oldPassword" id="oldPassword"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label">Password:</label>
                     <div class="col-md-8">
-                      <input class="form-control" type="password">
+                      <input class="form-control Password" type="password" name="password" id="password"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label">Confirm password:</label>
                     <div class="col-md-8">
-                      <input class="form-control"  type="password">
+                      <input class="form-control Password"  type="password" name="confirmPassword" id="confirmPassword"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-8">
-                      <input class="btn btn-primary" value="Save Changes" type="button">
+                      <input class="btn btn-primary" id="Save" value="Save Changes" type="button">
                       <span></span>
                       <input class="btn btn-default" value="Cancel" type="reset">
                     </div>
@@ -87,9 +81,6 @@
     <% include ../../partials/footer %>
 
      <% include ../../partials/termsmodal %>
-    <script type="text/javascript">
-        var oUser = <%= user %>;
-    </script>
     <script type="text/javascript" src="/uploadfile/uploadfile.js"></script>
     <script type="text/javascript" src="/editprofile/editprofile.js"></script>
 

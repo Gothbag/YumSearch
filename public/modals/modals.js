@@ -28,7 +28,8 @@ $(document).ready(function () {
         rules: {
             // simple rule, converted to {required:true}
             loginPwd: {
-                required: true,
+                minlength: 6,
+                required: true
             },
             loginEmail: {
                 required: true
@@ -52,12 +53,12 @@ $(document).ready(function () {
             },
             registerPwd: {
                 required: true,
-                min: 6
+                minlength: 6
             },
             registerPwdConfirm: {
                 required: true,
                 equalTo: "#registerPwd",
-                min: 6
+                minlength: 6
             }
         },
         messages: {

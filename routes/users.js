@@ -71,14 +71,6 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
 
-    app.get('/editprofile', isAuthenticated, function(req, res) {
-        var userSubset = _.pick(req.user, 'firstName', 'lastName'); //we only pick the properties we need
-        userSubset.local = {};
-        userSubset.local.username = req.user.local.username;
-        console.log(userSubset);
-        res.render('pages/users/editprofile.ejs', { title: 'Edit profile', user: userSubset });
-    });
-
     /* GET users listing. */
 	app.get('/users',isAuthenticated, function(req, res, next) {
 	  res.send('respond with a resource');
@@ -90,24 +82,41 @@ module.exports = function (app, passport) {
 	  res.render('pages/users/usercreated.ejs', { title: 'User created successfully', user: req.user });
 	});
 
-    app.post('/users/updateuser', function (req, res) {
-        var changedVals = req.body.changedValues;
+    /*to render the page where profiles are edited*/
+    app.get('/editprofile', isAuthenticated, function(req, res) {
+        var userSubset = _.pick(req.user, 'firstName', 'lastName'); //we only pick the properties we need
+        userSubset.local = {};
+        userSubset.local.email = req.user.local.email;
+        res.render('pages/users/editprofile.ejs', { title: 'Edit profile', user: userSubset });
+    });
 
+    /* user update POST request */
+    app.post('/users/updateuser', upload.single("avatarupload"), function (req, res) {
+        var changedVals = JSON.parse(req.body.changedValues);
+        var image = false;
+        var id = req.user._id;
+        //We prepare an object to update whatever needs to be updated
+        var updateObject = {};
+
+        if (changedVals.password + "" != "") {
+            var helpUser = new User;
+            changedVals.local.password = helpUser.generateHash(password);
+        }
         var profileimage;
         if (req.file) {
             profileimage = req.file.filename;
             console.log(req.file);
-            var image = true;
+            image = true;
         } else {
             profileimage = 'noimage.jpg';
         }
-
+        changedVals.profileimage = profileimage;
         if (image) {
-			fs.stat(path.join('profileimages', sId), function (err, stats) { //the path won't accept an integer that's why we add the ""
+			fs.stat(path.join('profileimages', id), function (err, stats) { //the path won't accept an integer that's why we add the ""
 				if (!stats.isDirectory) { //stats is an object with information on the file inspected
-					fs.mkdir(path.join('profileimages', sId), function (err) { //we create the directory if it doesn't exist
+					fs.mkdir(path.join('profileimages', id), function (err) { //we create the directory if it doesn't exist
 						if (!err) {
-							fs.rename(path.join('uploads', profileimage), path.join('profileimages', sId, profileimage), function (err) {
+							fs.rename(path.join('uploads', profileimage), path.join('profileimages', id, profileimage), function (err) {
 								if (err) {throw err;}
 							});
 						}

@@ -1,47 +1,71 @@
 $(document).ready(function () {
 
+    /*events*/
+    $("#Save").click(function () {
+
+        save();
+
+    });
+
+    /* validation */
+     $("#form2").validate({
+        rules: {
+            // simple rule, converted to {required:true}
+            oldPassword: {
+                skip_or_fill_minimum: [3, "Password"],
+                minlength: 6
+            },
+            password: {
+                minlength: 6
+            },
+            confirmPassword: {
+                minlength: 6,
+                equalTo: "#password"
+            },
+            registerPwdConfirm: {
+                required: true,
+                equalTo: "#registerPwd",
+                min: 6
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            firstName: {
+                LatinNames: true
+            },
+            lastName: {
+                LatinNames: true
+            }
+        },
+        messages: {
+            confirmPassword: {
+                equalTo: "The two passwords don't match."
+            }
+        }
+
+    });
 
 });
 
-/* index Knockout*/
-(function () {
+function save() {
 
-	//the main view model
-	var ProfileModel = function (user) {
-		var self = this;
+    var userData = $('#form2').serializeObject();
 
-        this.user = new User(user);
-
-		this.saveUser = function () {
-			$.ajax({
-		        type: "POST",
-		        url: '/api/users/self', /* url of the request */
-		        contentType: "application/json; charset=utf-8",
-		        dataType: 'json',
-		        success: function (data) {
-		        	self.offers.removeAll(); //all snakes are removed beforehand
-					data.map(function (offer) {
-						self.offers.push(new Offer(offer));
-					});
-		        }
-		    });
-		}.bind(this);
-
-		//this.offers = ko.observableArray();
-		//this.loadSnakes();
-
-	};
-
-	//represent a single user item
-	var User = function (user) {
-		this._id = user._id;
-        this.firstName = ko.observable(user.firstName);
-        this.lastName = ko.observable(user.lastName);
-		this.local.username = ko.observable(user.local.name);
-        this.local.password = ko.observable();
-	}
-
-	var profileModel = new ProfileModel();
-	ko.applyBindings(profileModel);
-
-}());
+    var data = JSON.stringify(userData);
+    $.ajax({
+      type: "POST",
+      json:true,
+      url: '/users/updateuser',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      data: {changedValues: data},
+      dataType: "json",
+      failure: function (err) {
+        alert(err);
+      },
+      success: function (data) {
+        films = data;
+        updateList();
+      }
+    });
+}
