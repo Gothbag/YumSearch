@@ -43,3 +43,8 @@ color: #FFF;
 font-size: 24px;
 }
 /*contact form*/
+
+/*background color*/
+.bg-turquoise{
+   background: #66CCCC !important;
+}
