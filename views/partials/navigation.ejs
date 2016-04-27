@@ -31,7 +31,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <% if (user) { %>
-                    <% if (typeof user.businesses != "undefined" || user.businesses.length > 0) { %>
+                    <% if (typeof user.businesses != "undefined" && user.businesses.length > 0) { %>
                     <li>
                          <div class="dropdown">
                             <button class="btn btn-info navbar-btn dropdown-toggle" type="button" data-toggle="dropdown"><%= user.local.username %>
@@ -47,13 +47,13 @@
                             </ul>
                         </div>
                     </li>
-                <% } else if  (typeof user.businesses != "undefined" || user.businesses.length == 0) { %>
+                <% } else if  (typeof user.businesses != "undefined" && user.businesses.length == 0) { %>
                     <li>
                          <div class="dropdown">
                             <button class="btn btn-info navbar-btn dropdown-toggle" type="button" data-toggle="dropdown"><%= user.local.username %>
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li><a href="/dashboard">Dashboard</a></li>
+                                <li><a href="/dashboard">Paco</a></li>
                                 <li><a href="/dashboard/offers">Offers Management</a></li>
                                 <li><a href="#">Comments about you</a></li>
                                 <li><a href="/editprofile">Edit Profile</a></li>
