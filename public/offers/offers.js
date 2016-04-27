@@ -29,7 +29,7 @@ $(document).ready(function () {
 		this.current = ko.observable();
 		//add a new offer
 		this.add = function () {
-			this.offers.push(new Offer({name:"Product"}));
+			this.offers.push(new Offer({name:"Product", priceBefore: 0, priceNow: 0}));
 		}.bind(this); // this ensures the value "this" is the parent object and not the array item.
 
 		this.remove = function (offer) {
@@ -71,6 +71,7 @@ $(document).ready(function () {
 		this.name = ko.observable(offer.name);
 		this.priceNow = ko.observable(offer.priceNow);
         this.priceBefore = ko.observable(offer.priceBefore);
+        this.differencePercentage = ko.observable(((offer.priceNow - offer.priceBefore) / offer.priceNow) * 100);
 		this.business = offer.business;
 	}
 	//we load the data
