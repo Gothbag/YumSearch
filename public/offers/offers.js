@@ -29,7 +29,7 @@ $(document).ready(function () {
 		this.current = ko.observable();
 		//add a new offer
 		this.add = function () {
-			this.offers.push(new Offer({name:"Product", priceBefore: 0, priceNow: 0}));
+			this.offers.push(new Offer({name:"", priceBefore: 0, priceNow: 0}));
 		}.bind(this); // this ensures the value "this" is the parent object and not the array item.
 
 		this.remove = function (offer) {
@@ -37,7 +37,7 @@ $(document).ready(function () {
 				offer.visible(false); //we hide the offer
 				offer.deleteItem(true); //we mark if for deletion
 			} else {
-				this.remove(offer); //the offer is just removed from the array
+				self.remove(offer); //the offer is just removed from the array
 			}
 		}.bind(this);
 
@@ -65,13 +65,28 @@ $(document).ready(function () {
 
 	//represent a single offer item
 	var Offer = function (offer) {
+        var self = this;
 		this._id = offer._id;
 		this.visible = ko.observable(true);
 		this.deleteItem = ko.observable(false);
 		this.name = ko.observable(offer.name);
 		this.priceNow = ko.observable(offer.priceNow);
         this.priceBefore = ko.observable(offer.priceBefore);
-        this.differencePercentage = ko.observable(((offer.priceNow - offer.priceBefore) / offer.priceNow) * 100);
+        this.differencePercentage = ko.computed({
+            read: function () {
+                var diffPer;
+                if (this.priceNow > 0 && this.priceBefore > 0) {
+                    diffPer = ((this.priceNow - this.priceBefore) / this.priceNow) * 100;
+                } else {
+                    diffPer = 0;
+                }
+                return diffPer;
+            },
+            write: function (value) {
+                this.priceNow(this.priceBefore - (this.priceBefore * value * 0.01));
+            },
+            owner: this
+        });
 		this.business = offer.business;
 	}
 	//we load the data
