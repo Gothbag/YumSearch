@@ -1,5 +1,5 @@
 .margin-right-5px {
-	margin-right: 5px;
+    margin-right: 5px;
 }
 
 .caption {
@@ -30,21 +30,16 @@
 
 /*Contact form*/
 .jumbotron {
-background: #D80000;
-color: #FFF;
-border-radius: 0px;
+    background: url(../img/food-background.jpg);
+    color: #FFF;
+    border-radius: 0px;
 }
 .jumbotron-sm { padding-top: 24px;
-padding-bottom: 24px; }
+    padding-bottom: 24px; }
 .jumbotron small {
-color: #FFF;
+    color: #FFF;
 }
 .h1 small {
-font-size: 24px;
-}
-/*contact form*/
+    font-size: 24px;
+}/*contact form*/
 
-/*background color*/
-.bg-turquoise{
-   background: #66CCCC !important;
-}

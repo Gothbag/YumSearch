@@ -4,19 +4,19 @@
 
 /* -- color classes -- */
 .coralbg {
-    background-color: #D80000;
+    background-color: #ea383b;
 }
 
 .coral {
-    color: #D80000;
+    color: #ea383b;
 }
 
 .turqbg {
-    background-color: #66CCCC;
+    background-color: #73B786;
 }
 
 .turq {
-    color: #66CCCC;
+    color: #73B786;
 }
 
 .white {
@@ -64,7 +64,7 @@ div.user-menu-container .btn-group-vertical {
 
 div.user-menu-container .btn-group-vertical>a {
     padding: 20px 25px;
-    background-color: #66CCCC;
+    background-color: #73B786;
     color: white;
     border-color: #fff;
 }
@@ -75,7 +75,7 @@ div.btn-group-vertical>a:hover {
 }
 
 div.btn-group-vertical>a.active {
-    background: #D80000;
+    background: #ea383b;
     box-shadow: none;
     color: white;
 }
@@ -95,7 +95,7 @@ div.user-menu-btns div.btn-group-vertical>a.active:after{
   border-left: 0;
   border-bottom: 13px solid transparent;
   border-top: 13px solid transparent;
-  border-left: 10px solid #66CCCC;
+  border-left: 10px solid #73B786;
 }
 /* -- The main tab & content styling of the vertical buttons info-- */
 div.user-menu-content {
