@@ -31,48 +31,64 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <% if (user) { %>
-                    <% if (typeof user.businesses != "undefined" && user.businesses.length > 0) { %>
-                    <li>
-                         <div class="dropdown">
-                            <button class="btn btn-info navbar-btn dropdown-toggle" type="button" data-toggle="dropdown"><%= user.local.username %>
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="/dashboard">Dashboard</a></li>
-                                <li><a href="/dashboard/offers">Offers Management</a></li>
-                                <li><a href="#">Comments about you</a></li>
-                                <li><a href="/editprofile">Edit Profile</a></li>
-                                <li><a href="/contact">Contact Us</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="/logout">Log Out</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                <% if (typeof user.businesses != "undefined" && user.businesses.length > 0) { %>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-info navbar-btn dropdown-toggle" type="button" data-toggle="dropdown"><%= user.local.username %>
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/dashboard/offers">Offers Management</a></li>
+                            <li><a href="#">Comments about you</a></li>
+                            <li><a href="/editprofile">Edit Profile</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">Log Out</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <% } else if  (user.webmaster != "undefined" && user.webmaster == true) { %>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-info navbar-btn dropdown-toggle" type="button" data-toggle="dropdown"><%= user.local.username %>
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="/adminDash">Dashboard</a></li>
+                            <li><a href="#">Inbox</a></li>
+                            <li><a href="#">Users Management</a></li>
+                            <li><a href="#">Comments Management</a></li>
+                            <li><a href="#">Security</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">Log Out</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <% } else if  (typeof user.businesses != "undefined" && user.businesses.length == 0) { %>
-                    <li>
-                         <div class="dropdown">
-                            <button class="btn btn-info navbar-btn dropdown-toggle" type="button" data-toggle="dropdown"><%= user.local.username %>
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="/dashboard">Paco</a></li>
-                                <li><a href="/dashboard/offers">Offers Management</a></li>
-                                <li><a href="#">Comments about you</a></li>
-                                <li><a href="/editprofile">Edit Profile</a></li>
-                                <li><a href="/contact">Contact Us</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="/logout">Log Out</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-info navbar-btn dropdown-toggle" type="button" data-toggle="dropdown"><%= user.local.username %>
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="/dashboard">Paco</a></li>
+                            <li><a href="/dashboard/offers">Offers Management</a></li>
+                            <li><a href="#">Comments about you</a></li>
+                            <li><a href="/editprofile">Edit Profile</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">Log Out</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <% } } else  { %>
-                    <li  class="margin-right-5px">
-                         <button id="navLogIn" class="btn btn-info navbar-btn" type="button">Log In</button>
-                    </li>
-                    <li>
-                         <button id="navSignUp" class="btn btn-info navbar-btn" type="button">Sign Up</button>
-                    </li>
+                <li  class="margin-right-5px">
+                    <button id="navLogIn" class="btn btn-info navbar-btn" type="button">Log In</button>
+                </li>
+                <li>
+                    <button id="navSignUp" class="btn btn-info navbar-btn" type="button">Sign Up</button>
+                </li>
                 <% }  %>
             </ul>
-           
+
         </div>
         <!-- /.navbar-collapse -->
     </div>

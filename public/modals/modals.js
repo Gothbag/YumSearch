@@ -1,23 +1,23 @@
-    /* events */
+/* events */
 $(document).ready(function () {
-	$("#navLogIn").click(function() {
-		$("#logInModal").modal();
-	});
+    $("#navLogIn").click(function() {
+        $("#logInModal").modal();
+    });
     $("#navSignUp").click(function() {
-		$("#signUpModal").modal();
-	});
+        $("#signUpModal").modal();
+    });
 
 
-	$("#Register").click(function () {
+    $("#Register").click(function () {
 
-       register();
+        register();
 
 
-	});
+    });
 
     $("#Login").click(function () {
-		login();
-	});
+        login();
+    });
 
     $("#navLoginForm input").click(function (){
         $("#LoginUserNotValidated").addClass("hidden");
@@ -80,19 +80,19 @@ $(document).ready(function () {
     $.validator.addMethod("emailExists", function (value, element) {
         var result;
         $.ajax({
-             type:'POST',
+            type:'POST',
             async: false,
-             url:'/users/emailexists',
-             contentType: "application/json; charset=utf-8",
+            url:'/users/emailexists',
+            contentType: "application/json; charset=utf-8",
             dataType: 'json',
-             data: JSON.stringify({email: $("#registerEmail").val()}),
-             success:function(data){
+            data: JSON.stringify({email: $("#registerEmail").val()}),
+            success:function(data){
                 result = !data; //the server will return true if the email already exists, therefore the validation must return false
-             },
-             error: function (xhr, ajaxOptions, thrownError) {
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
                 console.log(xhr.status);
                 console.log(thrownError);
-             }
+            }
         });
         return result;
     }, "This email is already taken.");
@@ -101,25 +101,25 @@ $(document).ready(function () {
     $.validator.addMethod("usernameExists", function (value, element) {
         var result;
         $.ajax({
-             type:'POST',
+            type:'POST',
             async: false,
-             url:'/users/usernameexists',
-             contentType: "application/json; charset=utf-8",
+            url:'/users/usernameexists',
+            contentType: "application/json; charset=utf-8",
             dataType: 'json',
-             data: JSON.stringify({username: $("#registerUsername").val()}),
-             success:function(data){
+            data: JSON.stringify({username: $("#registerUsername").val()}),
+            success:function(data){
                 result = !data; //the server will return true if the email already exists, therefore the validation must return false
-             },
-             error: function (xhr, ajaxOptions, thrownError) {
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
                 console.log(xhr.status);
                 console.log(thrownError);
-             }
+            }
         });
         return result;
     }, "This username is already taken.");
 
     $.validator.addMethod("noWhiteSpace", function(value, element) {
-      return value.indexOf(" ") < 0 && value != "";
+        return value.indexOf(" ") < 0 && value != "";
     }, "Whitespace is not allowed.");
 
 });
@@ -131,55 +131,58 @@ $(document).ready(function () {
 /* functions*/
 function login() {
 
-     $("#navLoginForm").validate();
+    $("#navLoginForm").validate();
     if (!$("#navLoginForm").valid()) {return;}
 
     $.ajax({
-         type:'POST',
-         url:'/login',
-         contentType: "application/json; charset=utf-8",
+        type:'POST',
+        url:'/login',
+        contentType: "application/json; charset=utf-8",
         dataType: 'json',
-         data: JSON.stringify({email: $("#loginEmail").val(), password: $('#loginPwd').val()}),
-         success:function(result){
+        data: JSON.stringify({email: $("#loginEmail").val(), password: $('#loginPwd').val()}),
+        success:function(result){
             if(result.status == 200) {
                 if (result.success == true){
-            	   window.location = "/users";
+                    if (result.webmaster == true)
+                        window.location = "/adminDash";
+                    else
+                        window.location = "/";
                 } else {
                     $("#LoginUserNotValidated").removeClass("hidden");
                 }
             }
 
 
-         },
-         error: function (xhr, ajaxOptions, thrownError) {
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
             console.log(thrownError);
-         }
-      });
+        }
+    });
 
 }
 
 function register() {
 
-     $("#navRegisterForm").validate();
+    $("#navRegisterForm").validate();
     if (!$("#navRegisterForm").valid()) {return;}
 
     $.ajax({
-         type:'POST',
-         url:'/signup',
-         contentType: "application/json; charset=utf-8",
+        type:'POST',
+        url:'/signup',
+        contentType: "application/json; charset=utf-8",
         dataType: 'json',
-         data: JSON.stringify({email: $("#registerEmail").val(), password: $('#registerPwd').val(), username: $('#registerUsername').val()}),
-         success:function(result){
+        data: JSON.stringify({email: $("#registerEmail").val(), password: $('#registerPwd').val(), username: $('#registerUsername').val()}),
+        success:function(result){
             if(result.status == 200){
-            	window.location = "/usercreated"
-       		 }
+                window.location = "/usercreated"
+            }
 
-         },
-         error: function (xhr, ajaxOptions, thrownError) {
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
             console.log(thrownError);
-         }
-      });
+        }
+    });
 
 }
