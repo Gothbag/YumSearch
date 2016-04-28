@@ -1,6 +1,26 @@
 /* events */
 $(document).ready(function () {
 
+    /* validations */
+    $("#form2").validate({
+        rules: {
+            // simple rule, converted to {required:true}
+            loginPwd: {
+                minlength: 6,
+                required: true
+            },
+            loginEmail: {
+                required: true
+            }
+        }
+
+    });
+    /*validation classes*/
+    jQuery.validator.addClassRules("Number", {
+      number: true
+    });
+
+
 });
 
 /* offers page Knockout*/
@@ -83,6 +103,7 @@ $(document).ready(function () {
                 return diffPer;
             },
             write: function (value) {
+                if (value == 0 || self.priceBefore() == 0) { return; }
                 self.priceNow(self.priceBefore() * (100-value) * 0.01);
             }
         });

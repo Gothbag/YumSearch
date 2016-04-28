@@ -24,45 +24,46 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Insert, update or delete your products on offer </h3><br>
-                    <div class="table-responsive">
+                    <form id="form2" action="#">
+                        <h3>Insert, update or delete your products on offer </h3><br>
+                        <div class="table-responsive">
 
 
-                        <table id="mytable" class="table table-bordred table-striped">
+                            <table id="mytable" class="table table-bordred table-striped">
 
-                            <thead>
-                                <th>Product Name</th>
-                                <th>Price Before</th>
-                                <th>Price Now</th>
-                                <th>Discount (%)</th>
+                                <thead>
+                                    <th>Product Name</th>
+                                    <th>Price Before</th>
+                                    <th>Price Now</th>
+                                    <th>Discount (%)</th>
 
-                                <th>Delete Offer</th>
-                            </thead>
-                            <tbody id="offers">
-                                <!-- ko foreach: offers -->
-                                <tr data-bind="visible: visible">
-                                    <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 " data-bind="value: name" /></td>
-                                    <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 " data-bind="value: priceBefore" /></td>
-                                    <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 " data-bind="value: priceNow" /></td>
-                                    <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 " data-bind="value: differencePercentage" /></td>
-                                    <td class="text-center"><button class="btn btn-danger btn-xs" data-title="Delete" data-bind="click: $parent.remove" ><span class="glyphicon glyphicon-trash"></span></button></td>
-                                </tr>
-                                <!-- /ko -->
-                                <tr>
-                                    <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 " value="New Product" data-bind="change: add" disabled="disabled" /></td>
-                                    <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 " data-bind="change: add" disabled="disabled" /></td>
-                                    <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 " data-bind="change: add"  disabled="disabled"/></td>
-                                    <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 " data-bind="change: add"  disabled="disabled"/></td>
-                                    <td class="text-center"><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-info btn-xs" title="Add" data-bind="click: add" ><span class="glyphicon glyphicon-plus"></span></button></p></td>
-                                </tr>
+                                    <th>Delete Offer</th>
+                                </thead>
+                                <tbody id="offers">
+                                    <!-- ko foreach: offers -->
+                                    <tr data-bind="visible: visible">
+                                        <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 " data-bind="value: name" /></td>
+                                        <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 Number" data-bind="value: priceBefore" /></td>
+                                        <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 Number" data-bind="value: priceNow" /></td>
+                                        <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 Digit" data-bind="value: differencePercentage" /></td>
+                                        <td class="text-center"><button class="btn btn-danger btn-xs" data-title="Delete" data-bind="click: $parent.remove" ><span class="glyphicon glyphicon-trash"></span></button></td>
+                                    </tr>
+                                    <!-- /ko -->
+                                    <tr>
+                                        <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 " value="New Product" data-bind="change: add" disabled="disabled" /></td>
+                                        <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 " data-bind="change: add" disabled="disabled" /></td>
+                                        <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 " data-bind="change: add"  disabled="disabled"/></td>
+                                        <td><input type="text" class="form-control col-lg-12 col-md-3 col-sm-3 col-xs-3 " data-bind="change: add"  disabled="disabled"/></td>
+                                        <td class="text-center"><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-info btn-xs" title="Add" data-bind="click: add" ><span class="glyphicon glyphicon-plus"></span></button></p></td>
+                                    </tr>
 
-                            </tbody>
+                                </tbody>
 
-                        </table>
+                            </table>
 
-                    </div>
+                        </div>
 
-
+                    </form>
                 </div>
                 <div class="btn-group">
                     <a class="btn btn-success" data-bind="click: save">Save <span class="glyphicon glyphicon-ok"></span></a>
