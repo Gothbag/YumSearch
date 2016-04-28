@@ -4,9 +4,9 @@ var bcrypt = require('bcryptjs');
 // define the schema for our user model
 var ratingSchema = mongoose.Schema({
     comment: String,
-    from: mongoose.Schema.Types.ObjectId,
-    to: mongoose.Schema.Types.ObjectId,
+    from: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    to: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     score: Integer
 });
 
-module.exports = mongoose.model('Ratings', ratingSchema);
+module.exports = mongoose.model('Rating', ratingSchema);

@@ -1,3 +1,5 @@
+var Offer = require('../models/offer');
+
 module.exports = function (app, passport) {
 
 	/* GET home business page. */
@@ -10,8 +12,16 @@ module.exports = function (app, passport) {
         res.render('pages/business/dashboard.ejs', { title: 'Dashboard', user: req.user });
 	});
 
-    /*GET business offered products*/
+    /*handling offers page*/
     app.get('/dashboard/offers', function(req, res, next) {
         res.render('pages/business/offers.ejs', { title: 'Offers', user: req.user });
+	});
+
+     /*obtain offers created by business*/
+    app.post('/offers/business', function(req, res, next) {
+        Offer.find({}, function (err, offers) {
+            if (err) { throw err; }
+            res.json(offers);
+        });
 	});
 };
