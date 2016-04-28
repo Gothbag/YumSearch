@@ -29,7 +29,7 @@ $(document).ready(function () {
 		this.current = ko.observable();
 		//add a new offer
 		this.add = function () {
-			this.offers.push(new Offer({name:"", priceBefore: 0, priceNow: 0}));
+			this.offers.push(new Offer({name:"Product", priceBefore: 0, priceNow: 0}));
 		}.bind(this); // this ensures the value "this" is the parent object and not the array item.
 
 		this.remove = function (offer) {
@@ -75,17 +75,16 @@ $(document).ready(function () {
         this.differencePercentage = ko.computed({
             read: function () {
                 var diffPer;
-                if (this.priceNow > 0 && this.priceBefore > 0) {
-                    diffPer = ((this.priceNow - this.priceBefore) / this.priceNow) * 100;
+                if (self.priceNow() > 0 && self.priceBefore() > 0) {
+                    diffPer = ((self.priceBefore() - self.priceNow()) / self.priceBefore()) * 100;
                 } else {
                     diffPer = 0;
                 }
                 return diffPer;
             },
             write: function (value) {
-                this.priceNow(this.priceBefore - (this.priceBefore * value * 0.01));
-            },
-            owner: this
+                self.priceNow(self.priceBefore() * (100-value) * 0.01);
+            }
         });
 		this.business = offer.business;
 	}
