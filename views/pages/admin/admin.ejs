@@ -17,6 +17,121 @@
             </div>
         </div>
 
+        <!--Profile information-->
+        <div class="container">
+            <div class="row user-menu-container square">
+                <div class="col-md-7 user-details">
+                    <div class="row coralbg white">
+                        <div class="col-md-6 no-pad">
+                            <div class="user-pad">
+                                <h3>Welcome back <br> ADMINISTRATOR</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-6 no-pad">
+                            <div class="user-image">
+                                <img src="https://farm7.staticflickr.com/6163/6195546981_200e87ddaf_b.jpg" class="img-responsive thumbnail">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row overview">
+                        <div class="col-md-4 user-pad text-center">
+                            <h3>VISITS</h3>
+                            <h4>1250</h4>
+                        </div>
+                        <div class="col-md-4 user-pad text-center">
+                            <h3>USERS</h3>
+                            <h4>456</h4>
+                        </div>
+                        <div class="col-md-4 user-pad text-center">
+                            <h3>BUSINESSES</h3>
+                            <h4>325</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 user-menu-btns">
+                    <div class="btn-group-vertical square" id="responsive">
+                        <a href="#" class="btn btn-block btn-default active">
+                            <i class="fa fa-envelope-o fa-3x"></i>
+                        </a>
+                        <a href="#" class="btn btn-default">
+                            <i class="fa fa-users fa-3x"></i>
+                        </a>
+                        <a href="#" class="btn btn-default">
+                            <i class="fa fa-commenting fa-3x"></i>
+                        </a>
+                        <a href="#" class="btn btn-default">
+                            <i class="fa fa-lock fa-3x"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 user-menu user-pad">
+                    <div class="user-menu-content active">
+                        <h2>
+                            Inbox (X new messages)
+                        </h2>
+                        <ul class="user-menu-list">
+                            <li>
+                                <button type="button" class="btn btn-labeled btn-info" href="#">
+                                    <span class="btn-label"><i class="fa fa-inbox"></i></span>View messages</button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-labeled btn-info" href="#">
+                                    <span class="btn-label"><i class="fa fa-share "></i></span>Send message</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-menu-content">
+                        <h2>
+                            Users Management
+                        </h2>
+                        <h3>Delete, update and more</h3>
+                        <ul class="user-menu-list">
+                            <li>
+                                <form class="form-search">
+                                    <div class="input-append">
+                                        <input type="text" class="input-style form-control" placeholder="Search users here">
+                                        <button class="btn btn-info navbar-btn">Search</button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-menu-content">
+                        <h2 class="text-center">
+                            Manage Comments
+                        </h2><br>
+                            <div class="dropdown text-center">
+                                <button class="btn btn-info navbar-btn" type="button" data-toggle="dropdown">Show comments since
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li id="past_hour"><a href="#">the past hour</a></li>
+                                    <li id="past_day"><a href="#">the past day</a></li>
+                                    <li id="past_week"><a href="#">the past week</a></li>
+                                    <li id="last_4_weeks"><a href="#">the last 4 weeks</a></li>
+                                    <li id="beggining_of_time"><a href="#">the beggining of time</a></li>
+                                </ul>
+                            </div>
+                    </div>
+
+                    <div class="user-menu-content">
+                        <h2 class="text-center">Change manager password</h2>
+                        <ul class="user-menu-list">
+                            <li>
+                                <form class="form-search">
+                                    <div class="input-append">
+                                        <input type="text" class="input-style form-control" placeholder="Type current password"/>
+                                        <input type="text" class="input-style form-control" placeholder="Type new password"/>
+                                        <input type="text" class="input-style form-control" placeholder="Retype new password"/>
+                                        <button class="btn btn-info navbar-btn">Done</button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><br> <!--profile information-->
+
 
         <% include ../../partials/footer %>
         <script src="/business/business.js"></script>
