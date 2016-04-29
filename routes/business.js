@@ -17,6 +17,11 @@ module.exports = function (app, passport) {
         res.render('pages/business/offers.ejs', { title: 'Offers', user: req.user });
 	});
 
+    /*handling business registration page*/
+    app.get('/business/register', function(req, res, next) {
+        res.render('pages/business/businessRegister.ejs', { title: 'Register Business', user: req.user });
+	});
+
      /*obtain offers created by a business*/
     app.post('/offers/business', listOffers);
 

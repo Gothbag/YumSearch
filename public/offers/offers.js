@@ -87,6 +87,7 @@ $(document).ready(function () {
 	var Offer = function (offer) {
         var self = this;
 		this._id = offer._id;
+        this.business = offer.business;
 		this.visible = ko.observable(true);
 		this.deleteItem = ko.observable(false);
 		this.name = ko.observable(offer.name);
