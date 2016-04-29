@@ -89,6 +89,7 @@ module.exports = function (app, passport) {
         var userSubset = _.pick(req.user, 'firstName', 'lastName'); //we only pick the properties we need
         userSubset.local = {};
         userSubset.local.email = req.user.local.email;
+        userSubset.local.username = req.user.local.username;
         res.render('pages/users/editprofile.ejs', { title: 'Edit profile', user: userSubset });
     });
 

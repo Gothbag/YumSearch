@@ -1,12 +1,12 @@
 /* events */
 $(document).ready(function () {
     $("#terms_cond").click(function() {
-		$("#t_and_c_m").modal();
-	});
+        $("#t_and_c_m").modal();
+    });
 
     /* function to validate names with non-ASCII characters*/
     $.validator.addMethod("LatinNames", function (value, element) {
-       return (/^[a-z\u00E0-\u00FC\s-]+$/i.test(value));
+        return (/^[a-z\u00E0-\u00FC\s-]+$/i.test(value));
     }, "Incorrect format");
 
     $.validator.addMethod("skip_or_fill_minimum", function(value, element, options) {
@@ -20,6 +20,10 @@ $(document).ready(function () {
             elems.addClass('error');
         }
     }, $.format("Please either skip these fields or fill at least {0} of them."));
+
+    $("#navSignUpBusiness").click(function(){
+        window.location='/registerBusiness';
+    });
 });
 
 // override jquery validate plugin defaults
