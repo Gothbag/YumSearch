@@ -87,6 +87,7 @@ $(document).ready(function () {
 	var Offer = function (offer) {
         var self = this;
 		this._id = offer._id;
+        this.business = offer.business;
 		this.visible = ko.observable(true);
 		this.deleteItem = ko.observable(false);
 		this.name = ko.observable(offer.name);
@@ -103,7 +104,7 @@ $(document).ready(function () {
                 return diffPer;
             },
             write: function (value) {
-                if (value == 0 || self.priceBefore() == 0) { return; }
+                if (self.priceBefore() == 0) { return; }
                 self.priceNow(self.priceBefore() * (100-value) * 0.01);
             }
         });

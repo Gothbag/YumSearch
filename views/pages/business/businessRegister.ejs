@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../../partials/head %>
+    </head>
+
+    <body>
+
+        <% include ../../partials/navigation %>
+        <div class="jumbotron jumbotron-sm"><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <h1 class="h1">
+                            <img class="img-responsive img-thumbnail img-circle" src="/resources/img/rounded_white_icon.png" /> Register Business</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+
+              <!-- edit form column -->
+              <div class="col-md-9 personal-info">
+                <h3>Personal info</h3>
+
+                <form class="form-horizontal" id="form2" role="form" action="#">
+                    <div class="form-group">
+                    <label class="col-lg-3 control-label">Address:</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" value="" name="address" id="address" type="text"/>
+                    </div>
+                  </div>
+                    <div class="form-group">
+                    <label class="col-lg-3 control-label">Postal code:</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" value="" name="postalCode" id="postalCode" type="text"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">First name:</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" value="<%= user.firstName %>" name="lastName" id="lastName" type="text"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Last name:</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" value="<%= user.lastName %>" name="firstName" name="lastName" type="text"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" value="<%= user.local.email %>" name="email" id="email" type="text"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Old password:</label>
+                    <div class="col-md-8">
+                      <input class="form-control Password" type="password" name="oldPassword" id="oldPassword"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Password:</label>
+                    <div class="col-md-8">
+                      <input class="form-control Password" type="password" name="password" id="password"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Confirm password:</label>
+                    <div class="col-md-8">
+                      <input class="form-control Password"  type="password" name="confirmPassword" id="confirmPassword"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                      <input class="btn btn-primary" id="Save" value="Save Changes" type="button">
+                      <span></span>
+                      <input class="btn btn-default" value="Cancel" type="reset">
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+        </div>
+
+
+    <% include ../../partials/footer %>
+
+     <% include ../../partials/termsmodal %>
+    <script type="text/javascript" src="/businessregister/businessregister.js"></script>
+
+
+    </body>
+
+</html>
