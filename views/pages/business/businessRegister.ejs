@@ -22,77 +22,102 @@
 
             <div class="row">
 
-              <!-- edit form column -->
-              <div class="col-md-9 personal-info">
-                <h3>Personal info</h3>
+                <!-- edit form column -->
+                <div class="col-md-9 personal-info">
+                    <h2>Fill the following data to promote your Business</h2>
 
-                <form class="form-horizontal" id="form2" role="form" action="#">
-                    <div class="form-group">
-                    <label class="col-lg-3 control-label">Address:</label>
-                    <div class="col-lg-8">
-                      <input class="form-control" value="" name="address" id="address" type="text"/>
-                    </div>
-                  </div>
-                    <div class="form-group">
-                    <label class="col-lg-3 control-label">Postal code:</label>
-                    <div class="col-lg-8">
-                      <input class="form-control" value="" name="postalCode" id="postalCode" type="text"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-3 control-label">First name:</label>
-                    <div class="col-lg-8">
-                      <input class="form-control" value="<%= user.firstName %>" name="lastName" id="lastName" type="text"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-3 control-label">Last name:</label>
-                    <div class="col-lg-8">
-                      <input class="form-control" value="<%= user.lastName %>" name="firstName" name="lastName" type="text"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-3 control-label">Email:</label>
-                    <div class="col-lg-8">
-                      <input class="form-control" value="<%= user.local.email %>" name="email" id="email" type="text"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-md-3 control-label">Old password:</label>
-                    <div class="col-md-8">
-                      <input class="form-control Password" type="password" name="oldPassword" id="oldPassword"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-md-3 control-label">Password:</label>
-                    <div class="col-md-8">
-                      <input class="form-control Password" type="password" name="password" id="password"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-md-3 control-label">Confirm password:</label>
-                    <div class="col-md-8">
-                      <input class="form-control Password"  type="password" name="confirmPassword" id="confirmPassword"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-md-3 control-label"></label>
-                    <div class="col-md-8">
-                      <input class="btn btn-primary" id="Save" value="Save Changes" type="button">
-                      <span></span>
-                      <input class="btn btn-default" value="Cancel" type="reset">
-                    </div>
-                  </div>
-                </form>
-              </div>
-          </div>
+                    <form class="form-horizontal" id="form2" role="form" action="#">
+                        <fieldset>
+                            <legend>Create an account</legend>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">First name:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="<%= user.firstName %>" name="lastName" id="lastName" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Last name:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="<%= user.lastName %>" name="firstName" name="lastName" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Email:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="<%= user.local.email %>" name="email" id="email" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Password:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control Password" type="password" name="password" id="password"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Confirm password:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control Password"  type="password" name="confirmPassword" id="confirmPassword"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Business Data</legend>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Company/Business Name:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="" name="businessName" id="businessName" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Tax ID number:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="" name="taxId" id="taxId" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Address:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="" name="address" id="address" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Postal code:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="" name="postalCode" id="postalCode" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Phone number:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="" name="phone" id="phone" type="text"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-10">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="termsconds" name="termsconds"> I agree with the <a id="terms_cond" href="#">Terms and Conditions</a>.</label>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <input class="btn btn-primary" id="Save" value="Create Account" type="button">
+                                <span></span>
+                                <input class="btn btn-default" value="Cancel" type="reset">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
 
-    <% include ../../partials/footer %>
+        <% include ../../partials/footer %>
 
-     <% include ../../partials/termsmodal %>
-    <script type="text/javascript" src="/businessregister/businessregister.js"></script>
+        <% include ../../partials/termsmodal %>
+        <script type="text/javascript" src="/businessregister/businessregister.js"></script>
 
 
     </body>
