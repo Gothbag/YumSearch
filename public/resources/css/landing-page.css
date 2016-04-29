@@ -31,16 +31,21 @@ h6 {
 }
 
 .intro-header {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-top: 15px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
     background: url(../img/food-background.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
+    max-height: 50%;
 }
 
 .intro-header-business {
     background: url(../img/fruit-stand-background.jpg) no-repeat center center !important;
+    max-height: 55% !important;
 }
 
 .logo{
@@ -65,12 +70,11 @@ h6 {
 }
 
 .welcome-message{
-    font-size: 4em;
     color: black;
 }
 
 .center-btn{
-  margin:0px auto;
+    margin:0px auto;
 }
 
 .intro-divider {
