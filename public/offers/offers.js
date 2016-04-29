@@ -103,7 +103,7 @@ $(document).ready(function () {
                 return diffPer;
             },
             write: function (value) {
-                if (value == 0 || self.priceBefore() == 0) { return; }
+                if (self.priceBefore() == 0) { return; }
                 self.priceNow(self.priceBefore() * (100-value) * 0.01);
             }
         });
