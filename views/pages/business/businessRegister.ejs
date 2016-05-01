@@ -30,18 +30,6 @@
                         <fieldset>
                             <legend>Create an account</legend>
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">First name:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="<%= user.firstName %>" name="lastName" id="lastName" type="text"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Last name:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="<%= user.lastName %>" name="firstName" name="lastName" type="text"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-lg-3 control-label">Email:</label>
                                 <div class="col-lg-8">
                                     <input class="form-control" value="<%= user.local.email %>" name="email" id="email" type="text"/>
@@ -63,7 +51,7 @@
                         <fieldset>
                             <legend>Business Data</legend>
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Company/Business Name:</label>
+                                <label class="col-lg-3 control-label">Company/business Name:</label>
                                 <div class="col-lg-8">
                                     <input class="form-control" value="" name="businessName" id="businessName" type="text"/>
                                 </div>
@@ -81,9 +69,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-lg-3 control-label">City:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="" name="city" id="city" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-lg-3 control-label">Postal code:</label>
                                 <div class="col-lg-8">
                                     <input class="form-control" value="" name="postalCode" id="postalCode" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Postal code:</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" value="" name="country" id="country" type="text"/>
                                 </div>
                             </div>
                             <div class="form-group">

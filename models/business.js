@@ -1,35 +1,23 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcryptjs');
 
 // define the schema for our user model
 var businessSchema = mongoose.Schema({
     businessName : String,
-    phoneNumber : Double,
+    phoneNumber : Number,
     email : String,
     address     : {
-        street       : String,
-        number       : String,
-        population   : String,
-        zip          : Double,
-        city         : String,
-        country      : String
+        address       : String,
+        city   : String,
+        postCode          : Number,
+        country      : Number
     },
     loc     : {
-        lng : Double,
-        lat : Double
+        lng : Number,
+        lat : Number
     },
-    registrationData : Timestamp,
+    creationDate : Date,
     profileImg : String,
-    rating: Double
+    rating: Number
 });
 
-//extra methods for the schema
-userSchema.methods.generateHash = function (password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8)); //synchronous hashing
-};
-
-userSchema.methods.validPassword = function (password) {
-    return bcrypt.compareSync(password, this.local.password); //synchronous password comparison
-};
-
-module.exports = mongoose.model('Business', userSchema);
+module.exports = mongoose.model('Business', businessSchema);
