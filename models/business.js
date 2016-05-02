@@ -6,10 +6,10 @@ var businessSchema = mongoose.Schema({
     phoneNumber : Number,
     email : String,
     address     : {
-        address       : String,
-        city   : String,
-        postCode          : Number,
-        country      : Number
+        address : String,
+        city : String,
+        postCode : Number,
+        country : Number
     },
     loc     : {
         lng : Number,
