@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcryptjs');
 
 // define the schema for our user model
 var businessSchema = mongoose.Schema({
@@ -20,6 +19,5 @@ var businessSchema = mongoose.Schema({
     profileImg : String,
     rating: Number
 });
-
 
 module.exports = mongoose.model('Business', businessSchema);

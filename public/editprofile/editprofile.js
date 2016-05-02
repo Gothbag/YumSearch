@@ -50,7 +50,11 @@ $(document).ready(function () {
 
 function save() {
 
+    var formData = new FormData();
+
     var userData = $('#form2').serializeObject();
+
+    formData.append()
 
     var data = JSON.stringify(userData);
     $.ajax({

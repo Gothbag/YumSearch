@@ -49,7 +49,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/users/emailexists', function (req, res) {
-        User.findOne({ 'local.email': req.body.email }, function (err, user) {
+        User.findOne({ '    local.email': req.body.email }, function (err, user) {
             if (err) { throw err;}
             // a user is found, we return true
             if (user) {return res.send(true);}
@@ -96,26 +96,43 @@ module.exports = function (app, passport) {
     });
 
     /* user update POST request */
-    app.post('/users/updateuser', upload.single("avatarupload"), function (req, res) {
+    app.post('/users/updateuser', function (req, res, next) {
         var changedVals = JSON.parse(req.body.changedValues);
         var image = false;
         var id = req.user._id;
         //We prepare an object to update whatever needs to be updated
-        var updateObject = {};
+        if (changedVals.email + "" != "") {
+            var helpUser = new User;
+            changedVals["local.email"] = changedVals.email;
+        }
+
 
         if (changedVals.password + "" != "") {
             var helpUser = new User;
-            changedVals.local.password = helpUser.generateHash(password);
+            changedVals["local.password"] = helpUser.generateHash(password);
         }
+        //deleting unwanted properties
+        delete changedVals.email;
+        delete changedVals.password;
+
+        User.update({_id:req.user._id}, {$set:changedVals}, function (err) {
+            if (err) {throw err;}
+
+        });
+    });
+
+    app.post('/users/avatarupload', upload.single("avatarupload"), function (req, res) {
+        var image = false;
         var profileimage;
+        console.log(req.file);
+        console.log(req.files);
         if (req.file) {
             profileimage = req.file.filename;
-            console.log(req.file);
             image = true;
         } else {
             profileimage = 'noimage.jpg';
         }
-        changedVals.profileimage = profileimage;
+        var id = req.user._id + "";
         if (image) {
             fs.stat(path.join('profileimages', id), function (err, stats) { //the path won't accept an integer that's why we add the ""
                 if (!stats.isDirectory) { //stats is an object with information on the file inspected
@@ -130,7 +147,7 @@ module.exports = function (app, passport) {
             });
 
         }
-        User.update({_id:req.user._id}, { $set: changedVals }, function (err) {
+        User.update({_id:id}, {$set:{profileimage:profileimage}}, function (err) {
             if (err) {throw err;}
 
         });
