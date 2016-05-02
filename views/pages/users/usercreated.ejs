@@ -9,21 +9,22 @@
         <% include ../../partials/navigation %>
 
         <div class="container">
-          <h2>Welcome <%= user.local.username %>!</h2>
-         <div class="row">
-             <div class="col-md-6 col-md-offset-3">
-                 <div class="alert alert-success">
-                    Your user has been created successfully! A verification email has been sent to your account.
-                  </div>
-              </div>
-        </div>
+            <h2>Welcome <%= user.local.username %>!</h2>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="alert alert-success" id="Message">
+                        Your user has been created successfully! A verification email has been sent to your account.
+                    </div>
+                </div>
+            </div>
 
         </div>
 
-    <% include ../../partials/footer %>
+        <% include ../../partials/footer %>
 
-     <% include ../../partials/termsmodal %>
+        <% include ../../partials/termsmodal %>
 
+        <script type="text/javascript" src="/modals/modals.js"></script>
 
     </body>
 

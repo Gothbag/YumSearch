@@ -35,6 +35,7 @@
                     <h1><%= user.local.username %></h1>
 
                     <form class="form-horizontal" id="form2" role="form" action="#">
+                        <% if (typeof user.businesses != "undefined") { %>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">First name:</label>
                             <div class="col-lg-8">
@@ -47,6 +48,7 @@
                                 <input class="form-control" value="<%= user.lastName %>" name="firstName" name="lastName" type="text"/>
                             </div>
                         </div>
+                        <% }  %>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email:</label>
                             <div class="col-lg-8">

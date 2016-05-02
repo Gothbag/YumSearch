@@ -1,6 +1,8 @@
 var _ = require('underscore');
 //Multer and all modules we need to upload files
 var multer = require('multer');
+var nodemailer = require("nodemailer");
+var smtpTransport = require("nodemailer-smtp-transport");
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, '../', 'resources/img/profileimages'));
@@ -131,6 +133,39 @@ module.exports = function (app, passport) {
         User.update({_id:req.user._id}, { $set: changedVals }, function (err) {
             if (err) {throw err;}
 
+        });
+    });
+
+    /**/
+    app.get('/users/sendmail',function(req,res){
+        console.log("hemos llegado al server");
+        var smtpTransport = nodemailer.createTransport("SMTP",{
+            host : "aspmx.l.google.com",
+            secureConnection : false,
+            port: 25,
+            service: "Gmail",
+            auth: {
+                user: "yumsearchcompany@gmail.com",
+                pass: "yumsearchco"
+            }
+        });
+
+        var mailOptions={
+            from : "yumsearchcompany@gmail.com",
+            to:req.query.to,
+            subject:req.query.subject,
+            text:req.query.text,
+        }
+
+        console.log(mailOptions);
+        smtpTransport.sendMail(mailOptions, function(error, response){
+            if(error){
+                console.log(error);
+                res.end("error");
+            }else{
+                console.log("Message sent: " + response.message);
+                res.end("sent");
+            }
         });
     });
 
