@@ -1,4 +1,7 @@
 var Offer = require('../models/offer');
+var ObjectId = require('mongoose').Types.ObjectId;
+
+var shared = require('../config/shared');
 
 module.exports = function (app, passport) {
 
@@ -8,17 +11,22 @@ module.exports = function (app, passport) {
 	});
 
     /*GET dashboard business user*/
-    app.get('/dashboard', function(req, res, next) {
+    app.get('/business/dashboard',isBusiness, function(req, res, next) {
         res.render('pages/business/dashboard.ejs', { title: 'Dashboard', user: req.user });
 	});
 
     /*handling offers page*/
-    app.get('/dashboard/offers', function(req, res, next) {
+    app.get('/business/offers', isBusiness, function(req, res, next) {
         res.render('pages/business/offers.ejs', { title: 'Offers', user: req.user });
 	});
 
     /*handling business registration page*/
-    app.get('/business/register', function(req, res, next) {
+    app.get('/business/register', shared.isAuthenticated, function(req, res, next) {
+        res.render('pages/business/businessRegister.ejs', { title: 'Register Business', user: req.user });
+	});
+
+    /*handling business registration POST request*/
+    app.post('/business/register', function(req, res) {
         res.render('pages/business/businessRegister.ejs', { title: 'Register Business', user: req.user });
 	});
 
@@ -67,3 +75,14 @@ var listOffers = function(req, res) {
         res.json(offers);
     });
 }
+
+//function to verify the user is logged in
+var isBusiness = function (req, res, next) {
+	// if user is authenticated in the session, call the next() to call the next request handler
+	// Passport adds this method to request object. A middleware is allowed to add properties to
+	// request and response objects
+	if (req.isAuthenticated() && req.user.businesses != undefined && req.user.businesses != null) { return next();}
+	//if the user is not authenticated then we redirect them to the main page
+	res.redirect('/');
+
+};

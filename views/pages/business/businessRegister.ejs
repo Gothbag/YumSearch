@@ -7,110 +7,106 @@
     <body>
 
         <% include ../../partials/navigation %>
-        <div class="jumbotron jumbotron-sm"><br>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-lg-12">
-                        <h1 class="h1">
-                            <img class="img-responsive img-thumbnail img-circle" src="/resources/img/rounded_white_icon.png" /> Register Business</h1>
+
+
+            <div class="jumbotron jumbotron-sm"><br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-12">
+                            <h1 class="h1">
+                                <img class="img-responsive img-thumbnail img-circle" src="/resources/img/rounded_white_icon.png" /> Register Business</h1>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
+            <div class="container">
 
-            <div class="row">
+                <div class="row">
 
-                <!-- edit form column -->
-                <div class="col-md-9 personal-info">
-                    <h2>Fill the following data to promote your Business</h2>
+                    <!-- edit form column -->
+                    <div class="col-md-9 personal-info">
+                        <h2>Fill the following data to promote your Business</h2>
 
-                    <form class="form-horizontal" id="form2" role="form" action="#">
-                        <fieldset>
-                            <legend>Create an account</legend>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Email:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="<%= user.local.email %>" name="email" id="email" type="text"/>
+                        <form class="form-horizontal" id="businessRegisterForm" role="form" action="#">
+                            <fieldset>
+                                <legend>Create an account</legend>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">First name:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" value="<%= user.firstName %>" name="firstName" id="firstName" type="text"/>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Last name:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" value="<%= user.lastName %>" name="lastName" id="lastName" type="text"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Business Data</legend>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Company/business Name:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" value="" name="businessName" id="businessName" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Tax ID number:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" value="" name="taxId" id="taxId" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Address:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" value="" name="address" id="address" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">City:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" value="" name="city" id="city" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Postal code:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" value="" name="postalCode" id="postalCode" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Country:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" value="" name="country" id="country" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Phone number:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" value="" name="phone" id="phone" type="text"/>
+                                    </div>
+                                </div>
+                            </fieldset>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Password:</label>
+                                <div class="col-sm-offset-3 col-sm-10">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" id="termsconds" name="termsconds"> I agree with the <a id="terms_cond" href="#">Terms and Conditions</a>.</label>
+                                    </div>
+                                </div>
+                            </div><br>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
                                 <div class="col-md-8">
-                                    <input class="form-control Password" type="password" name="password" id="password"/>
+                                    <input class="btn btn-primary" id="CreateBusinessAccount" value="Create Account" type="button">
+                                    <span></span>
+                                    <input class="btn btn-default" value="Cancel" type="reset">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">Confirm password:</label>
-                                <div class="col-md-8">
-                                    <input class="form-control Password"  type="password" name="confirmPassword" id="confirmPassword"/>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Business Data</legend>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Company/business Name:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="" name="businessName" id="businessName" type="text"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Tax ID number:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="" name="taxId" id="taxId" type="text"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Address:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="" name="address" id="address" type="text"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">City:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="" name="city" id="city" type="text"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Postal code:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="" name="postalCode" id="postalCode" type="text"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Postal code:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="" name="country" id="country" type="text"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Phone number:</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control" value="" name="phone" id="phone" type="text"/>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-10">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" id="termsconds" name="termsconds"> I agree with the <a id="terms_cond" href="#">Terms and Conditions</a>.</label>
-                                </div>
-                            </div>
-                        </div><br>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"></label>
-                            <div class="col-md-8">
-                                <input class="btn btn-primary" id="Save" value="Create Account" type="button">
-                                <span></span>
-                                <input class="btn btn-default" value="Cancel" type="reset">
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
         </div>
 
 

@@ -19,8 +19,17 @@
 
                         <!--<div class="intro-message">-->
                         <h1 class="welcome-message">Do you have a food drugstore? Promote your products with us</h1><br><br>
-                        <a href="/business/register" class="btn btn-primary btn-lg active center-block" role="button">Free Registration</a>
-                        <!--</div>-->
+                        <% if (user) { %>
+
+                            <a href="/business/register" class="btn btn-primary btn-lg active center-block" role="button">Free Registration</a>
+                            <!--</div>-->
+
+                        <% } else { %>
+
+                            <h3>Sign up or log into your YumSearch account to begin.</h3>
+                            <a class="btn btn-primary btn-lg" id="businessLogIn" href="#!" role="button">Log In</a> <a class="btn btn-primary btn-lg" href="#!" id="businessSignUp" role="button">Sign Up</a>
+
+                        <% } %>
                     </div>
                 </div>
 
@@ -30,67 +39,18 @@
         </div>
         <!-- /.intro-header -->
 
-        <!-- Page Content -->
-
-        <a  name="services"></a>
-        <div class="content-section-a">
-
-            <div class="container">
-                <div class=" col-sm-12 row" data-bind="foreach: offers">
-                    <div class="col-sm-4">
-                        <div class="col-sm-12 thumbnail text-center">
-                            <img alt="" class="img-responsive" src=
-                                 "http://www.wallpapereast.com/static/images/6801692-lovely-nature-wallpaper.jpg">
-
-                            <div class="caption">
-                                <h4><span data-bind="text: prod"></span> Now: <span data-bind="text: now"></span> Before: <span data-bind="text: before"></span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-        </div>
     <!-- /.content-section-a -->
 
-    <div class="banner">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <h2>Connect to Start Bootstrap:</h2>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="list-inline banner-social-buttons">
-                        <li>
-                            <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.banner -->
-
     <% include ../../partials/footer %>
+
+    <script type="text/javascript">
+        var business = true;
+    </script>
 
     <% include ../../partials/loginmodals %>
 
     <% include ../../partials/termsmodal %>
-    <script type="text/javascript" src="index/index.js"></script>
+    <script type="text/javascript" src="/businessmain/businessmain.js"></script>
 
 
     </body>

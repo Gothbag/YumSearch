@@ -146,7 +146,7 @@ function login() {
                     if (result.webmaster == true)
                         window.location = "/adminDash";
                     else
-                        window.location = "/";
+                        window.location = (business ? "/business/register" : "/");
                 } else {
                     $("#LoginUserNotValidated").removeClass("hidden");
                 }
