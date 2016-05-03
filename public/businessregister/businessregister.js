@@ -59,7 +59,7 @@ function createBusinessAccount() {
 
     $.ajax({
         type:'POST',
-        url:'/login',
+        url:'/business/register',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         data: {newBusiness: data},
@@ -67,11 +67,7 @@ function createBusinessAccount() {
             if(result.status == 200) {
                 if (result.success == true){
                     if (result.webmaster == true)
-                        window.location = "/adminDash";
-                    else
-                        window.location = (business ? "/business/register" : "/");
-                } else {
-                    $("#LoginUserNotValidated").removeClass("hidden");
+                        window.location = "/business/dashboard";
                 }
             }
 
