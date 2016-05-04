@@ -14,6 +14,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 var fs = require('fs');
 var path = require('path');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 var shared = require('../config/shared');
 
@@ -42,8 +43,11 @@ module.exports = function (app, passport) {
             if (!user) { return res.json({success:false, "status" : 200}); }
             req.logIn(user, function(err) {
                 if (err) { return next(err); }
-                if (user.webmaster == true)
+                if (user.webmaster == true) {
                     res.json({"success" : true, "status" : 200, "webmaster": true});
+                } else if (ObjectId.isValid(user.businesses)) {
+                    res.json({"success" : true, "status" : 200, "business": true});
+                }
                 res.json({"success" :true, "status" : 200});
             });
         })(req, res, next);

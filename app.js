@@ -27,6 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.locals.businessLogin = false;
+
 app.use(session({secret: 'yums34rch1smys3cr3t', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());

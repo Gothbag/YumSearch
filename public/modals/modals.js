@@ -143,10 +143,13 @@ function login() {
         success:function(result){
             if(result.status == 200) {
                 if (result.success == true){
-                    if (result.webmaster == true)
+                    if (result.webmaster == true) {
                         window.location = "/adminDash";
-                    else
+                    } else if (result.business == true) {
+                        window.location = "/business/dashboard"
+                    } else {
                         window.location = (business ? "/business/register" : "/");
+                    }
                 } else {
                     $("#LoginUserNotValidated").removeClass("hidden");
                 }

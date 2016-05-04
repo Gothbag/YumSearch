@@ -10,6 +10,10 @@ module.exports = function (app, passport) {
 
 	/* GET home business page. */
 	app.get('/business', function(req, res, next) {
+        req.app.locals.businessLogin = true;
+
+        if (ObjectId.isValid(req.user.businesses)) {res.redirect("/business/dashboard");}
+
         res.render('pages/business/businessMain.ejs', { title: 'Business', user: req.user, business: true });
 	});
 
@@ -31,7 +35,7 @@ module.exports = function (app, passport) {
     /*handling business registration POST request*/
     app.post('/business/register', function(req, res) {
         var business = req.body.newBusiness;
-        var url = "https://maps.googleapis.com/maps/api/geocode/json?components=country:" + business.country + "|postal_code:" + business.postalCode + "&address=" + business.address + ",+" + business.city + "&key=YOUR_API_KEY";
+        var url = "https://maps.googleapis.com/maps/api/geocode/json?components=country:" + business.country + "|postal_code:" + business.postalCode + "&address=" + business.address + ",+" + business.city + "&key=AIzaSyAUqnfY_0L_VBsnK4tHfjAPqMr3GGYlLV4";
         request({
             url: url,
             json: true
@@ -49,9 +53,8 @@ module.exports = function (app, passport) {
                 newBusiness.address.postCode = business.postalCode;
                 newBusiness.address.country = business.country;
                 newBusiness.creationDate = new Date();
-
                 newBusiness.save(function (err, business) {
-                    if (err) { return done(err); }
+                    if (err) { throw err; }
                     User.update({_id:req.user._id}, {$set:{businesses: business._id}}, function (err) {
 
 
@@ -71,23 +74,29 @@ module.exports = function (app, passport) {
         var itemsProcessed = 0; //this is so that when all items are processed, we can send them back
         var offers = req.body;
         var len = offers.length;
+        console.log(offers);
         for (var i = 0; i < len; i++) {
             var offer = offers[i]; //this way it's easier to work
             var id;
             if (offer.hasOwnProperty("_id")) {
                 id = new mongo.ObjectId(offer._id); //Knockout sends items without an ObjectId
-                delete (offer._id); //we remove the id
+            } else {
+                offer._id = new ObjectId();
+
             }
+
             if (!offer.deleteItem) { //we add/update the snakes that are not marked for deletion
                 delete( offer.deleteItem ); //we don't need these fields anymore
                 delete( offer.visible );
-                Offer.findOneAndUpdate({_id:id}, offer, {upsert:true}, function(err, doc){
+                delete( offer.differencePercentage );
+                 Offer.findOneAndUpdate({_id:id}, offer, {upsert:true}, function(err, doc){
                     if (err) {throw err;}
                     itemsProcessed++;
                     if(itemsProcessed === len) {
                         return listOffers(req, res); //we return the updated snakes
                     }
                 });
+
             } else { //items marked for deletion
                 Offer.remove({_id: id}, function (err) {
                         if (err) {throw err;}

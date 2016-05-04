@@ -12,14 +12,6 @@ $(document).ready(function () {
     $("#businessRegisterForm").validate({
         rules: {
             // simple rule, converted to {required:true}
-            firstName: {
-                LatinNames: true,
-                required: true
-            },
-            lastName: {
-                LatinNames: true,
-                required: true
-            },
             businessName: {
                 required: true
             },
@@ -40,6 +32,14 @@ $(document).ready(function () {
             },
             phone: {
                 required: true
+            },
+            termsconds: {
+                required: true
+            }
+        },
+        messages: {
+            termsconds: {
+                required: "You have to read and accept our terms and conditions."
             }
         }
 
@@ -55,14 +55,14 @@ function createBusinessAccount() {
 
     var businessData = $('#businessRegisterForm').serializeObject();
 
-    var data = JSON.stringify(businessData);
+    var data = JSON.stringify({newBusiness:businessData});
 
     $.ajax({
         type:'POST',
         url:'/business/register',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        data: {newBusiness: data},
+        data: data,
         success:function(result){
             if(result.status == 200) {
                 if (result.success == true){
