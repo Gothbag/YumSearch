@@ -14,7 +14,7 @@ var businessSchema = mongoose.Schema({
         lng : Number,
         lat : Number
     },
-    creationDate : Date,
+    createdAt: { type: Date, default: Date.now },
     profileImg : String,
     rating: Number
 });

@@ -5,7 +5,7 @@ var bcrypt = require('bcryptjs');
 var userSchema = mongoose.Schema({
     firstName : String,
     lastName: String,
-    creationDate: Date,
+    createdAt: { type: Date, default: Date.now },
     profileimage: String,
     businesses: mongoose.Schema.Types.ObjectId,
     local            : {

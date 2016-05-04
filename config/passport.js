@@ -30,7 +30,6 @@ module.exports = function (passport) {
                     //the new user is set
 					newUser.local.username = username;
 					newUser.local.email = email;
-                    newUser.creationDate = new Date();
 					newUser.local.password = newUser.generateHash(password); //password is hashed
 
 					newUser.save(function (err) {	

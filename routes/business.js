@@ -1,5 +1,4 @@
 var request = require('request');
-var Offer = require('../models/offer');
 var Business = require('../models/business');
 var User = require('../models/user');
 var ObjectId = require('mongoose').Types.ObjectId;
@@ -52,7 +51,6 @@ module.exports = function (app, passport) {
                 newBusiness.address.city = business.city;
                 newBusiness.address.postCode = business.postalCode;
                 newBusiness.address.country = business.country;
-                newBusiness.creationDate = new Date();
                 newBusiness.save(function (err, business) {
                     if (err) { throw err; }
                     User.update({_id:req.user._id}, {$set:{businesses: business._id}}, function (err) {
@@ -66,57 +64,7 @@ module.exports = function (app, passport) {
 
 	});
 
-     /*obtain offers created by a business*/
-    app.post('/offers/business', listOffers);
-
-     /*save the offers*/
-    app.post('/offers/business/save', function(req, res) {
-        var itemsProcessed = 0; //this is so that when all items are processed, we can send them back
-        var offers = req.body;
-        var len = offers.length;
-        console.log(offers);
-        for (var i = 0; i < len; i++) {
-            var offer = offers[i]; //this way it's easier to work
-            var id;
-            if (offer.hasOwnProperty("_id")) {
-                id = new mongo.ObjectId(offer._id); //Knockout sends items without an ObjectId
-            } else {
-                offer._id = new ObjectId();
-
-            }
-
-            if (!offer.deleteItem) { //we add/update the snakes that are not marked for deletion
-                delete( offer.deleteItem ); //we don't need these fields anymore
-                delete( offer.visible );
-                delete( offer.differencePercentage );
-                 Offer.findOneAndUpdate({_id:id}, offer, {upsert:true}, function(err, doc){
-                    if (err) {throw err;}
-                    itemsProcessed++;
-                    if(itemsProcessed === len) {
-                        return listOffers(req, res); //we return the updated snakes
-                    }
-                });
-
-            } else { //items marked for deletion
-                Offer.remove({_id: id}, function (err) {
-                        if (err) {throw err;}
-                        itemsProcessed++;
-                        if(itemsProcessed === len) {
-                            return listOffers(req, res);
-                        }
-                    });
-            }
-
-        }
-	});
 };
-
-var listOffers = function(req, res) {
-    Offer.find({business:req.user.businesses}, function (err, offers) {
-        if (err) { throw err; }
-        res.json(offers);
-    });
-}
 
 //function to verify whether a user has a business account
 var isBusiness = function (req, res, next) {

@@ -35,7 +35,8 @@ app.use(passport.session());
 
 var routes = require('./routes/index')(app, passport);
 var users = require('./routes/users')(app, passport);
-var business = require('./routes/business')(app, passport);
+var businesses = require('./routes/business')(app, passport);
+var offers = require('./routes/offers')(app);
 var admin = require('./routes/admin')(app);
 
 // error handlers
