@@ -54,8 +54,8 @@ module.exports = function (app, passport) {
                 newBusiness.save(function (err, business) {
                     if (err) { throw err; }
                     User.update({_id:req.user._id}, {$set:{businesses: business._id}}, function (err) {
-
-
+                        if (err) {throw err;}
+                        res.json({"success" :true, "status" : 200});
                     });
                 });
             }

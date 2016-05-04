@@ -7,7 +7,11 @@ var offerSchema = mongoose.Schema({
     name: String,
     priceBefore: Number,
     priceNow: Number,
-    business: { type: mongoose.Schema.Types.ObjectId, ref: 'Business' }
+    business: { type: mongoose.Schema.Types.ObjectId, ref: 'Business' },
+    loc     : {
+        lng : Number,
+        lat : Number
+    }
 });
 
 module.exports = mongoose.model('Offers', offerSchema);

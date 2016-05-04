@@ -66,8 +66,7 @@ function createBusinessAccount() {
         success:function(result){
             if(result.status == 200) {
                 if (result.success == true){
-                    if (result.webmaster == true)
-                        window.location = "/business/dashboard";
+                    window.location = "/business/dashboard";
                 }
             }
 
