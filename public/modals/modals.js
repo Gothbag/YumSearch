@@ -178,10 +178,8 @@ function register() {
         data: JSON.stringify({email: $("#registerEmail").val(), password: $('#registerPwd').val(), username: $('#registerUsername').val()}),
         success:function(result){
             if(result.status == 200){
-                sendMail($("#registerEmail").val(), "Welcome to YumSearch", "Hello nigga");
                 window.location = "/usercreated";
             }
-
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);

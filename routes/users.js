@@ -159,39 +159,6 @@ module.exports = function (app, passport) {
         });
     });
 
-    /**/
-    app.get('/users/sendmail',function(req,res){
-        console.log("hemos llegado al server");
-        var smtpTransport = nodemailer.createTransport("SMTP",{
-            host : "aspmx.l.google.com",
-            secureConnection : false,
-            port: 25,
-            service: "Gmail",
-            auth: {
-                user: "yumsearchcompany@gmail.com",
-                pass: "yumsearchco"
-            }
-        });
-
-        var mailOptions={
-            from : "yumsearchcompany@gmail.com",
-            to:req.query.to,
-            subject:req.query.subject,
-            text:req.query.text,
-        }
-
-        console.log(mailOptions);
-        smtpTransport.sendMail(mailOptions, function(error, response){
-            if(error){
-                console.log(error);
-                res.end("error");
-            }else{
-                console.log("Message sent: " + response.message);
-                res.end("sent");
-            }
-        });
-    });
-
 };
 
 
