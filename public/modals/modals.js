@@ -189,22 +189,6 @@ function register() {
 
 }
 
-/*sendMail function
-    to --> email address destination
-    from --> email addres remitent
-    subject --> email subject
-    text --> email text
-    datamail --> additional data for the email
-*/
-function sendMail(to, subject, text) {
-    $.get("/users/sendmail",{to:to,subject:subject,text:text},function(data){
-        console.log("Estamos intentando mailear");
-        if(data=="sent")
-            $("#Message").empty().html("Email is been sent at " + to + " . Please check inbox !");
-    });
-}
-
-
 
 
 
