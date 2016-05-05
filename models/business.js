@@ -10,10 +10,7 @@ var businessSchema = mongoose.Schema({
         postCode : String,
         country : String
     },
-    loc     : {
-        lng : Number,
-        lat : Number
-    },
+    loc     : [Number],
     createdAt: { type: Date, default: Date.now },
     profileImg : String,
     rating: Number

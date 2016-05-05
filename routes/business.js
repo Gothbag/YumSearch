@@ -44,8 +44,7 @@ module.exports = function (app, passport) {
 
                 var newBusiness = new Business(business);
                 //we obtain coordinates of the location
-                newBusiness.loc.lat = body.results[0].geometry.location.lat;
-                newBusiness.loc.lng = body.results[0].geometry.location.lng;
+                newBusiness.loc = [body.results[0].geometry.location.lng, body.results[0].geometry.location.lat]; //longitude must be stored first
                 newBusiness.address = {};
                 newBusiness.address.address = business.address;
                 newBusiness.address.city = business.city;

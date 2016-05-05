@@ -14,6 +14,7 @@
     "ejs": "~2.3.3",
     "express": "~4.13.1",
     "express-session": "~1.13.0",
+    "maxmind": "^0.6.0",
     "mongoose": "~4.4.12",
     "morgan": "~1.6.1",
     "multer": "^1.1.0",

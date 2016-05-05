@@ -1,6 +1,7 @@
 var Offer = require('../models/offer');
 var Business = require('../models/business');
 var ObjectId = require('mongoose').Types.ObjectId;
+var maxmind = require('maxmind');
 
 module.exports = function (app) {
 
@@ -23,9 +24,7 @@ module.exports = function (app) {
                     delete( offer.deleteItem ); //we don't need these fields anymore
                     delete( offer.visible );
                     delete( offer.differencePercentage );
-                    offer.loc = {};
-                    offer.loc.lng = business.loc.lng;
-                    offer.loc.lat = business.loc.lat;
+                    offer.loc = business.loc;
                     if (!offer.hasOwnProperty("business")) { offer.business = business._id;}
                     if (!offer.hasOwnProperty("_id")) { offer._id = new ObjectId();} //the update method doesn't add an _id property
                      Offer.update({_id:offer._id}, offer, {upsert:true, setDefaultsOnInsert: true}, function(err){
@@ -53,9 +52,24 @@ module.exports = function (app) {
 
     /*get nearby offers*/
     app.post('/offers/nearby', function(req, res) {
+        // City/Location lookup
+        maxmind.init('../ipsdb/GeoLiteCity.dat');
+        var location = maxmind.getLocation(req.ip);
+        /*
+        Location.find({
+          loc: {
+            $near: coords,
+            $maxDistance: maxDistance
+          }
+        }).limit(limit).exec(function(err, locations) {
+          if (err) {
+            return res.json(500, err);
+          }
+
+          res.json(200, locations);
+        });*/
         Offer
-            .find({business:req.user.businesses})
-            .populate("business")
+            .find({$near:req.user.businesses, $maxDistance: maxDistance})
             .exec(function (err, offers) {
                 if (err) { throw err; }
                 res.json(offers);
