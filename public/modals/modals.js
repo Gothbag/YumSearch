@@ -178,7 +178,17 @@ function register() {
         data: JSON.stringify({email: $("#registerEmail").val(), password: $('#registerPwd').val(), username: $('#registerUsername').val()}),
         success:function(result){
             if(result.status == 200){
-                window.location = "/usercreated";
+                $.get("http://localhost:3000/users/sendMail",{to:$("#registerEmail").val()},function(data){
+                    if(data=="sent")
+                    {
+                        //$("#message").empty().html("Email is been sent at "+to+" . Please check inbox !");
+                        console.log("Done!");
+                    }
+                    else{
+                        console.log("Fail!");
+                    }
+                });
+                window.location = "/";
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
