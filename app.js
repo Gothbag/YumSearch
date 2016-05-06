@@ -9,7 +9,15 @@ var mongoose = require('mongoose');
 
 var session = require('express-session');
 
-mongoose.connect('mongodb://localhost:27017/yumsearchdb');
+
+
+//provide a sensible default for local development
+mongodb_connection_string = 'mongodb://localhost:27017/yumsearchdb';
+//take advantage of openshift env vars when available:
+if(process.env.OPENSHIFT_MONGODB_DB_URL){
+  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + 'yumsearchdb';
+}
+mongoose.connect(mongodb_connection_string);
 
 var app = express();
 
