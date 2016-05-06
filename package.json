@@ -6,7 +6,7 @@
         "start": "node ./bin/www",
 
     },
-    "main": "./bin/www",
+    "main": "node ./bin/www",
     "dependencies": {
         "bcryptjs": "^2.3.0",
         "body-parser": "~1.13.2",
