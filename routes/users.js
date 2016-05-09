@@ -168,11 +168,11 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.get('/users/sendMail', function (req, res){
+    app.post('/users/sendMail', function (req, res){
         var mailOptions={
             transport : transport,
             from : 'yumsearchcompany@gmail.com',
-            to : req.query.to,
+            to : req.body.to,
             subject : "Welcome",
             text : "Hello Yummer"
         }
@@ -184,7 +184,7 @@ module.exports = function (app, passport) {
                 res.end("error");
             }else{
                 console.log("Message sent: " + response.message);
-                res.end("sent");
+                res.json({"sent" :true, "status" : 200});
             }
         });
     });
