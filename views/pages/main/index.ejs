@@ -45,7 +45,7 @@
                                  "http://www.wallpapereast.com/static/images/6801692-lovely-nature-wallpaper.jpg">
 
                             <div class="caption">
-                                <h4><span data-bind="text: prod"></span> Now: <span data-bind="text: now"></span> Before: <span data-bind="text: before"></span></h4>
+                                <h4><span data-bind="text: name"></span> Now: <span data-bind="text: priceNow"></span> Before: <span data-bind="text: priceBefore"></span></h4>
                             </div>
                         </div>
                     </div>
@@ -55,11 +55,31 @@
         </div>
         <!-- /.container -->
 
-        </div>
+
     <!-- /.content-section-a -->
 
 
+
+
     <% include ../../partials/footer %>
+
+    <!-- Modal logIn -->
+    <div class="modal" id="googleMapsModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Select your location</h4>
+                </div>
+                <div class="modal-body" style="height: 200px; max-width: 400px;">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <% include ../../partials/loginmodals %>
 
