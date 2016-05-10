@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 // define the schema for our user model
 var businessSchema = mongoose.Schema({
-    businessName : String,
+    name : String,
     phoneNumber : String,
     address     : {
         address : String,
