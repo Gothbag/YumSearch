@@ -60,7 +60,7 @@ module.exports = function (app) {
             .exec(function (err, offers) { //one degree is approximately 111.12 kilometers
                 if (err) { throw err; }
                 res.json(offers);
-        });
+        }); //the populate function will "populate" the business that corresponds to the location
     });
 
 };

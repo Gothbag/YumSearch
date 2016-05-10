@@ -26,7 +26,14 @@ $(document).ready(function () {
               marker = new google.maps.Marker({
                 position: latLng,
                 map: map
-              });
+              }),
+            infoWindow = new google.maps.InfoWindow({
+                content: "<div>" + offer.business.address.address + "</div>"
+            });
+            //open window on click
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+            });
         }
     };
 
@@ -44,9 +51,7 @@ $(document).ready(function () {
 		        dataType: 'json',
 		        success: function (data) {
 		        	self.offers.removeAll(); //all snakes are removed beforehand
-					data.map(function (offer) {
-						self.offers.push(new Offer(offer));
-					});
+					self.offers = data;
 		        }
 		    });
 		}.bind(this);
@@ -55,18 +60,6 @@ $(document).ready(function () {
 		this.loadOffers();
 
 	};
-
-	//represent a single snake item le
-	var Offer = function (offer) {
-		this._id = offer._id;
-		this.priceNow = offer.priceNow;
-		this.priceBefore = offer.priceBefore;
-		this.imgSrc = offer.imgSrc;
-		this.name = offer.name;
-	}
-	//we load the data
-
-	//var offers = [{before:2.5,now:2,imgSrc:"tomatoes.jpg",prod:"Tomatoes"},{before:2.5,now:2,imgSrc:"tomatoes.jpg",prod:"Strawberries"},{before:2.5,now:2,imgSrc:"tomatoes.jpg",prod:"Fish"}]
 
 	var viewModel = new ViewModel();
 	ko.applyBindings(viewModel);
@@ -90,11 +83,5 @@ $(document).ready(function () {
     }
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-    var bcnInfoWindow = new google.maps.InfoWindow({
-        content: "<div style=\"background-color: pink\">Welcome to Barcelona! We love pink here!</div>"
-    });
-    //open window on click
-    google.maps.event.addListener(marker, 'click', function () {
-        bcnInfoWindow.open(map, marker);
-    });
+
 */
