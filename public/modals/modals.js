@@ -180,19 +180,10 @@ function register() {
         data: JSON.stringify({email: $("#registerEmail").val(), password: $('#registerPwd').val(), username: $('#registerUsername').val()}),
         success:function(result){
             if(result.status == 200){
-                $.ajax({
-                    type:'POST',
-                    url:'/users/sendMail',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: 'json',
-                    data: JSON.stringify({to:$("#registerEmail").val()}),
-                    success: function(data){
-                       window.location = "/";
-                        if(data.sent == true){
-                            /*$("#Message").append("<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>    <strong>Success!</strong> This alert box could indicate a successful or positive action.</div>");*/
-                        }
-                    }
-                });
+                $("#Message").html("<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Successfully Registered!</strong> You have received a Welcome email. Please, check your inbox</div>");
+                setTimeout(function(){ $("#Message").slideUp(2000, function(){
+                    window.location = "/";
+                }); }, 2000);
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
