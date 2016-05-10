@@ -7,19 +7,15 @@ $(document).ready(function () {
 (function () {
 
 	//the main view model
-	var ViewModel = function (pOffers) {
+	var ViewModel = function () {
 		var self = this;
 
 		this.offers = [];
-		//OJO!! temporary
-		pOffers.map(function (offer) {
-			self.offers.push(new Offer(offer));
-		});
 
 		this.loadOffers = function () {
 			$.ajax({
 		        type: "POST",
-		        url: '/api/offers/nearby', /* url of the request */
+		        url: '/offers/nearby', /* url of the request */
 		        contentType: "application/json; charset=utf-8",
 		        dataType: 'json',
 		        success: function (data) {
@@ -31,24 +27,40 @@ $(document).ready(function () {
 		    });
 		}.bind(this);
 
-		//this.offers = ko.observableArray();
-		//this.loadSnakes();
+		this.offers = ko.observableArray();
+		this.loadOffers();
 
 	};
 
 	//represent a single snake item le
 	var Offer = function (offer) {
 		this._id = offer._id;
-		this.now = offer.now;
-		this.before = offer.before;
+		this.priceNow = offer.priceNow;
+		this.priceBefore = offer.priceBefore;
 		this.imgSrc = offer.imgSrc;
-		this.prod = offer.prod;
+		this.name = offer.name;
 	}
 	//we load the data
 
-	var offers = [{before:2.5,now:2,imgSrc:"tomatoes.jpg",prod:"Tomatoes"},{before:2.5,now:2,imgSrc:"tomatoes.jpg",prod:"Strawberries"},{before:2.5,now:2,imgSrc:"tomatoes.jpg",prod:"Fish"}]
+	//var offers = [{before:2.5,now:2,imgSrc:"tomatoes.jpg",prod:"Tomatoes"},{before:2.5,now:2,imgSrc:"tomatoes.jpg",prod:"Strawberries"},{before:2.5,now:2,imgSrc:"tomatoes.jpg",prod:"Fish"}]
 
-	var viewModel = new ViewModel(offers);
+	var viewModel = new ViewModel();
 	ko.applyBindings(viewModel);
 
 }());
+
+/*
+// create the maps
+    var myOptions = {
+        zoom: 14,
+        center: new google.maps.LatLng(0.0, 0.0),
+        disableDefaultUI: true,
+        scrollwheel: false,
+        navigationControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        draggable: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+*/
