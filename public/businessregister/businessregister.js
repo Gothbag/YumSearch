@@ -12,7 +12,7 @@ $(document).ready(function () {
     $("#businessRegisterForm").validate({
         rules: {
             // simple rule, converted to {required:true}
-            businessName: {
+            name: {
                 required: true
             },
             taxId: {
