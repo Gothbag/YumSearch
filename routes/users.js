@@ -39,6 +39,25 @@ module.exports = function (app, passport) {
             if (!user) { return res.json({success:false}); }
             req.logIn(user, function(err) {
                 if (err) { return next(err); }
+
+                var mailOptions={
+                    transport : transport,
+                    from : 'yumsearchcompany@gmail.com',
+                    to : user.local.email,
+                    subject : "Welcome to YumSearch",
+                    text : "Hello " + user.local.username + "!\n\nNow you are a yummer forever. Save money searching food products in our webpage"
+                }
+                console.log(mailOptions);
+                console.log(smtpTransport);
+                transport.sendMail(mailOptions, function(error, response){
+                    if(error){
+                        console.log(error);
+                        return next(error);
+                    }else{
+                        console.log("Message sent: " + response.message);
+                    }
+                });
+
                 res.json({"success" :true, "status" : 200});
             });
         })(req, res, next);
@@ -165,27 +184,6 @@ module.exports = function (app, passport) {
         User.update({_id:id}, {$set:{profileimage:profileimage}}, function (err) {
             if (err) {throw err;}
 
-        });
-    });
-
-    app.post('/users/sendMail', function (req, res){
-        var mailOptions={
-            transport : transport,
-            from : 'yumsearchcompany@gmail.com',
-            to : req.body.to,
-            subject : "Welcome",
-            text : "Hello Yummer"
-        }
-        console.log(mailOptions);
-        console.log(smtpTransport);
-        transport.sendMail(mailOptions, function(error, response){
-            if(error){
-                console.log(error);
-                res.end("error");
-            }else{
-                console.log("Message sent: " + response.message);
-                res.json({"sent" :true, "status" : 200});
-            }
         });
     });
 };
