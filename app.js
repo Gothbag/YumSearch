@@ -46,6 +46,7 @@ var users = require('./routes/users')(app, passport);
 var businesses = require('./routes/business')(app, passport);
 var offers = require('./routes/offers')(app);
 var admin = require('./routes/admin')(app);
+var ratings = require('./routes/ratings')(app);
 
 // error handlers
 

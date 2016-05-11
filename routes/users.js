@@ -110,14 +110,8 @@ module.exports = function (app, passport) {
     });
 
     /* GET users listing. */
-    app.get('/users',shared.isAuthenticated, function(req, res, next) {
-        res.send('respond with a resource');
-    });
-
-    /* new user welcome page */
-    app.get('/usercreated',shared.isAuthenticated, function(req, res, next) {
-        console.log(req.user);
-        res.render('pages/users/usercreated.ejs', { title: 'User created successfully', user: req.user });
+    app.get('/users/personal',shared.isAuthenticated, function(req, res, next) {
+         res.render('pages/users/userArea.ejs', { title: 'Personal', user: req.user });
     });
 
     /*to render the page where profiles are edited*/
