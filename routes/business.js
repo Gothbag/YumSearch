@@ -11,7 +11,8 @@ module.exports = function (app, passport) {
 	app.get('/business', function(req, res, next) {
         req.app.locals.businessLogin = true;
 
-        if (ObjectId.isValid(req.user.businesses)) {res.redirect("/business/dashboard");}
+        if (req.user != undefined)
+            if (ObjectId.isValid(req.user.businesses)) {res.redirect("/business/dashboard");}
 
         res.render('pages/business/businessMain.ejs', { title: 'Business', user: req.user, business: true });
 	});

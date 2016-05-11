@@ -1,10 +1,6 @@
 module.exports = function (app, passport) {
 
-	/* GET home business page. */
-	app.get('/admin', isWebmaster, function(req, res, next) {
-        res.render('pages/admin/adminAuth.ejs', { title: 'Webmaster', user: req.user });
-	});
-
+	/* GET webmaster dasboard */
     app.get('/adminDash', isWebmaster, function(req, res, next) {
         res.render('pages/admin/admin.ejs', { title: 'Webmaster', user: req.user });
 	});
