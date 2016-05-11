@@ -52,7 +52,6 @@ module.exports = function (app) {
 
     /*get nearby offers*/
     app.post('/offers/nearby', function(req, res) {
-        // City/Location lookup
         maxmind.init('./ipsdb/GeoLiteCity.dat'); //connecting to GeoLite IP database
         var location = maxmind.getLocation('88.0.22.216'); //obtaining the user's geolocation via their IP
         Offer.find({  loc: {"$near":[location.longitude, location.latitude], "$maxDistance": 1/111.12}})

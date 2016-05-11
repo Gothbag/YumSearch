@@ -50,8 +50,10 @@ $(document).ready(function () {
 		        contentType: "application/json; charset=utf-8",
 		        dataType: 'json',
 		        success: function (data) {
-		        	self.offers.removeAll(); //all snakes are removed beforehand
-					self.offers = data;
+		        	self.offers.removeAll(); //all offers are removed beforehand
+					data.map(function (offer) {
+						self.offers.push(new Offer(offer));
+					});
 		        }
 		    });
 		}.bind(this);
@@ -61,11 +63,19 @@ $(document).ready(function () {
 
 	};
 
-	var viewModel = new ViewModel();
-	ko.applyBindings(viewModel);
+
+    var viewModel = new ViewModel();
+    ko.applyBindings(viewModel);
 
 }());
 
+var Offer = function (offer) {
+    var self = this;
+    this.name = ko.observable(offer.name);
+    this.priceNow = ko.observable(offer.priceNow);
+    this.priceBefore = ko.observable(offer.priceBefore);
+    this.business = offer.business;
+}
 
 
 /*
