@@ -39,18 +39,7 @@
 
             <div class="container">
                 <div class=" col-sm-12 row" data-bind="foreach: offers">
-                    <!--
-                    <div class="col-sm-4">
-                        <div class="col-sm-12 thumbnail text-center">
-                            <img alt="" class="img-responsive" src=
-                                 "http://www.wallpapereast.com/static/images/6801692-lovely-nature-wallpaper.jpg">
-
-                            <div class="caption">
-                                <h4><span data-bind="text: name"></span> Now: <span data-bind="text: priceNow"></span> Before: <span data-bind="text: priceBefore"></span></h4>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="map" data-bind="offerMap: { loc: loc }" style="height: 200px; width:200px;" class="col-md-4"></div>
+                    <div class="map col-md-4" data-bind="offerMap: { loc: loc, business: business, name: name, priceNow: priceNow, priceBefore: priceBefore }" style="height: 200px;"></div>
                 </div>
             </div>
 
@@ -65,29 +54,11 @@
 
     <% include ../../partials/footer %>
 
-    <!-- Modal logIn -->
-    <div class="modal" id="googleMapsModal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>Select your location</h4>
-                </div>
-                <div class="modal-body" style="height: 200px; max-width: 400px;">
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
 
     <% include ../../partials/loginmodals %>
 
      <% include ../../partials/termsmodal %>
-        <script src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyAUqnfY_0L_VBsnK4tHfjAPqMr3GGYlLV4&callback=initMap"
-    async defer></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyAUqnfY_0L_VBsnK4tHfjAPqMr3GGYlLV4&callback=initMap"></script>
 
     <script type="text/javascript" src="index/index.js"></script>
 

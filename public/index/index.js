@@ -29,11 +29,15 @@ $(document).ready(function () {
               }),
             infoWindow = new google.maps.InfoWindow({
                 content: "<div>" + offer.business.address.address + "</div>"
-            });
+            }),
+            offerInfoDiv = document.createElement('div'),
+            offerInfo = new OfferInfo(offerInfoDiv, map, offer);
             //open window on click
             google.maps.event.addListener(marker, 'click', function () {
                 infoWindow.open(map, marker);
             });
+            //adding the control the map
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(offerInfoDiv);
         }
     };
 
@@ -71,27 +75,29 @@ $(document).ready(function () {
 
 var Offer = function (offer) {
     var self = this;
-    this.name = ko.observable(offer.name);
-    this.priceNow = ko.observable(offer.priceNow);
-    this.priceBefore = ko.observable(offer.priceBefore);
+    this.loc = offer.loc;
+    this.name = offer.name;
+    this.priceNow = offer.priceNow;
+    this.priceBefore = offer.priceBefore;
     this.business = offer.business;
 }
 
+//this is a class for a "home control" that returns the user to Barcelona when clicked
+function OfferInfo(pControlDiv, pMap, pOffer) {
+    pControlDiv.style.padding = '5px';
+    var controlUI = document.createElement('div');
+    //properties of the DOM element
+    controlUI.style.textAlign = 'center';
+    controlUI.style.backgroundColor = 'white';
+    pControlDiv.appendChild(controlUI);
+    var controlText = document.createElement('div');
+    //properties of the text
+    controlText.style.fontFamily = 'Arial, sans-serif';
+    controlText.style.fontSize = '15px';
+    controlText.style.fontWeight = '600';
+    controlText.padding = '2px';
+    controlText.innerHTML = pOffer.business.name + ". " + pOffer.name + ". Price before: " + pOffer.priceBefore + ", price NOW: " + pOffer.priceNow;
+    controlUI.appendChild(controlText);
+}
 
-/*
-// create the maps
-    var myOptions = {
-        zoom: 14,
-        center: new google.maps.LatLng(0.0, 0.0),
-        disableDefaultUI: true,
-        scrollwheel: false,
-        navigationControl: false,
-        mapTypeControl: false,
-        scaleControl: false,
-        draggable: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-
-*/
