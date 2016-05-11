@@ -21,9 +21,6 @@ $(document).ready(function () {
         }
     }, $.format("Please either skip these fields or fill at least {0} of them."));
 
-    $("#navSignUpBusiness").click(function(){
-        window.location='/business/register';
-    });
 });
 
 // override jquery validate plugin defaults
