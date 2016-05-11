@@ -182,7 +182,7 @@ function register() {
             if(result.status == 200){
                 $("#Message").html("<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Successfully Registered!</strong> You have received a Welcome email. Please, check your inbox</div>");
                 setTimeout(function(){ $("#Message").slideUp(2000, function(){
-                    window.location = "/";
+                    window.location = (business ? "/business/register" : "/");
                 }); }, 2000);
             }
         },
