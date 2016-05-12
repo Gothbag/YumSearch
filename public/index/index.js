@@ -1,9 +1,9 @@
-/* events */
 $(document).ready(function () {
 
 });
 
 /* index Knockout*/
+
 (function () {
 
     ko.bindingHandlers.offerMap = {
@@ -51,6 +51,7 @@ $(document).ready(function () {
 			$.ajax({
 		        type: "POST",
 		        url: '/offers/nearby', /* url of the request */
+                data:JSON.stringify({search:$("#MainSearch").val()}),
 		        contentType: "application/json; charset=utf-8",
 		        dataType: 'json',
 		        success: function (data) {
@@ -67,7 +68,6 @@ $(document).ready(function () {
 
 	};
 
-
     var viewModel = new ViewModel();
     ko.applyBindings(viewModel);
 
@@ -81,7 +81,6 @@ var Offer = function (offer) {
     this.priceBefore = offer.priceBefore;
     this.business = offer.business;
 }
-
 //this is a class for a "home control" that returns the user to Barcelona when clicked
 function OfferInfo(pControlDiv, pMap, pOffer) {
     pControlDiv.style.padding = '5px';
@@ -99,5 +98,3 @@ function OfferInfo(pControlDiv, pMap, pOffer) {
     controlText.innerHTML = pOffer.business.name + ". " + pOffer.name + ". Price before: " + pOffer.priceBefore + ", price NOW: " + pOffer.priceNow;
     controlUI.appendChild(controlText);
 }
-
-
