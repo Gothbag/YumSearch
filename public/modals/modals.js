@@ -150,7 +150,7 @@ function login() {
                     } else if (result.business == true) {
                         window.location = "/business/dashboard"
                     } else {
-                        window.location = (business ? "/business/register" : "/");
+                        window.location = "/";
                     }
                 } else {
                     $("#LoginUserNotValidated").removeClass("hidden");
