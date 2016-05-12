@@ -52,9 +52,10 @@ module.exports = function (app) {
 
     /*get nearby offers*/
     app.post('/offers/nearby', function(req, res) {
+        var query = req.body.search.trim().replace(/\s{1,}/, ".*");
         maxmind.init('./ipsdb/GeoLiteCity.dat'); //connecting to GeoLite IP database
         var location = maxmind.getLocation('88.0.22.216'); //obtaining the user's geolocation via their IP
-        Offer.find({  loc: {"$near":[location.longitude, location.latitude], "$maxDistance": 1/111.12}})
+        Offer.find({name: {$regex:query, $options : 'i' }, loc: {"$near":[location.longitude, location.latitude], "$maxDistance": 1/111.12}})
             .populate('business')
             .exec(function (err, offers) { //one degree is approximately 111.12 kilometers
                 if (err) { throw err; }
@@ -63,7 +64,8 @@ module.exports = function (app) {
     });
 
     /*get nearby offers*/
-    app.post('/offers/nearby/search', function(req, res) {
+    /*
+    app.post('/offers/nearby', function(req, res) {
         var query = req.query.search.replace(/\w{1,}/, ".*");
         maxmind.init('./ipsdb/GeoLiteCity.dat'); //connecting to GeoLite IP database
         var location = maxmind.getLocation('88.0.22.216'); //obtaining the user's geolocation via their IP
@@ -74,7 +76,7 @@ module.exports = function (app) {
                 if (err) { throw err; }
                 res.json(offers);
         }); //the populate function will "populate" the business that corresponds to the location
-    });
+    });*/
 
 };
 
