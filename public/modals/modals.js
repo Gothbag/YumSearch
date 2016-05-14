@@ -132,7 +132,7 @@ $(document).ready(function () {
 
 /* functions*/
 function login() {
-
+    var remember = $("#rememberMe").is(':checked');
     $("#navLoginForm").validate();
     if (!$("#navLoginForm").valid()) {return;}
 
@@ -141,7 +141,7 @@ function login() {
         url:'/login',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        data: JSON.stringify({email: $("#loginEmail").val(), password: $('#loginPwd').val()}),
+        data: JSON.stringify({email: $("#loginEmail").val(), password: $('#loginPwd').val(), remember: remember}),
         success:function(result){
             if(result.status == 200) {
                 if (result.success == true){

@@ -48,7 +48,6 @@ module.exports = function (passport) {
         passReqToCallback : true
     }, function(req, email, password, done) {
         //find a user whose mail or username matches the login used on the form
-        //we check if the user already exists
         User.findOne({ $or: [ { 'local.username': email }, { 'local.email': email } ] }, function (err, user) {
             if (err) {return done(err);}
             // if no user is found, return the message
@@ -56,6 +55,22 @@ module.exports = function (passport) {
 
             // if the user is found but the password is wrong
             if (!user.validPassword(password)) {return done(null, false);}
+
+            // all is well, return successful user
+            return done(null, user);
+        });
+    }));
+    //cookie login
+    passport.use('local-cookie-login', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'username',
+        passReqToCallback : true
+    }, function(req, username, password, done) {
+        //find a user whose username matches the one stored in the cookie
+        User.findOne({ 'local.username': username }, function (err, user) {
+            if (err) {return done(err);}
+            // if no user is found, return the message
+            if (!user) {return done(null, false);}
 
             // all is well, return successful user
             return done(null, user);
