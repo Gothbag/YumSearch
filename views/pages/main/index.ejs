@@ -19,10 +19,15 @@
                                 <a href="/"><img src="/resources/img/logo_black.png" alt="logo" class="img-responsive logo" /></a>
                             </div><br><br>
                             <div class="input-group">
-                                <input type="text" id="MainSearch" class="form-control input-style" placeholder="Search food products near you" data-bind="enterKey: loadOffers"/>
+                                <input class="form-control input-style" id="maxDistance" type="range" value="1" min="1" max="5"/>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="MainSearch" class="form-control input-style" placeholder="Search for food products 1 km away from you" data-bind="enterKey: loadOffers"/>
+
                                 <span class="input-group-addon" style="cursor:pointer;" data-bind="enterKey: loadOffers">
                                     <i class="fa fa-search"></i>
                                 </span>
+
                             </div>
                         </div>
                     </div>
@@ -39,7 +44,7 @@
 
             <div class="container">
                 <div class=" col-sm-12 row" data-bind="foreach: offers">
-                    <div class="map col-md-4" data-bind="offerMap: { loc: loc, business: business, name: name, priceNow: priceNow, priceBefore: priceBefore }" style="height: 200px;"></div>
+                    <div class="map col-md-4" data-bind="offerMap: { loc: loc, business: business, name: name, priceNow: priceNow, priceBefore: priceBefore }, click: $root.enlargeMap" style="height: 200px;"></div>
                 </div>
             </div>
 
@@ -67,10 +72,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Log In</h4>
+                    <h4 class="modal-title" id="mapModalHeader"></h4>
                 </div>
                 <div class="modal-body">
-                    <div id="LargeMap" style="height: 500px;width:100%;"></div>
+                    <div id="LargeMap" style="height: 500px;width:500px;"></div>
                 </div>
             </div>
 
