@@ -1,5 +1,32 @@
+var enlargedMap;
 $(document).ready(function () {
 
+    /*$('#mapModal').on('show.bs.modal', function() {
+       //Must wait until the modal shows, that's why we require a callback funtion
+       resizeMap();
+    });*/
+
+    if ($("#LargeMap").length > 0) { //this is so the script doesn't cause an exception if the selector cannot be found
+        //the map center is in Barcelona
+        var barcelona = new google.maps.LatLng(41.3833, 2.1833);
+        function initialize() {
+            var mapOptions = {
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                center: barcelona
+            };
+            enlargedMap = new google.maps.Map(document.getElementById("LargeMap"), mapOptions);
+
+        }
+        google.maps.event.addDomListener(window, "load", initialize);
+    }
+
+    //we update the search placeholder text
+    $("#maxDistance").change(function () {
+
+        $("#MainSearch").attr("placeholder", "Search for food products " + $("#maxDistance").val() + " km away from you.");
+
+    });
 });
 
 /* index Knockout*/
@@ -51,7 +78,7 @@ $(document).ready(function () {
 			$.ajax({
 		        type: "POST",
 		        url: '/offers/nearby', /* url of the request */
-                data:JSON.stringify({search:$("#MainSearch").val()}),
+                data:JSON.stringify({search:$("#MainSearch").val(),maxDistance:$("#maxDistance").val()}),
 		        contentType: "application/json; charset=utf-8",
 		        dataType: 'json',
 		        success: function (data) {
@@ -62,6 +89,27 @@ $(document).ready(function () {
 		        }
 		    });
 		}.bind(this);
+
+        this.enlargeMap = function (offer) {
+            if(typeof enlargedMap =="undefined") return;
+            //we create the map before showing the model
+            var latLong = new google.maps.LatLng(offer.loc[1], offer.loc[0]),
+            mark = new google.maps.Marker({
+                position: latLong,
+                map: enlargedMap
+            });
+            $("#mapModalHeader").text(offer.business.name + ", "+ offer.business.address.address +". " + offer.name + ". Price before: " + offer.priceBefore + ", price NOW: " + offer.priceNow);
+            /* this is so the map rerendered after the modal is activated*/
+            $("#mapModal").modal();
+            setTimeout( function(){resizingMap();} , 400);
+
+            function resizingMap() {
+               if(typeof enlargedMap =="undefined") return;
+               google.maps.event.trigger(enlargedMap, "resize");
+                enlargedMap.setCenter(latLong);
+            }
+
+        }
 
 		this.offers = ko.observableArray();
 		this.loadOffers();
@@ -98,3 +146,4 @@ function OfferInfo(pControlDiv, pMap, pOffer) {
     controlText.innerHTML = pOffer.business.name + ". " + pOffer.name + ". Price before: " + pOffer.priceBefore + ", price NOW: " + pOffer.priceNow;
     controlUI.appendChild(controlText);
 }
+
