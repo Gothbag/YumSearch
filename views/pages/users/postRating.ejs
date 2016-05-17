@@ -23,14 +23,14 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="well well-sm">
-                        <form>
+                        <form action="/user/post_rating" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <div class="ui-widget">
-                                            <label for="search-name">
+                                        <div class="ui-widget"><!--autocomplete css class format-->
+                                            <label for="search-businessName">
                                                 Type the drugstore name</label>
-                                            <input type="text" class="form-control" id="search-name"  required="required" placeholder="Drugstore name"/>
+                                            <input type="text" class="form-control" id="search-businessName"  required="required" placeholder="Drugstore name"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -61,25 +61,23 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-info pull-right" id="btnContactUs">
-                                        Post</button>
+                                    <button type="submit" class="btn btn-info pull-right" >Post</button>
+                                    <!--<input type="submit" value="Send message" />-->
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <form>
-                        <legend><img src="/resources/img/black_icon.png" /> Please, be respectful</legend>
-                        <address>
-                            <strong>Delivering messages that include swearing, insults and/or rude language, or use of words in an inappropriate way, hate speech, or racial slurs aren't welcome on YumSearch and may cause your account to be suspended</strong><br>
+                    <legend><img src="/resources/img/black_icon.png" /> Please, be respectful</legend>
+                    <address>
+                        <strong>Delivering messages that include swearing, insults and/or rude language, or use of words in an inappropriate way, hate speech, or racial slurs aren't welcome on YumSearch and may cause your account to be suspended</strong><br>
 
-                        </address>
-                        <address>
-                            <strong>Remember the</strong><br>
-                            <a id="terms_cond" href="#">Terms and Conditions</a>
-                        </address>
-                    </form>
+                    </address>
+                    <address>
+                        <strong>Remember the</strong><br>
+                        <a id="terms_cond" href="#">Terms and Conditions</a>
+                    </address>
                 </div>
             </div>
         </div><!--contact form-->
