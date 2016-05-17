@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#search-businessName").autocomplete({
+    $("#search_businessName").autocomplete({
         source: function (request, response) {
             $.ajax({
                 url: "/search_businesses",
