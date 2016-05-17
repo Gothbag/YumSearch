@@ -14,22 +14,28 @@ module.exports = function (app) {
     });
 
     app.post('/user/post_rating', shared.isAuthenticated, function(req, res) {
+
         var newRating = new Rating();
         newRating.comment = req.body.message;
         newRating.score = req.body.rating;
         newRating.from = req.user._id;
 
-        Business.findOne({ 'name': req.body.search_businessName }, function (err, business) {
+        console.log (req.body.message);
+        console.log (req.body.rating);
+        console.log (req.user._id);
+        console.log (req.body.search_businessName);
+
+        Business.findOne({'name': req.body.search_businessName }, function (err, business) {
             if (err) {return done(err);}
             if (business) {
                 newRating.to = business._id;
-
+                console.log ("paso por aqui");
+                newRating.save(function (err) {
+                    if (err) { return done(err); }
+                    res.redirect('/users/personal');
+                });
             }
-
         });
-        /*
-        newRating.to = extract "_id" from req.body.search_businessName;
-        */
 
     });
 
