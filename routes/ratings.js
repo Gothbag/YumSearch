@@ -20,12 +20,13 @@ module.exports = function (app) {
         newRating.from = req.user._id;
 
         Business.findOne({ 'name': req.body.search_businessName }, function (err, business) {
-				if (err) {return done(err);}
-				if (business) {
-					newRating.to = business._id;
-				} else {
+            if (err) {return done(err);}
+            if (business) {
+                newRating.to = business._id;
 
-			});
+            }
+
+        });
         /*
         newRating.to = extract "_id" from req.body.search_businessName;
         */
