@@ -17,9 +17,9 @@ module.exports = function (app) {
         var newRating = new Rating();
         newRating.comment = req.body.message;
         newRating.score = req.body.rating;
-        newRating.from = extract "_id" from req.user._id;
+        newRating.from = req.user._id;
 
-        Business.findOne({ 'name': req.body.search-businessName }, function (err, business) {
+        Business.findOne({ 'name': req.body.search_businessName }, function (err, business) {
 				if (err) {return done(err);}
 				if (business) {
 					newRating.to = business._id;
@@ -27,7 +27,7 @@ module.exports = function (app) {
 
 			});
         /*
-        newRating.to = extract "_id" from req.body.search-businessName;
+        newRating.to = extract "_id" from req.body.search_businessName;
         */
 
     });
