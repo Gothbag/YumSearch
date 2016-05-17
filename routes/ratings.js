@@ -33,4 +33,13 @@ module.exports = function (app) {
 
     });
 
+    app.post('/ratings/user', function (req, res) {
+        Rating.find({from: req.user._id })
+            .populate('from')
+            .exec(function (err, ratings) {
+                if (err) { throw err; }
+                res.json(ratings);
+        }); //the populate function will "populate" the businesses that have been rated by the user
+    });
+
 }

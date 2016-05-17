@@ -5,7 +5,7 @@ var bcrypt = require('bcryptjs');
 var ratingSchema = mongoose.Schema({
     comment: String,
     from: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    to: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    to: { type: mongoose.Schema.Types.ObjectId, ref: 'Business' },
     score: Number
 });
 

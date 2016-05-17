@@ -110,6 +110,10 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
 
+    app.get('/user/ratings', shared.isAuthenticated, function(req, res) {
+        res.send('Load all comments of current user');
+    });
+
     /* GET users listing. */
     app.get('/users/personal',shared.isAuthenticated, function(req, res, next) {
          res.render('pages/users/userArea.ejs', { title: 'Personal', user: req.user });

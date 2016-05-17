@@ -56,6 +56,7 @@ module.exports = function (app) {
         var maxDistance = Number(req.body.maxDistance);
         maxmind.init('./ipsdb/GeoLiteCity.dat'); //connecting to GeoLite IP database
         var location = maxmind.getLocation('88.0.22.216'); //obtaining the user's geolocation via their IP
+        console.log(query);
         Offer.find({name: {$regex:query, $options : 'i' }, loc: {"$near":[location.longitude, location.latitude], "$maxDistance": maxDistance/111.12}})
             .populate('business')
             .exec(function (err, offers) { //one degree is approximately 111.12 kilometers
