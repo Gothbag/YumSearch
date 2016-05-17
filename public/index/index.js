@@ -47,7 +47,14 @@ $(document).ready(function () {
                 mapTypeControl: false,
                 scaleControl: false,
                 draggable: false,
-                  clickableLabels:false,
+                    styles: [
+                    {
+                      "featureType": "poi",
+                      "stylers": [
+                        { "visibility": "off" }
+                      ]
+                    }
+                  ],
                   mapTypeId: google.maps.MapTypeId.ROADMAP
             },
               map = new google.maps.Map(element, mapOptions),
