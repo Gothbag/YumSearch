@@ -8,7 +8,7 @@ module.exports = function (app) {
         res.render('pages/users/postRating.ejs', { title: 'Personal', user: req.user });
     });
 
-    app.get('/user/ratings/', shared.isAuthenticated, function(req, res) {
+    app.get('/user/ratings', shared.isAuthenticated, function(req, res) {
         res.send('Load all comments of current user');
     });
 }

@@ -27,9 +27,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="search-name">
-                                            Type the drugstore name</label>
-                                        <input type="text" class="form-control" id="search-name"  required="required" placeholder="Drugstore name"/>
+                                        <div class="ui-widget">
+                                            <label for="search-name">
+                                                Type the drugstore name</label>
+                                            <input type="text" class="form-control" id="search-name"  required="required" placeholder="Drugstore name"/>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">
@@ -44,6 +46,7 @@
                                             <input type="email" class="form-control" id="email" value="<%= user.local.email %>" required="required" />
                                         </div>
                                     </div>
+                                    <!--http://www.jqueryscript.net/other/Simple-jQuery-Star-Rating-Widget-For-Bootstrap-3-Bootstrap-Rating-Input.html-->
                                     <div class="form-group">
                                         <label for="rating">Rate here
                                             <input type="number" name="My Rating System" id="rating" class="rating" data-clearable="remove"/></label>
@@ -86,5 +89,6 @@
         <!-- jQuery -->
         <script src="/resources/js/bootstrap/bootstrap-rating-input.min.js"></script>
         <script src="/resources/js/jquery/jquery-ui.min.js"></script>
+        <script src="/ratings/ratings.js"></script>
     </body>
 </html>
