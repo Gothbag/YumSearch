@@ -47,7 +47,8 @@ $(document).ready(function () {
                 mapTypeControl: false,
                 scaleControl: false,
                 draggable: false,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                  clickableLabels:false,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
             },
               map = new google.maps.Map(element, mapOptions),
               marker = new google.maps.Marker({
