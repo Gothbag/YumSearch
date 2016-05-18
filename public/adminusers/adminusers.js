@@ -46,57 +46,40 @@ $(document).ready(function () {
 		}.bind(this);
 
 		this.save = function () {
-			var data = ko.toJSON(this.offers);
+			var data = ko.toJSON(this.users);
 			$.ajax({
 		        type: "POST",
-		        url: '/offers/business/save', /* url of the request */
+		        url: '/admin/business/save', /* url of the request */
 		        contentType: "application/json; charset=utf-8",
 		        dataType: 'json',
 		  		data: data,
 		        success: function (data) {
-		            self.offers.removeAll();
-		            data.map(function (offer) {
-						self.offers.push(new Offer(offer));
+		            self.users.removeAll();
+		            data.map(function (user) {
+						self.users.push(new User(user));
 					});
 		        }
 		    });
 		}.bind(this);
 
-		this.offers = ko.observableArray();
-		this.loadOffers();
+		this.users = ko.observableArray();
+		this.loadUsers();
 
 	};
 
 	//represent a single offer item
-	var Offer = function (offer) {
+	var User = function (user) {
         var self = this;
-		this._id = offer._id;
-        this.business = offer.business;
-		this.visible = ko.observable(true);
+		this._id = user._id;
+        this.firstName = ko.observable(user.firstName);
+		this.lastName = ko.observable(user.lastName);
+		this.username = ko.observable(user.local.username);
 		this.deleteItem = ko.observable(false);
-		this.name = ko.observable(offer.name);
-		this.priceNow = ko.observable(offer.priceNow);
-        this.priceBefore = ko.observable(offer.priceBefore);
-        this.differencePercentage = ko.computed({
-            read: function () {
-                var diffPer;
-                if (self.priceNow() > 0 && self.priceBefore() > 0) {
-                    diffPer = ((self.priceBefore() - self.priceNow()) / self.priceBefore()) * 100;
-                } else {
-                    diffPer = 0;
-                }
-                return diffPer;
-            },
-            write: function (value) {
-                if (self.priceBefore() == 0) { return; }
-                self.priceNow(self.priceBefore() * (100-value) * 0.01);
-            }
-        });
-		this.business = offer.business;
+        this.visible = ko.observable(true);
 	}
 	//we load the data
 
 	var viewModel = new ViewModel();
-	ko.applyBindings(viewModel, document.getElementById("offers"));
+	ko.applyBindings(viewModel, document.getElementById("users"));
 
 }());
