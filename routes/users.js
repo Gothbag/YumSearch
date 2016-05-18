@@ -135,14 +135,12 @@ module.exports = function (app, passport) {
         var id = req.user._id;
         //We prepare an object to update whatever needs to be updated
         if (changedVals.email + "" != "") {
-            var helpUser = new User;
             changedVals["local.email"] = changedVals.email;
         }
-
-
+        console.log(changedVals);
         if (changedVals.password + "" != "") {
             var helpUser = new User;
-            changedVals["local.password"] = helpUser.generateHash(password);
+            changedVals.local.password = helpUser.generateHash(password);
         }
         //deleting unwanted properties
         delete changedVals.email;
@@ -150,7 +148,7 @@ module.exports = function (app, passport) {
 
         User.update({_id:req.user._id}, {$set:changedVals}, function (err) {
             if (err) {throw err;}
-
+            res.json({"success" :true, "status" : 200});
         });
     });
 
