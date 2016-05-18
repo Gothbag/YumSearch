@@ -49,7 +49,7 @@ $(document).ready(function () {
 			var data = ko.toJSON(this.users);
 			$.ajax({
 		        type: "POST",
-		        url: '/admin/business/save', /* url of the request */
+		        url: '/admin/users/save', /* url of the request */
 		        contentType: "application/json; charset=utf-8",
 		        dataType: 'json',
 		  		data: data,

@@ -13,6 +13,41 @@ module.exports = function (app, passport) {
         });
 
     });
+
+     /*save the users*/
+    app.post('/admin/users/save', function(req, res) {
+        var users = req.body;
+        var itemsProcessed = 0; //this is so that when all items are processed, we can send them back
+        var len = users.length;
+         for (var i = 0; i < len; i++) {
+            var user = users[i]; //this way it's easier to work
+
+            if (!user.deleteItem) { //we add/update the users that are not marked for deletion
+                delete( user.deleteItem ); //we don't need these fields anymore
+                delete( user.visible );
+                 User.update({_id:user._id}, offer, {upsert:true, setDefaultsOnInsert: true}, function(err){
+                    if (err) {throw err;}
+                    itemsProcessed++;
+                    if(itemsProcessed === len) {
+                        listUsers(req, res, "", function (users) {
+
+                        }); //we return the updated snakes
+                    }
+                });
+
+            } else { //items marked for deletion
+                Offer.remove({_id: offer._id}, function (err) {
+                        if (err) {throw err;}
+                        itemsProcessed++;
+                        if(itemsProcessed === len) {
+                            return listUsers(req, res);
+                        }
+                    });
+            }
+
+        }
+
+	});
 }
 
 //function to verify the user is logged in
