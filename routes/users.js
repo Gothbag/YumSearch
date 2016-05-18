@@ -185,6 +185,15 @@ module.exports = function (app, passport) {
 
         });
     });
+
+    app.get('/user/ratings', shared.isAuthenticated, function(req, res) { //the populate function will "populate" the businesses that have been rated by the user
+        Rating.find({from: req.user._id })
+            .populate('from')
+            .exec(function (err, ratings) {
+                if (err) { throw err; }
+                res.render('pages/business/receivedRatings.ejs', { title: 'Received Ratings', user: req.user, ratings: ratings });
+        });
+    });
 };
 
 

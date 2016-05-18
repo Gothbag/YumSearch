@@ -9,10 +9,6 @@ module.exports = function (app) {
         res.render('pages/users/postRating.ejs', { title: 'Personal', user: req.user });
     });
 
-    app.get('/user/ratings', shared.isAuthenticated, function(req, res) {
-        res.send('Load all comments of current user');
-    });
-
     app.post('/user/post_rating', shared.isAuthenticated, function(req, res) {
 
         var newRating = new Rating();
@@ -37,15 +33,6 @@ module.exports = function (app) {
             }
         });
 
-    });
-
-    app.post('/ratings/user', function (req, res) {
-        Rating.find({from: req.user._id })
-            .populate('from')
-            .exec(function (err, ratings) {
-                if (err) { throw err; }
-                res.json(ratings);
-        }); //the populate function will "populate" the businesses that have been rated by the user
     });
 
 }

@@ -84,6 +84,15 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/business/ratings', isBusiness, function(req, res) { //the populate function will "populate" the businesses that have been rated by the user
+        Rating.find({to: req.user.businesses })
+            .populate('from')
+            .exec(function (err, ratings) {
+                if (err) { throw err; }
+                res.render('pages/business/receivedRatings.ejs', { title: 'Received Ratings', user: req.user, ratings: ratings });
+        });
+    });
+
 };
 
 //function to verify whether a user has a business account
