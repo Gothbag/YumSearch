@@ -36,69 +36,69 @@ $(document).ready(function () {
     var ENTER_KEY = 13;
 
     // A factory function we can use to create binding handlers for specific
-	// keycodes (which we'll use for the Enter key).
-	function keyhandlerBindingFactory(keyCode) {
-		return {
-			init: function (element, valueAccessor, allBindingsAccessor, data, bindingContext) {
-				var wrappedHandler, newValueAccessor;
+    // keycodes (which we'll use for the Enter key).
+    function keyhandlerBindingFactory(keyCode) {
+        return {
+            init: function (element, valueAccessor, allBindingsAccessor, data, bindingContext) {
+                var wrappedHandler, newValueAccessor;
 
-				// wrap the handler with a check for the enter key
-				wrappedHandler = function (data, event) {
-					if (event.keyCode === keyCode) {
-						valueAccessor().call(this, data, event);
-					}
-				};
+                // wrap the handler with a check for the enter key
+                wrappedHandler = function (data, event) {
+                    if (event.keyCode === keyCode) {
+                        valueAccessor().call(this, data, event);
+                    }
+                };
 
-				// create a valueAccessor with the options that we would want to pass to the event binding
-				newValueAccessor = function () {
-					return {
-						keyup: wrappedHandler
-					};
-				};
+                // create a valueAccessor with the options that we would want to pass to the event binding
+                newValueAccessor = function () {
+                    return {
+                        keyup: wrappedHandler
+                    };
+                };
 
-				// call the real event binding's init function
-				ko.bindingHandlers.event.init(element, newValueAccessor, allBindingsAccessor, data, bindingContext);
-			}
-		};
-	}
+                // call the real event binding's init function
+                ko.bindingHandlers.event.init(element, newValueAccessor, allBindingsAccessor, data, bindingContext);
+            }
+        };
+    }
 
-	// a custom binding to handle the Enter key
-	ko.bindingHandlers.enterKey = keyhandlerBindingFactory(ENTER_KEY);
+    // a custom binding to handle the Enter key
+    ko.bindingHandlers.enterKey = keyhandlerBindingFactory(ENTER_KEY);
 
     ko.bindingHandlers.offerMap = {
         init: function (element, valueAccessor) {
             var
-              offer = valueAccessor(),
-              latLng = new google.maps.LatLng(offer.loc[1], offer.loc[0]),
-              mapOptions = {
-                center: latLng,
-                zoom: 14,
-                disableDefaultUI: true,
-                scrollwheel: false,
-                navigationControl: false,
-                mapTypeControl: false,
-                scaleControl: false,
-                draggable: false,
+            offer = valueAccessor(),
+                latLng = new google.maps.LatLng(offer.loc[1], offer.loc[0]),
+                mapOptions = {
+                    center: latLng,
+                    zoom: 14,
+                    disableDefaultUI: true,
+                    scrollwheel: false,
+                    navigationControl: false,
+                    mapTypeControl: false,
+                    scaleControl: false,
+                    draggable: false,
                     styles: [
-                    {
-                      "featureType": "poi",
-                      "stylers": [
-                        { "visibility": "off" }
-                      ]
-                    }
-                  ],
-                  mapTypeId: google.maps.MapTypeId.ROADMAP
-            },
-              map = new google.maps.Map(element, mapOptions),
-              marker = new google.maps.Marker({
-                position: latLng,
-                map: map
-              }),
-            infoWindow = new google.maps.InfoWindow({
-                content: "<div>" + offer.business.address.address + "</div>"
-            }),
-            offerInfoDiv = document.createElement('div'),
-            offerInfo = new OfferInfo(offerInfoDiv, map, offer);
+                        {
+                            "featureType": "poi",
+                            "stylers": [
+                                { "visibility": "off" }
+                            ]
+                        }
+                    ],
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                },
+                map = new google.maps.Map(element, mapOptions),
+                marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map
+                }),
+                infoWindow = new google.maps.InfoWindow({
+                    content: "<div>" + offer.business.address.address + "</div>"
+                }),
+                offerInfoDiv = document.createElement('div'),
+                offerInfo = new OfferInfo(offerInfoDiv, map, offer);
             //open window on click
             google.maps.event.addListener(marker, 'click', function () {
                 infoWindow.open(map, marker);
@@ -108,53 +108,56 @@ $(document).ready(function () {
         }
     };
 
-	//the main view model
-	var ViewModel = function () {
-		var self = this;
+    //the main view model
+    var ViewModel = function () {
+        var self = this;
 
-		this.offers = [];
+        this.offers = [];
 
-		this.loadOffers = function () {
-			$.ajax({
-		        type: "POST",
-		        url: '/offers/nearby', /* url of the request */
+        this.loadOffers = function () {
+            $.ajax({
+                type: "POST",
+                url: '/offers/nearby', /* url of the request */
                 data:JSON.stringify({search:$("#MainSearch").val(),maxDistance:$("#maxDistance").val()}),
-		        contentType: "application/json; charset=utf-8",
-		        dataType: 'json',
-		        success: function (data) {
-		        	self.offers.removeAll(); //all offers are removed beforehand
-					data.map(function (offer) {
-						self.offers.push(new Offer(offer));
-					});
-		        }
-		    });
-		}.bind(this);
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (data) {
+                    self.offers.removeAll(); //all offers are removed beforehand
+                    data.map(function (offer) {
+                        self.offers.push(new Offer(offer));
+                    });
+                }
+            });
+        }.bind(this);
 
         this.enlargeMap = function (offer) {
             if(typeof enlargedMap =="undefined") return;
             //we create the map before showing the model
             var latLong = new google.maps.LatLng(offer.loc[1], offer.loc[0]),
-            mark = new google.maps.Marker({
-                position: latLong,
-                map: enlargedMap
-            });
-            $("#mapModalHeader").text(offer.business.name + ", "+ offer.business.address.address +". " + offer.name + ". Price before: " + offer.priceBefore + ", price NOW: " + offer.priceNow);
+                mark = new google.maps.Marker({
+                    position: latLong,
+                    map: enlargedMap
+                });
+            $("#mapModalHeader").empty();
+            $("#mapModalHeader").append("<h4>" + offer.business.name + ", " + offer.business.address.address + "</h4>");
+            $("#mapModalHeader").append("<h4><span style='text-transform: uppercase;'>" + offer.name + "</span>" + " <span style='color: red;'>&nbsp;&nbsp;&nbsp; Price before: " + offer.priceBefore + "</span> <span style='color: green;'>&nbsp;&nbsp;&nbsp;Price NOW: " + offer.priceNow +"</span></h4>");
+
             /* this is so the map rerendered after the modal is activated*/
             $("#mapModal").modal();
             setTimeout( function(){resizingMap();} , 400);
 
             function resizingMap() {
-               if(typeof enlargedMap =="undefined") return;
-               google.maps.event.trigger(enlargedMap, "resize");
+                if(typeof enlargedMap =="undefined") return;
+                google.maps.event.trigger(enlargedMap, "resize");
                 enlargedMap.setCenter(latLong);
             }
 
         }
 
-		this.offers = ko.observableArray();
-		this.loadOffers();
+        this.offers = ko.observableArray();
+        this.loadOffers();
 
-	};
+    };
 
     var viewModel = new ViewModel();
     ko.applyBindings(viewModel);
@@ -178,12 +181,53 @@ function OfferInfo(pControlDiv, pMap, pOffer) {
     controlUI.style.backgroundColor = 'white';
     pControlDiv.appendChild(controlUI);
     var controlText = document.createElement('div');
-    //properties of the text
-    controlText.style.fontFamily = 'Arial, sans-serif';
-    controlText.style.fontSize = '15px';
-    controlText.style.fontWeight = '600';
-    controlText.padding = '2px';
-    controlText.innerHTML = pOffer.business.name + ". " + pOffer.name + ". Price before: " + pOffer.priceBefore + ", price NOW: " + pOffer.priceNow;
+
+    var businessDiv = document.createElement('div');
+    businessDiv.style.fontFamily = "Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif";
+    businessDiv.style.fontSize = '15px';
+    businessDiv.style.fontWeight = 'bold';
+    businessDiv.innerHTML = pOffer.business.name;
+
+
+    var offerDiv = document.createElement('div');
+    offerDiv.style.fontFamily = "Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif";
+    offerDiv.style.fontSize = '20px';
+    offerDiv.style.textTransform = 'uppercase';
+    offerDiv.innerHTML = pOffer.name;
+
+    var priceBefore = document.createElement('div');
+    priceBefore.style.fontFamily = "Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif";
+    priceBefore.style.fontSize = '15px';
+    priceBefore.innerHTML = "Price before: " + pOffer.priceBefore;
+
+    var priceNow = document.createElement('div');
+    priceNow.style.fontFamily = "Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif";
+    priceNow.style.fontSize = '15px';
+    priceNow.innerHTML = "Price NOW: " + pOffer.priceNow;
+
+    controlText.appendChild(businessDiv);
+    controlText.appendChild(offerDiv);
+    controlText.appendChild(priceBefore);
+    controlText.appendChild(priceNow);
+
     controlUI.appendChild(controlText);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
