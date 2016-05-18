@@ -1,6 +1,13 @@
 /* events */
 $(document).ready(function () {
 
+    $("#Save").click(function(){
+        $(".OffersAdded").append("<td colspan='5' class='text-success'>Offers successfully added</td>");
+        setTimeout(function(){
+            $(".OffersAdded").fadeOut();
+        }, 5000);
+    });
+
     /* validations */
     $("#form2").validate({
         rules: {
