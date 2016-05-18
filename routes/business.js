@@ -1,6 +1,7 @@
 var request = require('request');
 var Business = require('../models/business');
 var User = require('../models/user');
+var Rating = require('../models/rating');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 var shared = require('../config/shared');
