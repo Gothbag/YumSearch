@@ -5,7 +5,7 @@ module.exports = function (app, passport) {
         res.render('pages/admin/admin.ejs', { title: 'Webmaster', user: req.user });
 	});
 
-    /*obtain offers created by a business*/
+    /*obtain users business*/
     app.post('/admin/users', function(req, res) {
         var query = req.body.search.trim().replace(/\s{1,}/, ".*"); //we obtain the query from the request body
         User.aggregate([
@@ -16,6 +16,10 @@ module.exports = function (app, passport) {
                 res.json(users);
         });
     });
+
+    app.get('/admin/users', isWebmaster, function(req, res) {
+        res.render('pages/admin/users.ejs', { title: 'Webmaster', user: req.user });
+     });
 
      /*save the users*/
     app.post('/admin/users/save', function(req, res) {

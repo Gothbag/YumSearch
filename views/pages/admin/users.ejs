@@ -33,13 +33,15 @@
 
                                 <thead>
                                     <th>Username</th>
+                                    <th>Email</th>
                                     <th>First name</th>
                                     <th>Last name</th>
-                                    <th>Delete Offer</th>
+                                    <th>Delete User</th>
                                 </thead>
                                 <tbody>
                                     <!-- ko foreach: offers -->
                                     <tr data-bind="visible: visible">
+                                        <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 " data-bind="value: name" /></td>
                                         <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 " data-bind="value: name" /></td>
                                         <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 Number" data-bind="value: priceBefore" /></td>
                                         <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 Number" data-bind="value: priceNow" /></td>
