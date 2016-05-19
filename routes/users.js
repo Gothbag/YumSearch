@@ -16,8 +16,9 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 var shared = require('../config/shared');
 
-//User model
+//User and Rating model
 var User = require('../models/user');
+var Rating = require('../models/rating');
 
 //Mail stuff
 var nodemailer = require("nodemailer");
@@ -108,10 +109,6 @@ module.exports = function (app, passport) {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
-    });
-
-    app.get('/user/ratings', shared.isAuthenticated, function(req, res) {
-        res.send('Load all comments of current user');
     });
 
     /* GET users listing. */
