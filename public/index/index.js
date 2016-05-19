@@ -94,16 +94,9 @@ $(document).ready(function () {
                     position: latLng,
                     map: map
                 }),
-                infoWindow = new google.maps.InfoWindow({
-                    content: "<div>" + offer.business.address.address + "</div>"
-                }),
                 offerInfoDiv = document.createElement('div'),
                 offerInfo = new OfferInfo(offerInfoDiv, map, offer);
-            //open window on click
-            google.maps.event.addListener(marker, 'click', function () {
-                infoWindow.open(map, marker);
-            });
-            //adding the control the map
+            //adding the control onto the map
             map.controls[google.maps.ControlPosition.TOP_LEFT].push(offerInfoDiv);
         }
     };
@@ -112,18 +105,21 @@ $(document).ready(function () {
     var ViewModel = function () {
         var self = this;
 
+        var limit = true;
+
         this.offers = [];
 
         this.loadOffers = function () {
             $.ajax({
                 type: "POST",
                 url: '/offers/nearby', /* url of the request */
-                data:JSON.stringify({search:$("#MainSearch").val(),maxDistance:$("#maxDistance").val()}),
+                data:JSON.stringify({search:$("#MainSearch").val(),maxDistance:$("#maxDistance").val(), limit:limit}),
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (data) {
                     self.offers.removeAll(); //all offers are removed beforehand
                     data.map(function (offer) {
+                        limit = false;
                         self.offers.push(new Offer(offer));
                     });
                 }
@@ -134,9 +130,16 @@ $(document).ready(function () {
             if(typeof enlargedMap =="undefined") return;
             //we create the map before showing the model
             var latLong = new google.maps.LatLng(offer.loc[1], offer.loc[0]),
+                infoWindow = new google.maps.InfoWindow({
+                    content: "<div>" + offer.business.address.address + "</div>"
+                }),
                 mark = new google.maps.Marker({
                     position: latLong,
                     map: enlargedMap
+                });
+                //open window on click
+                google.maps.event.addListener(mark, 'click', function () {
+                    infoWindow.open(enlargedMap, mark);
                 });
             $("#mapModalHeader").empty();
             $("#mapModalHeader").append("<h4>" + offer.business.name + ", " + offer.business.address.address + "</h4>");
