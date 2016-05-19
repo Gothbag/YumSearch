@@ -90,8 +90,7 @@ input[type="password"] {
 .map-style{
     height: 200px;
     cursor:pointer;
-    margin: 10px;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     border-radius: 10px;
 }
