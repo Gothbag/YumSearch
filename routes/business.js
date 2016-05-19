@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var request = require('request');
 var Business = require('../models/business');
 var User = require('../models/user');
@@ -92,6 +93,15 @@ module.exports = function (app, passport) {
                 if (err) { throw err; }
                 res.render('pages/business/receivedRatings.ejs', { title: 'Received Ratings', user: req.user, ratings: ratings });
         });
+    });
+
+    /*to render the page where profiles are edited*/
+    app.get('/business/edit', isBusiness, function(req, res) {
+        var userSubset = _.pick(req.user, 'firstName', 'lastName'); //we only pick the properties we need
+        userSubset.local = {};
+        userSubset.local.email = req.user.local.email;
+        userSubset.local.username = req.user.local.username;
+        res.render('pages/business/edit.ejs', { title: 'Edit bussines', user: userSubset });
     });
 
 };
