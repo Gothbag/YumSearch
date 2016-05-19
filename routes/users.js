@@ -72,7 +72,6 @@ module.exports = function (app, passport) {
             if (!user) { return res.json({success:false, "status" : 200}); }
             req.logIn(user, function(err) {
                 if (err) { return next(err); }
-                if (req.body.remember) {res.cookie('remember', user.local.username, { maxAge: 2629746000 });}
                 if (user.webmaster == true) {
                     return res.json({"success" : true, "status" : 200, "webmaster": true});
                 } else if (ObjectId.isValid(user.businesses)) {
