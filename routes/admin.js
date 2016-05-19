@@ -60,4 +60,3 @@ var isWebmaster = function (req, res, next) {
 	//if the user is not authenticated then we redirect them to the main page
 	res.redirect('/');
 }
-}
