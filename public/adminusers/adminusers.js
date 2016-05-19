@@ -53,11 +53,10 @@ $(document).ready(function () {
 		        contentType: "application/json; charset=utf-8",
 		        dataType: 'json',
 		  		data: data,
-		        success: function (data) {
-		            self.users.removeAll();
-		            data.map(function (user) {
-						self.users.push(new User(user));
-					});
+		        success: function (result) {
+		            if(result.status == 200 && result.success == true){
+                        self.loadUsers();
+                    }
 		        }
 		    });
 		}.bind(this);
