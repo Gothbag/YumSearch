@@ -105,10 +105,11 @@ module.exports = function (app, passport) {
     });
 
     //to modify the details of a business
-    app.get('/business/edit', isBusiness, function(req, res) {
-        Business.find({_id:req.user.businesses}, function (err, business) {
+    app.post('/business/edit', isBusiness, function(req, res) {
+        var changedVals = JSON.parse(req.body.changedValues);
+        Business.update({_id:req.user.businesses}, {$set:changedVals}, function (err) {
             if (err) {throw err;}
-            res.render('pages/business/edit.ejs', { title: 'Edit bussines', user: req.user, business: business });
+            res.json({"success" :true, "status" : 200});
         });
 
     });

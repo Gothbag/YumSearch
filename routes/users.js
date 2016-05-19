@@ -126,26 +126,29 @@ module.exports = function (app, passport) {
 
     /* user update POST request */
     app.post('/users/updateuser', function (req, res, next) {
-        var changedVals = JSON.parse(req.body.changedValues);
-        var image = false;
-        var id = req.user._id;
-        //We prepare an object to update whatever needs to be updated
-        if (changedVals.email + "" != "") {
-            changedVals["local.email"] = changedVals.email;
-        }
-        console.log(changedVals);
-        if (changedVals.password + "" != "") {
-            var helpUser = new User;
-            changedVals.local.password = helpUser.generateHash(password);
-        }
-        //deleting unwanted properties
-        delete changedVals.email;
-        delete changedVals.password;
+        User.find({_id:req.user._id}, function (err, user) {
+            var changedVals = JSON.parse(req.body.changedValues);
+            var updateObject = {};
+            if (!user.validPassword(changedVals.oldPassword)) {return res.json({"success" :false, "status" : 200});}
+            var id = user._id;
+            //We prepare an object to update whatever needs to be updated
+            if (changedVals.email + "" != "") {
+                changedVals.local.email = changedVals.email;
+            }
+            console.log(changedVals);
+            if (changedVals.password + "" != "") {
+                changedVals.local.password = helpUser.generateHash(password);
+            }
+            //deleting unwanted properties
+            delete changedVals.email;
+            delete changedVals.password;
 
-        User.update({_id:req.user._id}, {$set:changedVals}, function (err) {
-            if (err) {throw err;}
-            res.json({"success" :true, "status" : 200});
+            User.update({_id:id}, {$set:changedVals}, function (err) {
+                if (err) {throw err;}
+                res.json({"success" :true, "status" : 200});
+            });
         });
+
     });
 
     app.post('/users/avatarupload', upload.single("avatarupload"), function (req, res) {

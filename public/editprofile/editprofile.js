@@ -51,6 +51,7 @@ $(document).ready(function () {
 function save() {
 
     var userData = $('#form2').serializeObject();
+    delete(userData.oldPassword);
 
     var data = JSON.stringify(userData);
     $.ajax({
