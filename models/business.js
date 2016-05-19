@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var businessSchema = mongoose.Schema({
     name : String,
     phoneNumber : String,
+    email: String,
     address     : {
         address : String,
         city : String,

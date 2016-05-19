@@ -95,13 +95,22 @@ module.exports = function (app, passport) {
         });
     });
 
-    /*to render the page where profiles are edited*/
+    /*to render the page where businesses are edited*/
     app.get('/business/edit', isBusiness, function(req, res) {
-        var userSubset = _.pick(req.user, 'firstName', 'lastName'); //we only pick the properties we need
-        userSubset.local = {};
-        userSubset.local.email = req.user.local.email;
-        userSubset.local.username = req.user.local.username;
-        res.render('pages/business/edit.ejs', { title: 'Edit bussines', user: userSubset });
+        Business.find({_id:req.user.businesses}, function (err, business) {
+            if (err) {throw err;}
+            res.render('pages/business/edit.ejs', { title: 'Edit bussines', user: req.user, business: business });
+        });
+
+    });
+
+    //to modify the details of a business
+    app.get('/business/edit', isBusiness, function(req, res) {
+        Business.find({_id:req.user.businesses}, function (err, business) {
+            if (err) {throw err;}
+            res.render('pages/business/edit.ejs', { title: 'Edit bussines', user: req.user, business: business });
+        });
+
     });
 
 };
