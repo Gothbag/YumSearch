@@ -89,6 +89,7 @@ module.exports = function (app, passport) {
     app.get('/business/profile/:id', function(req, res) {
         var id = req.params.id;
         Business.find({_id: id}, function (err, business) {
+            var business = business[0];
             Rating.find({to: business._id })
                 .populate('from')
                 .exec(function (err, ratings) {
