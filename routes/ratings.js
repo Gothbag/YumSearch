@@ -16,19 +16,24 @@ module.exports = function (app) {
         newRating.score = req.body.rating;
         newRating.from = req.user._id;
 
-        console.log (req.body.message);
-        console.log (req.body.rating);
-        console.log (req.user._id);
-        console.log (req.body.search_businessName);
-
-        Business.findOne({'name': req.body.search_businessName }, function (err, business) {
-            if (err) {return done(err);}
+        Business.findOne({name: req.body.search_businessName }, function (err, business) {
+            if (err) {throw err;}
             if (business) {
                 newRating.to = business._id;
-                console.log ("paso por aqui");
                 newRating.save(function (err) {
                     if (err) { return done(err); }
-                    res.redirect('/users/personal');
+                    res.redirect('/users/personal'); //we obtain the business' average ratings
+                    Rating.aggregate([{$match:{to:business._id}},{$group:{_id:null,avgRating:{$avg:"$score"}}}], function (err, result) {
+                        if (err) {throw err;}
+                        console.log(result);
+                         Business.update({_id:business._id}, {$set:{avgRating:result[0].avgRating}}, function (err) {
+                            if (err) {throw err;}
+                        });
+                    });
+
+
+
+
                 });
             }
         });

@@ -19,5 +19,16 @@ module.exports = function (app, passport) {
     app.get('/contact', function(req, res, next) {
         res.render('pages/main/contact.ejs', { title: 'Contact', user: req.user });
 	});
+
+    /*GET about us page*/
+    app.get('/aboutus', function(req, res, next) {
+        res.render('pages/main/aboutus.ejs', { title: 'About Us', user: req.user });
+	});
+
+
+    /*GET FAQ page*/
+    app.get('/faq', function(req, res, next) {
+        res.render('pages/main/faq.ejs', { title: 'FAQ', user: req.user });
+	});
 };
 

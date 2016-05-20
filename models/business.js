@@ -14,7 +14,8 @@ var businessSchema = mongoose.Schema({
     loc     : {type:[Number], index:'2d'},
     createdAt: { type: Date, default: Date.now },
     profileImg : String,
-    rating: Number
+    rating: Number,
+    avgRating: Number
 });
 
 module.exports = mongoose.model('Business', businessSchema);

@@ -89,7 +89,8 @@ module.exports = function (app, passport) {
     app.get('/business/profile/:id', function(req, res) {
         var id = req.params.id;
         Business.find({_id: id}, function (err, business) {
-            var business = business[0];
+            if (business.length <= 0) { res.redirect('/'); } //if the business cannot be found, e redirect the user
+            var business = business[0]; //it is an array
             Rating.find({to: business._id })
                 .populate('from')
                 .exec(function (err, ratings) {
