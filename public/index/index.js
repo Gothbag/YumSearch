@@ -181,7 +181,8 @@ function OfferInfo(pControlDiv, pMap, pOffer) {
     var controlUI = document.createElement('div');
     //properties of the DOM element
     controlUI.style.textAlign = 'center';
-    controlUI.style.backgroundColor = 'white';
+    controlUI.style.backgroundColor = '#5bc0de';
+    controlUI.style.color = 'white';
     pControlDiv.appendChild(controlUI);
     var controlText = document.createElement('div');
 
