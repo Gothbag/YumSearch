@@ -143,7 +143,7 @@ $(document).ready(function () {
                 });
             $("#mapModalHeader").empty();
             $("#mapModalHeader").append("<h4>" + offer.business.name + ", " + offer.business.address.address + "</h4>");
-            $("#mapModalHeader").append("<h4><span style='text-transform: uppercase;'>" + offer.name + "</span>" + " <span style='color: red;'>&nbsp;&nbsp;&nbsp; Price before: " + offer.priceBefore + "</span> <span style='color: green;'>&nbsp;&nbsp;&nbsp;Price NOW: " + offer.priceNow +" </span> <a href='/business/profile/" + offer.business.id + "'><button type='button' class='btn btn-labeled btn-info'><span class='btn-info'><i class='fa fa-star-o'></i></span>See ratings</button></a></h4>");
+            $("#mapModalHeader").append("<h4><span style='text-transform: uppercase;'>" + offer.name + "</span>" + " <span style='color: red;'>&nbsp;&nbsp;&nbsp; Price before: " + offer.priceBefore + "</span> <span style='color: green;'>&nbsp;&nbsp;&nbsp;Price NOW: " + offer.priceNow +" </span> <a href='/business/profile/" + offer.business._id + "'><button type='button' class='btn btn-labeled btn-info'><span class='btn-info'><i class='fa fa-star-o'></i></span>See ratings</button></a></h4>");
 
             /* this is so the map rerendered after the modal is activated*/
             $("#mapModal").modal();

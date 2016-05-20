@@ -93,6 +93,7 @@ module.exports = function (app, passport) {
                 .populate('from')
                 .exec(function (err, ratings) {
                     if (err) { throw err; }
+                console.log(business);
                     res.render('pages/business/profile.ejs', { business:business, title: 'Business Profile: ' + business.name, user: req.user, ratings: ratings });
             });
 
