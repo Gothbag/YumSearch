@@ -1,17 +1,4 @@
 var _ = require('underscore');
-//Multer and all modules we need to upload files
-var multer = require('multer');
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../', 'resources/img/profileimages'));
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + ".jpg")
-    }
-});
-var upload = multer({ storage: storage });
-var fs = require('fs');
-var path = require('path');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 var shared = require('../config/shared');
@@ -151,45 +138,18 @@ module.exports = function (app, passport) {
 
     });
 
-    app.post('/users/avatarupload', upload.single("avatarupload"), function (req, res) {
-        var image = false;
-        var profileimage;
-        console.log(req.file);
-        console.log(req.files);
-        if (req.file) {
-            profileimage = req.file.filename;
-            image = true;
-        } else {
-            profileimage = 'noimage.jpg';
-        }
-        var id = req.user._id + "";
-        if (image) {
-            fs.stat(path.join('profileimages', id), function (err, stats) { //the path won't accept an integer that's why we add the ""
-                if (!stats.isDirectory) { //stats is an object with information on the file inspected
-                    fs.mkdir(path.join('profileimages', id), function (err) { //we create the directory if it doesn't exist
-                        if (!err) {
-                            fs.rename(path.join('uploads', profileimage), path.join('profileimages', id, profileimage), function (err) {
-                                if (err) {throw err;}
-                            });
-                        }
-                    })
-                }
+    app.get('/user/profile/:id', function(req, res) { //the populate function will "populate" the businesses that have been rated by the user
+        var id = req.params.id;
+        User.find({_id:id}, function (err, user) {
+            if (user.length <= 0) {res.redirect("/");}
+             Rating.find({from: user._id })
+                .populate('to')
+                .exec(function (err, ratings) {
+                    if (err) { throw err; }
+                    res.render('pages/user/profile.ejs', { title: 'User Profile ' + user.name, shownUser: user,user: req.user, ratings: ratings });
             });
-
-        }
-        User.update({_id:id}, {$set:{profileimage:profileimage}}, function (err) {
-            if (err) {throw err;}
-
         });
-    });
 
-    app.get('/user/ratings', shared.isAuthenticated, function(req, res) { //the populate function will "populate" the businesses that have been rated by the user
-        Rating.find({from: req.user._id })
-            .populate('from')
-            .exec(function (err, ratings) {
-                if (err) { throw err; }
-                res.render('pages/business/receivedRatings.ejs', { title: 'Received Ratings', user: req.user, ratings: ratings });
-        });
     });
 };
 

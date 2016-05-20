@@ -30,23 +30,6 @@
                 <div class="col-md-9 personal-info">
                     <h1><%= user.local.username %></h1>
 
-                    <form class="form-horizontal" id="avataruploadForm" method="post" enctype="multipart/form-data" role="form" action="/users/avatarupload">
-                        <div class="form-group text-center">
-                            <div class="col-md-8 col-md-offset-3">
-                                <img src="//placehold.it/100" id="uploadedavatar" class="avatar img-circle" alt="avatar" height="100" width="100" />
-                                <h6>Upload a different photo...</h6>
-
-                                <input class="form-control" type="file" id="avatarupload" name="avatarupload" accept="image/*"/>
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-3">
-                                <input class="btn btn-primary" value="Upload" type="submit">
-                            </div>
-                        </div>
-                    </form>
-
                     <form class="form-horizontal" id="form2" role="form" action="#">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">First name:</label>

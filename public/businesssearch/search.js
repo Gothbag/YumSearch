@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../../partials/head %>
+    </head>
+
+    <body>
+
+        <% include ../../partials/navigation %>
+
+        <div class="jumbotron jumbotron-sm"><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <h1 class="h1">
+                            <img class="img-responsive img-thumbnail img-circle" src="/resources/img/rounded_white_icon.png" /> Search Businesses</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Offers management-->
+        <div class="container">
+            <div class="row"  id="offers">
+                <div class="col-md-12">
+                    <input id="searchBusiness" name="searchBusiness" type="text" />
+                    <form id="form2" action="#">
+
+                        <h3>Search businesses </h3><br/>
+
+                        <div class="table-responsive">
+
+
+                            <table id="mytable" class="table table-bordred table-striped">
+
+                                <thead>
+                                    <th>Product Name</th>
+                                    <th>Price Before (€/kg)</th>
+                                    <th>Price Now (€/kg)</th>
+                                    <th>Discount (%)</th>
+
+                                    <th>Delete Offer</th>
+                                </thead>
+                                <tbody>
+                                    <!-- ko foreach: offers -->
+                                    <tr data-bind="visible: visible">
+                                        <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 " data-bind="value: name" /></td>
+                                        <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 Number" data-bind="value: priceBefore" /></td>
+                                        <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 Number" data-bind="value: priceNow" /></td>
+                                        <td><input type="text" class="form-control col-lg-3 col-md-3 col-sm-3 col-xs-3 Digit" data-bind="value: differencePercentage" /></td>
+                                        <td class="text-center"><button class="btn btn-danger btn-xs" data-title="Delete" data-bind="click: $parent.remove" ><span class="glyphicon glyphicon-trash fa-2x"></span></button></td>
+                                    </tr>
+                                    <!-- /ko -->
+                                    <tr>
+                                        <td colspan="5" class="text-center"><button class="btn btn-info btn-xs" title="Click as many times as offers you need to add" data-bind="click: add" ><h4>Click  to add a new offer</h4><span class="glyphicon glyphicon-plus fa-3x"></span></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" class="text-danger">Don't forget click SAVE button below to keep any changes</td>
+                                    </tr>
+                                    <tr class="OffersAdded">
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-success" id="Save" data-bind="click: $root.save">Save <span class="glyphicon glyphicon-ok"></span></a>
+                    <a class="btn btn-warning" data-bind="click: $root.loadOffers">Cancel <span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            </div>
+        </div>
+
+        <% include ../../partials/footer %>
+        <script type="text/javascript" src="/offers/offers.js"></script>
+
+    </body>
+</html>

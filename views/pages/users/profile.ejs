@@ -25,7 +25,7 @@
                         <div class = "panel panel-info">
                            <div class = "panel-heading">
                               <h3 class = "panel-title">
-                                  <%= ratings[i].from.local.username %>
+                                  <%= ratings[i].to.name %>
                                   <div class="pull-right">
                                   <% for(var j=1; j <= 5; j++) { %>
                                     <i class="glyphicon <% if (j <= ratings[i].score) { %> glyphicon-star <% } else { %> glyphicon-star-empty <% } %>"></i>
@@ -45,6 +45,8 @@
 
         <% include ../../partials/footer %>
 
+
+        <% include ../../partials/loginmodals %>
 
         <% include ../../partials/termsmodal %>
 
