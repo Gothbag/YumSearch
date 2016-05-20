@@ -86,13 +86,18 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.get('/business/ratings', isBusiness, function(req, res) { //the populate function will "populate" the businesses that have been rated by the user
-        Rating.find({to: req.user.businesses })
-            .populate('from')
-            .exec(function (err, ratings) {
-                if (err) { throw err; }
-                res.render('pages/business/receivedRatings.ejs', { title: 'Received Ratings', user: req.user, ratings: ratings });
+    app.get('/business/profile/:id', function(req, res) {
+        var id = req.params.id;
+        Business.find({_id: id}, function (err, business) {
+            Rating.find({to: business._id })
+                .populate('from')
+                .exec(function (err, ratings) {
+                    if (err) { throw err; }
+                    res.render('pages/business/profile.ejs', { business:business, title: 'Business Profile: ' + business.name, user: req.user, ratings: ratings });
+            });
+
         });
+
     });
 
     /*to render the page where businesses are edited*/
