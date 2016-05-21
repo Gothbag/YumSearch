@@ -20,21 +20,25 @@
         </div>
 
         <div class="container" style="margin-top:20px;">
-                <div class="row">
+                <div class="row"  id="businesses">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="businessSearch" name="businessSearch"  placeholder="Search" data-bind="enterKey: loadBusinesses" />
+                            <span class="input-group-addon">
+                                <button type="button">
+                                    <span class="glyphicon glyphicon-search" data-bind="click: loadBusinesses"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
                     <!-- ko foreach: businesses -->
-                    <div class="col-md-12" id="businesses">
+                    <div class="col-md-12">
                         <div class = "panel panel-info">
-                           <div class = "panel-heading">
-                              <h3 class = "panel-title">
-                                  <span data-bind="text:name"></span>
-                                  <div class="pull-right">
-                                      Average rating: <span data-bind="text:avgRating"></span>
-                                    </div>
-                               </h3>
-                           </div>
 
-                           <div class = "panel-body" data-bind="text:address.address">
-
+                           <div class = "panel-body" >
+                                 <h5><a data-bind="attr: { href: '/business/profile/' + id }"><span data-bind="text:name"></span></a></h5>
+                                 Address: <span data-bind="text:address.address"></span><br/>
+                                Average rating: <span data-bind="text:avgRating"></span>
                            </div>
                         </div>
                     </div>
@@ -46,7 +50,7 @@
 
 
         <% include ../../partials/footer %>
-        <script type="text/javascript" src="/offers/offers.js"></script>
+        <script type="text/javascript" src="/businesssearch/businesssearch.js"></script>
 
     </body>
 </html>

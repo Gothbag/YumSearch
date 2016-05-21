@@ -55,8 +55,10 @@ module.exports = function (app) {
         var query = req.body.search.trim().replace(/\s{1,}/, ".*");
         var maxDistance = Number(req.body.maxDistance);
         var limit = req.body.limit; //this allows us to know if we have to limit the query or not
+        var ip = req.ip.replace('::ffff:', ""); //this is a subnet prefix for IPv4 (32 bit) addresses that are placed inside an IPv6 (128 bit) space. we remove it
+        var ipUsed = (ip == '127.0.0.1' ? '88.0.22.216' : req.ip);
         maxmind.init('./ipsdb/GeoLiteCity.dat'); //connecting to GeoLite IP database
-        var location = maxmind.getLocation('88.0.22.216'); //obtaining the user's geolocation via their IP
+        var location = maxmind.getLocation(ipUsed); //obtaining the user's geolocation via their IP
         console.log(query);
         var select = Offer.find({name: {$regex:query, $options : 'i' }, loc: {"$near":[location.longitude, location.latitude], "$maxDistance": maxDistance/111.12}}).populate('business');
         if (limit) {
