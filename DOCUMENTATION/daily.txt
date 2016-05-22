@@ -1,0 +1,79 @@
+Apr 11: Create the project and upload on GitHub repository.
+        Briefing about database, funcionalities and frameworks (knockout)
+        
+Apr 12: Code reordering; added KnockOutJS
+        UML, use case and entity-relationship diagram
+
+Apr 13: Sign up menu. Terms and conditions modal. Provisional logo
+
+Apr 14: Student Strike
+
+Apr 15: Node packages briefing; node packages addition; project folders reordering; Passport configuration work
+
+Apr 17: Gimp - work on the final logo and more assets
+
+Apr 18: Passport sign up work; business landing page work
+
+Apr 19: Sign up added; front-end work (final logo added and more stuff)
+
+Apr 20: Login and logout work (finished pretty much); worked on business landing page and business dashboard
+
+Apr 21: Navegability business changes and dashboard work; profile image attempt, and JQuery validation added
+
+Apr 22: Briefing about database changes
+        Work on edit profile, business an offer models added
+
+Apr 25: Added profile image upload and user dropdown
+
+Apr 26: Great day. Hard work on several parts of the project
+
+Apr 27: KnockOut offers changes; front-end improvements; merge navigations bars in one
+
+Apr 28: KnockOut front-back-end hard work; webmaster page added
+
+Apr 29: Business registration page; front-end and navegability changes
+
+May 1: New fields added to business registration form
+
+May 2: Image upload and send mail work
+
+May 3: Business registration and send mail attempts
+
+May 4: Offers and business interface work
+
+May 5: IP geolocation work; welcome mail ok
+
+May 6: OpenShift deployment work
+
+May 7: Openshift deployment fail test. Heroku deployment test
+
+May 9: Mail sent succesfully alert message intertion
+
+May 10: Geolocation work. Main page work. Sent mail code position changed
+        Briefing about database model changes. Business model changed
+
+May 11: Work on main page (search and show offers). Work on ratings structure
+
+May 12: Search and ratings progression
+
+May 14: Worked on cookie authentication
+
+May 17: Search and ratings work; navigation and ratings error fixed
+        Documentation changes: UML
+
+May 18: Landing page front-end and user management page work; 
+
+May 19: Several changes, additions and deletions along the project
+
+May 20: Briefing about changes, stuff dismissed in project and more; work in it
+        Documentation changes: use case diagram
+        
+May 21: Business search tool work. Documentation changes: entity relationship diagram
+
+May 22: 
+        
+
+
+
+
+
