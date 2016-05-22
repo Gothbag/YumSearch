@@ -48,6 +48,9 @@
         <div class="content-section-a">
 
             <div class="container">
+                <div class="col-sm-12 row">
+                    <a class="btn btn-primary" href="/business/search">Search Businesses</a>
+                </div>
                 <div class=" col-sm-12 row" data-bind="foreach: offers">
                     <div class="map col-md-4 map-style" data-bind="offerMap: { loc: loc, business: business, name: name, priceNow: priceNow, priceBefore: priceBefore }, click: $root.enlargeMap" title="Click for further information"></div>
                 </div>
