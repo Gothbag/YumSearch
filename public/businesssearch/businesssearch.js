@@ -50,7 +50,7 @@ $(document).ready(function () {
         this.loadBusinesses = function () {
             $.ajax({
                 type: "POST",
-                url: '/search_businesses', /* url of the request */
+                url: '/business/search', /* url of the request */
                 data:JSON.stringify({search:$("#businessSearch").val()}),
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
@@ -58,7 +58,7 @@ $(document).ready(function () {
                     self.businesses.removeAll(); //all offers are removed beforehand
                     data.map(function (business) {
                         limit = false;
-                        self.business.push(new Business(business));
+                        self.businesses.push(new Business(business));
                     });
                 }
             });

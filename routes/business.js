@@ -88,6 +88,7 @@ module.exports = function (app, passport) {
 
     app.get('/business/profile/:id', function(req, res) {
         var id = req.params.id;
+        var ownRating;
         Business.find({_id: id}, function (err, business) {
             if (business.length <= 0) { res.redirect('/'); } //if the business cannot be found, e redirect the user
             var business = business[0]; //it is an array
@@ -95,8 +96,13 @@ module.exports = function (app, passport) {
                 .populate('from')
                 .exec(function (err, ratings) {
                     if (err) { throw err; }
-                console.log(business);
-                    res.render('pages/business/profile.ejs', { business:business, title: 'Business Profile: ' + business.name, user: req.user, ratings: ratings });
+                    var oEntity = ratings.filter(function (rat) { //we obtain the rating posted by the user themselves
+                        rat.from == req.user._id;
+                    });
+                    if (oEntity.length >= 0) {
+                        ownRating = oEntity[0];
+                    }
+                    res.render('pages/business/profile.ejs', { business:business, title: 'Business Profile: ' + business.name, user: req.user, ratings: ratings, ownRating: ownRating });
             });
 
         });
@@ -120,6 +126,22 @@ module.exports = function (app, passport) {
             res.json({"success" :true, "status" : 200});
         });
 
+    });
+
+    //the GET for the business search page
+    app.get('/business/search', function(req, res) {
+            res.render('pages/business/search.ejs', { title: 'Search Businesses', user: req.user });
+    });
+
+    //the POST handler for the business search tool
+    app.post('/business/search', function(req, res) {
+        var query = req.body.search.trim().replace(/\s{1,}/, ".*");
+
+        Business.find({$or:[{name: {$regex:query, $options : 'i' }}, {'address.address': {$regex:query, $options : 'i' }}]})
+            .exec(function (err, businesses) {
+                if (err) { throw err; }
+                res.json(businesses);
+        });
     });
 
 };
