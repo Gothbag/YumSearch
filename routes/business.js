@@ -88,9 +88,9 @@ module.exports = function (app, passport) {
 
     app.get('/business/profile/:id', function(req, res) {
         var id = req.params.id;
-        var ownRating;
+
         Business.find({_id: id}, function (err, business) {
-            if (business.length <= 0) { res.redirect('/'); } //if the business cannot be found, e redirect the user
+            if (business.length <= 0) { res.redirect('/'); } //if the business cannot be found, we redirect the user
             var business = business[0]; //it is an array
             Rating.find({to: business._id })
                 .populate('from')
@@ -98,14 +98,15 @@ module.exports = function (app, passport) {
                     if (err) { throw err; }
                     if (req.user) {
                         var oEntity = ratings.filter(function (ratin) { //we obtain the rating posted by the user themselves in case there is one
-                            ratin.from == req.user._id;
+                            return ratin.from._id.equals(req.user._id);
                         });
                         if (oEntity.length >= 0) {
-                            ownRating = oEntity[0];
+                            var ownRating = oEntity[0];
                             var ind = ratings.indexOf(ownRating); //we obtain the user's own rating within the array
                             if (ind >= 0) {ratings.splice(ind, 1); }//we remove the user's own rating from the array
                         }
                     }
+                    console.log(ownRating);
                     res.render('pages/business/profile.ejs', { business:business, title: 'Business Profile: ' + business.name, user: req.user, ratings: ratings, ownRating: ownRating });
             });
 
