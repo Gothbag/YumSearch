@@ -97,8 +97,8 @@ module.exports = function (app, passport) {
                 .exec(function (err, ratings) {
                     if (err) { throw err; }
                     if (req.user) {
-                        var oEntity = ratings.filter(function (rat) { //we obtain the rating posted by the user themselves
-                        rat.from == req.user._id;
+                        var oEntity = ratings.filter(function (ratin) { //we obtain the rating posted by the user themselves in case there is one
+                            ratin.from == req.user._id;
                         });
                         if (oEntity.length >= 0) {
                             ownRating = oEntity[0];
