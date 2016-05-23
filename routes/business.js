@@ -101,6 +101,8 @@ module.exports = function (app, passport) {
                     });
                     if (oEntity.length >= 0) {
                         ownRating = oEntity[0];
+                        var ind = ratings.indexOf(ownRating); //we obtain the user's own rating within the array
+                        if (ind >= 0) {ratings.splice(ind, 1); }//we remove the user's own rating from the array
                     }
                     res.render('pages/business/profile.ejs', { business:business, title: 'Business Profile: ' + business.name, user: req.user, ratings: ratings, ownRating: ownRating });
             });
