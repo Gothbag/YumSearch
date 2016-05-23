@@ -15,6 +15,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
                         <div class="intro-message">
+                            <h2>Become a yummer and save your money</h2>
                             <div>
                                 <a href="/"><img src="/resources/img/logo_black.png" alt="logo" class="img-responsive logo" /></a>
                             </div><br>
@@ -45,18 +46,19 @@
         <!-- Page Content -->
 
         <a  name="services"></a>
-        <div class="content-section-a">
+        <div class="content-section-a  row">
+            <div class="container">
+                <h2>Do you want to read about any drugstore? <a class="btn btn-primary btn-lg" href="/business/search">Click Me!</a></h2>
+            </div>
+        </div>
 
             <div class="container">
-                <div class="col-sm-12 row">
-                    <a class="btn btn-primary" href="/business/search">Search Businesses</a>
-                </div>
                 <div class=" col-sm-12 row" data-bind="foreach: offers">
                     <div class="map col-md-4 map-style" data-bind="offerMap: { loc: loc, business: business, name: name, priceNow: priceNow, priceBefore: priceBefore }, click: $root.enlargeMap" title="Click for further information"></div>
                 </div>
             </div>
 
-        </div>
+
         <!-- /.container -->
 
 
