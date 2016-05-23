@@ -30,12 +30,6 @@ $(document).ready(function () {
             email: {
                 required: true,
                 email: true
-            },
-            firstName: {
-                LatinNames: true
-            },
-            lastName: {
-                LatinNames: true
             }
         },
         messages: {
@@ -61,11 +55,13 @@ function save() {
       data: {changedValues: data},
       dataType: "json",
       failure: function (err) {
-        alert(err);
+        dataSuccess(err);
       },
-      success: function (data) {
-        films = data;
-        updateList();
+      success: function (result) {
+          if(result.status == 200 && result.success == true){
+              dataSuccess("Business information saved succesfully.");
+          }
+
       }
     });
 }

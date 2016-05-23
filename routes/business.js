@@ -118,7 +118,7 @@ module.exports = function (app, passport) {
     app.get('/business/edit', isBusiness, function(req, res) {
         Business.find({_id:req.user.businesses}, function (err, business) {
             if (err) {throw err;}
-            res.render('pages/business/edit.ejs', { title: 'Edit bussines', user: req.user, business: business });
+            res.render('pages/business/edit.ejs', { title: 'Edit bussines', user: req.user, business: business[0] });
         });
 
     });
@@ -126,6 +126,15 @@ module.exports = function (app, passport) {
     //to modify the details of a business
     app.post('/business/edit', isBusiness, function(req, res) {
         var changedVals = JSON.parse(req.body.changedValues);
+        changedVals.address = {};
+        changedVals.address.postCode = changedVals.postCode;
+         changedVals.address.address = changedVals.address;
+        changedVals.address.country = changedVals.country;
+        changedVals.address.city = changedVals.city;
+        delete changedVals.postCode;
+        delete changedVals.address;
+        delete changedVals.country;
+        delete changedVals.city;
         Business.update({_id:req.user.businesses}, {$set:changedVals}, function (err) {
             if (err) {throw err;}
             res.json({"success" :true, "status" : 200});
