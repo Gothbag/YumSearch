@@ -132,7 +132,6 @@ $(document).ready(function () {
 
 /* functions*/
 function login() {
-    var remember = $("#rememberMe").is(':checked');
     $("#navLoginForm").validate();
     if (!$("#navLoginForm").valid()) {return;}
 
