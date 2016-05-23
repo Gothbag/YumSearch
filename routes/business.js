@@ -3,6 +3,7 @@ var request = require('request');
 var Business = require('../models/business');
 var User = require('../models/user');
 var Rating = require('../models/rating');
+var Offer = require('../models/offer');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 var shared = require('../config/shared');
@@ -21,7 +22,28 @@ module.exports = function (app, passport) {
 
     /*GET dashboard business user*/
     app.get('/business/dashboard',isBusiness, function(req, res, next) {
-        res.render('pages/business/dashboard.ejs', { title: 'Dashboard', user: req.user });
+
+        Business.find({_id:req.user.businesses}, function (err, business) {
+            if (err) {throw err;}
+            if (business.length <= 0) {
+                res.redirect("/");}
+            else {
+                business = business[0];
+            }
+
+            Offer.count({business:business._id}, function( err, offercount){
+                if (err) {throw err;}
+                Rating.count({to:business._id}, function( err, ratingcount){
+                    if (err) {throw err;}
+                    res.render('pages/business/dashboard.ejs', { title: 'Dashboard', user: req.user, offercount: offercount, ratingcount: ratingcount, business: business  });
+                });
+
+            });
+
+        });
+
+
+
     });
 
     /*handling offers page*/

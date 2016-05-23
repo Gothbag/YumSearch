@@ -9,7 +9,7 @@ module.exports = function (app) {
         res.render('pages/users/postRating.ejs', { title: 'Personal', user: req.user });
     });
 
-    app.post('/ratings/post', shared.isAuthenticated, function(req, res) {
+    app.post('/ratings/post', function(req, res) {
 
         var businessId =req.body.businessId;
 
@@ -24,12 +24,12 @@ module.exports = function (app) {
                 newRating.to = business._id;
                 Rating.update({to:business._id, from: req.user._id}, newRating, {upsert:true, setDefaultsOnInsert: true}, function (err) {
                     if (err) { return done(err); }
-                    res.redirect('/users/personal'); //we obtain the business' average ratings
                     //we obtain the average of the ratings given to this business
                     Rating.aggregate([{$match:{to:business._id}},{$group:{_id:null,avgRating:{$avg:"$score"}}}], function (err, result) {
                         if (err) {throw err;}
                          Business.update({_id:business._id}, {$set:{avgRating:result[0].avgRating}}, function (err) {
                             if (err) {throw err;}
+                             res.json({"success" :true, "status" : 200});
                         });
                     });
 

@@ -30,10 +30,11 @@ function rateBusiness() {
         dataType: 'json',
         data: JSON.stringify({score: $("#ratingScore").val(), comment: $('#ratingComment').val(), businessId: businessId}),
         failure: function (err) {
-            dataSuccess(err);
+            dataError(err);
         },
         success: function (result) {
-        if (result.status == 200 && result.success == true){
+            console.log("paco");
+            if (result.status == 200 && result.success == true){
                 dataSuccess("Rating saved succesfully.");
           }
 

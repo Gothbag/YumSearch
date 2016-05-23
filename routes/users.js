@@ -60,9 +60,9 @@ module.exports = function (app, passport) {
             req.logIn(user, function(err) {
                 if (err) { return next(err); }
                 if (user.webmaster == true) {
-                    res.json({"success" : true, "status" : 200, "webmaster": true});
+                    return res.json({"success" : true, "status" : 200, "webmaster": true});
                 } else if (ObjectId.isValid(user.businesses)) {
-                    res.json({"success" : true, "status" : 200, "business": true});
+                    return res.json({"success" : true, "status" : 200, "business": true});
                 }
                 res.json({"success" :true, "status" : 200});
             });
@@ -99,7 +99,10 @@ module.exports = function (app, passport) {
 
     /* GET users listing. */
     app.get('/users/personal',shared.isAuthenticated, function(req, res, next) {
-         res.render('pages/users/userArea.ejs', { title: 'Personal', user: req.user });
+        Rating.count({from:req.user._id}, function( err, ratingcount){
+            if (err) {throw err;}
+            res.render('pages/users/userArea.ejs', { title: 'Personal', user: req.user, ratingcount: ratingcount });
+        });
     });
 
     /*to render the page where profiles are edited*/
@@ -113,24 +116,28 @@ module.exports = function (app, passport) {
 
     /* user update POST request */
     app.post('/users/updateuser', function (req, res, next) {
-        User.find({_id:req.user._id}, function (err, user) {
+        User.findOne({_id:req.user._id}, function (err, user) {
+            if (!user) { return res.json({"success" :false, "status" : 500});}
             var changedVals = JSON.parse(req.body.changedValues);
             var updateObject = {};
-            if (!user.validPassword(changedVals.oldPassword)) {return res.json({"success" :false, "status" : 200});}
+            if (changedVals.password + "" != "") {
+                if (user.validPassword(changedVals.oldPassword)) {
+                    user.local.password = user.generateHash(changedVals.password);
+                } else {
+                    return res.json({"success" :false, "status" : 500});
+                }
+            }
             var id = user._id;
             //We prepare an object to update whatever needs to be updated
             if (changedVals.email + "" != "") {
-                changedVals.local.email = changedVals.email;
+                user.local.email = changedVals.email;
             }
-            console.log(changedVals);
-            if (changedVals.password + "" != "") {
-                changedVals.local.password = helpUser.generateHash(password);
-            }
-            //deleting unwanted properties
-            delete changedVals.email;
-            delete changedVals.password;
 
-            User.update({_id:id}, {$set:changedVals}, function (err) {
+            user.email = changedVals.email;
+            user.lastName = changedVals.lastName;
+            user.firstName = changedVals.firstName;
+
+            User.update({_id:id}, user, function (err) {
                 if (err) {throw err;}
                 res.json({"success" :true, "status" : 200});
             });
@@ -141,12 +148,17 @@ module.exports = function (app, passport) {
     app.get('/user/profile/:id', function(req, res) { //the populate function will "populate" the businesses that have been rated by the user
         var id = req.params.id;
         User.find({_id:id}, function (err, user) {
-            if (user.length <= 0) {res.redirect("/");}
-             Rating.find({from: user._id })
+            if (user.length <= 0) {
+                res.redirect("/");
+            } else {
+                user = user[0];
+            }
+
+             Rating.find({from: user._id }) //we find all ratings by the user
                 .populate('to')
                 .exec(function (err, ratings) {
                     if (err) { throw err; }
-                    res.render('pages/user/profile.ejs', { title: 'User Profile ' + user.name, shownUser: user,user: req.user, ratings: ratings });
+                    res.render('pages/users/profile.ejs', { title: 'User Profile ' + user.name, userShown: user,user: req.user, ratings: ratings });
             });
         });
 

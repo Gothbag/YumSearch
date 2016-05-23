@@ -22,11 +22,6 @@ $(document).ready(function () {
                 minlength: 6,
                 equalTo: "#password"
             },
-            registerPwdConfirm: {
-                required: true,
-                equalTo: "#registerPwd",
-                min: 6
-            },
             email: {
                 required: true,
                 email: true
@@ -51,7 +46,7 @@ $(document).ready(function () {
 function save() {
 
     var userData = $('#form2').serializeObject();
-    delete(userData.oldPassword);
+    delete userData.confirmPassword;
 
     var data = JSON.stringify(userData);
     $.ajax({
@@ -62,11 +57,13 @@ function save() {
       data: {changedValues: data},
       dataType: "json",
       failure: function (err) {
-        alert(err);
-      },
-      success: function (data) {
-        films = data;
-        updateList();
+            dataSuccess(err);
+        },
+        success: function (result) {
+        if (result.status == 200 && result.success == true){
+                dataSuccess("Details saved succesfully.");
+          }
+
       }
     });
 }

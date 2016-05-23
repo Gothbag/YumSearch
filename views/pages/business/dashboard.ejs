@@ -23,16 +23,11 @@
             <div class="row user-menu-container square">
                 <div class="col-md-7 user-details">
                     <div class="row coralbg white">
-                        <div class="col-md-6 no-pad">
+                        <div class="col-md-12 no-pad">
                             <div class="user-pad">
-                                <h3>Welcome back <br> USER</h3>
-                                <h4 class="white"><i class="fa fa-check-circle-o"></i> BUSINESS NAME</h4>
+                                <h3>Welcome back <br> <%= user.local.username %></h3>
+                                <h4 class="white"><i class="fa fa-check-circle-o"></i> <%= business.name %></h4>
                                 <span>Member since <%= user.createdAt %></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6 no-pad">
-                            <div class="user-image">
-                                <img src="/resources/img/profile.png" class="img-responsive thumbnail">
                             </div>
                         </div>
                     </div>
@@ -42,11 +37,11 @@
                         </div>
                         <div class="col-md-4 user-pad text-center">
                             <h3>PRODUCTS </h3>
-                            <h4>125</h4>
+                            <h4><%=offercount %></h4>
                         </div>
                         <div class="col-md-4 user-pad text-center">
-                            <h3>SUBSCRIBERS </h3>
-                            <h4>456</h4>
+                            <h3>RATINGS </h3>
+                            <h4><%=ratingcount %></h4>
                         </div>
 
                     </div>
