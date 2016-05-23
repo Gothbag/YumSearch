@@ -27,13 +27,13 @@
                 <div class="col-md-8">
                     <div class="well well-sm">
                         <% if (user) { %>
-                            <form action="#" id="addRatingForm">
+                            <form action="#" id="addRatingForm" onsubmit="return false;">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <!--http://www.jqueryscript.net/other/Simple-jQuery-Star-Rating-Widget-For-Bootstrap-3-Bootstrap-Rating-Input.html-->
                                         <div class="form-group">
                                             <label for="rating">Rate here
-                                                <input type="number" name="ratingScore" id="ratingScore" class="rating" value="<% if (ownRating) { %> ownRating.score <% } %>" data-clearable="remove"/></label>
+                                                <input type="number" name="ratingScore" id="ratingScore" class="rating" value="<%= ownRating ? ownRating.score : '' %>" data-clearable="remove"/></label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -41,11 +41,11 @@
                                             <label for="message">
                                                 Comment</label>
                                             <textarea name="ratingComment" id="ratingComment" class="form-control" rows="9" cols="25"
-                                                      placeholder="Type here your opinion on the drugstore"><% if (ownRating) { %> ownRating.comment <% } %></textarea>
+                                                      placeholder="Type here your opinion on the drugstore"><%= ownRating ? ownRating.comment : '' %></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <a href="#" id="rateBusiness" class="btn btn-info pull-right" >Post</a>
+                                        <button href="#" id="rateBusiness" class="btn btn-info pull-right" >Post</button>
                                         <!--<input type="submit" value="Send message" />-->
                                     </div>
                                 </div>
@@ -66,37 +66,39 @@
 
         </div>
 
-        <div class="row">
-            <div class="container">
-                <div class="col-md-3">
-                <h3>Ratings by other users</h3>
-            </div>
+        <% if (ratings.length > 0) { %>
 
-            <% for(var i=0; i < ratings.length; i++) { %>
+            <div class="row">
+                <div class="container">
                     <div class="col-md-3">
-                        <div class = "panel panel-primary">
-                           <div class = "panel-heading">
-                              <h3 class = "panel-title">
-                                  <%= ratings[i].from.local.username %>
-                                  <div class="pull-right">
-                                  <% for(var j=1; j <= 5; j++) { %>
-                                    <i class="glyphicon <% if (j <= ratings[i].score) { %> glyphicon-star <% } else { %> glyphicon-star-empty <% } %>"></i>
-                                  <% } %>
-                                    </div>
-                               </h3>
-                           </div>
+                    <h3>Ratings by other users</h3>
+                </div>
 
-                           <div class = "panel-body">
-                             <%= ratings[i].comment %>
-                           </div>
+                <% for(var i=0; i < ratings.length; i++) { %>
+                        <div class="col-md-3">
+                            <div class = "panel panel-primary">
+                               <div class = "panel-heading">
+                                  <h3 class = "panel-title">
+                                      <%= ratings[i].from.local.username %>
+                                      <div class="pull-right">
+                                      <% for(var j=1; j <= 5; j++) { %>
+                                        <i class="glyphicon <% if (j <= ratings[i].score) { %> glyphicon-star <% } else { %> glyphicon-star-empty <% } %>"></i>
+                                      <% } %>
+                                        </div>
+                                   </h3>
+                               </div>
+
+                               <div class = "panel-body">
+                                 <%= ratings[i].comment %>
+                               </div>
+                            </div>
                         </div>
-                    </div>
-                <% } %>
+                    <% } %>
+                </div>
+
             </div>
 
-        </div>
-
-
+         <% } %>
 
 
         <% include ../../partials/footer %>
@@ -107,9 +109,11 @@
         <% include ../../partials/termsmodal %>
 
         <script type="text/javascript">
-           var userId = <% if (ownRating) { %> ownRating.from <%} else { %>0<% } %>;
+           //var userId = <% if (ownRating) { %> ownRating.from <%} else { %>0<% } %>;
+            var businessId = '<%= business._id %>';
         </script>
         <script type="text/javascript" src="/resources/js/bootstrap/bootstrap-rating-input.min.js"></script>
+        <script type="text/javascript" src="/businessprofile/businessprofile.js"></script>
 
     </body>
 

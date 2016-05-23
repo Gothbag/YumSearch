@@ -3,11 +3,10 @@ $(document).ready(function () {
     $("#addRatingForm").validate({
         rules: {
             // simple rule, converted to {required:true}
-            loginPwd: {
-                minlength: 6,
+            ratingComment: {
                 required: true
             },
-            loginEmail: {
+            ratingComment: {
                 required: true
             }
         }
@@ -26,10 +25,10 @@ function rateBusiness() {
 
     $.ajax({
         type:'POST',
-        url:'/rating/post',
+        url:'/ratings/post',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        data: JSON.stringify({score: $("#ratingScore").val(), comment: $('#commentScore').val(), userId: userId}),
+        data: JSON.stringify({score: $("#ratingScore").val(), comment: $('#ratingComment').val(), businessId: businessId}),
         success:function(result){
             if(result.status == 200) {
                 if (result.success == true){
