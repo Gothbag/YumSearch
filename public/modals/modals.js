@@ -140,7 +140,7 @@ function login() {
         url:'/login',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        data: JSON.stringify({email: $("#loginEmail").val(), password: $('#loginPwd').val(), remember: remember}),
+        data: JSON.stringify({email: $("#loginEmail").val(), password: $('#loginPwd').val()}),
         success:function(result){
             if(result.status == 200) {
                 if (result.success == true){

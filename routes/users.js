@@ -60,9 +60,9 @@ module.exports = function (app, passport) {
             req.logIn(user, function(err) {
                 if (err) { return next(err); }
                 if (user.webmaster == true) {
-                    return res.json({"success" : true, "status" : 200, "webmaster": true});
+                    res.json({"success" : true, "status" : 200, "webmaster": true});
                 } else if (ObjectId.isValid(user.businesses)) {
-                    return res.json({"success" : true, "status" : 200, "business": true});
+                    res.json({"success" : true, "status" : 200, "business": true});
                 }
                 res.json({"success" :true, "status" : 200});
             });
