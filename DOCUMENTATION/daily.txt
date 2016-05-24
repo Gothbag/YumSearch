@@ -68,9 +68,14 @@ May 19: Several changes, additions and deletions along the project
 May 20: Briefing about changes, stuff dismissed in project and more; work in it
         Documentation changes: use case diagram
         
-May 21: Business search tool work. Documentation changes: entity relationship diagram
+May 21: Business search tool work. Documentation changes: entity relationship diagram. 
+        Worked on slides presentation
 
-May 22: 
+May 22: Business search-rating work. Documentation changes. Worked on slides presentation
+
+May 23: Final sprint. Several changes. Worked on slides presentation
+
+May 24: Worked on slides presentation and promotional video. May the force be with us
         
 
 
